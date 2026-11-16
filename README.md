@@ -67,6 +67,11 @@ og/               share images
 
 Found a historical or physics error? Please [open an issue](https://github.com/JasonDE03/sophon/issues) with a source, or leave a comment under the episode. Corrections are very welcome.
 
+## License
+
+- **Code** (simulations, scripts, Worker, notebooks): [MIT](LICENSE).
+- **Content** (article text in `vi/` and `en/`, and the images in `og/`): [CC BY 4.0](LICENSE-CONTENT.md). Reuse is welcome with credit.
+
 ## Author
 
 Nguyen Phan Nam Son · [Facebook](https://www.facebook.com/nam.son.178624/) · [Instagram](https://www.instagram.com/fet.sofn/)
