@@ -183,3 +183,70 @@ ol.episodes .soon { opacity:.42; }
 .comment .comment-reply-button, .comment-form .comment-cancel { padding:3px 8px; font-size:12px; }
 .comment-form .comment-cancel { border:0; color:var(--accent); }
 .admin-page { padding-top:40px; }
+
+/* Shared language-aware header and author footer. */
+.site-header { border-bottom:1px solid var(--line); margin-bottom:64px; }
+.site-header nav { max-width:680px; margin:0 auto; padding:22px 20px; border:0; }
+.site-header .links { align-items:center; gap:22px; }
+.lang-switch { display:inline-flex; align-items:center; gap:8px; padding:6px 11px;
+  border:1px solid var(--line); border-radius:999px; color:var(--faint); font:400 12px/1.4 var(--sans); }
+.lang-switch strong { color:var(--fg); font-weight:600; }
+.lang-switch a { color:var(--muted); }
+.lang-switch a:hover { color:var(--fg); }
+.author-footer { border-top:1px solid var(--line); padding:48px 20px 52px; text-align:center; }
+.social-links { display:flex; justify-content:center; align-items:center; gap:24px; }
+.social-links a { display:inline-flex; padding:6px; color:var(--muted); }
+.social-links a:hover { color:var(--fg); }
+.social-links svg { width:22px; height:22px; }
+.author-footer p { margin:16px 0 0; color:var(--faint); font:400 13px/1.6 var(--sans); }
+.site-header a:focus-visible, .social-links a:focus-visible, .page-toc a:focus-visible {
+  outline:2px solid var(--blue); outline-offset:4px; }
+
+/* Language homes: one introduction followed by the complete episode catalogue. */
+.home-page .hero { min-height:0; padding-bottom:24px; }
+.hero .tagline { text-wrap:balance; font:600 clamp(1.7rem, 4vw, 2.5rem)/1.25 var(--serif); margin:0 0 24px; letter-spacing:-.015em; }
+.home-page .hero .lede { max-width:680px; margin:0; }
+.home-page main > h2 { text-wrap:balance; margin-top:1.5em; margin-bottom:24px; }
+ol.episodes { display:grid; grid-template-columns:minmax(0, 1fr); gap:16px; border:0; }
+ol.episodes li { border:1px solid var(--line); border-radius:14px; overflow:hidden; }
+ol.episodes li > a, ol.episodes li > span { height:100%; padding:24px; align-content:start;
+  grid-template-columns:2em minmax(0, 1fr); gap:10px 14px; }
+ol.episodes .n { grid-column:1; grid-row:1 / span 3; padding-top:5px; color:var(--accent); }
+ol.episodes .t { grid-column:2; font:600 1.25rem/1.3 var(--serif); }
+ol.episodes .y { grid-column:2; font-size:12px; }
+ol.episodes .description { grid-column:2; color:var(--muted); font:400 15px/1.6 var(--sans); }
+ol.episodes .availability { grid-column:2; color:var(--muted); font:400 12px/1.5 var(--sans); }
+
+/* Preserve the narrow-screen reading column; break out only on larger screens. */
+.page-toc { display:none; }
+@media (min-width:760px) {
+  .site-header nav { max-width:1200px; padding-inline:24px; }
+  .episode-page h1 { text-wrap:balance; }
+  .episode-page main { max-width:808px; padding-inline:24px; }
+  .episode-page main > :is(.sim, .ask.predict, section.quiz, section.comments) {
+    width:min(980px, calc(100vw - 48px));
+    margin-inline:calc((100% - min(980px, calc(100vw - 48px))) / 2); }
+}
+@media (min-width:900px) {
+  .home-page main { max-width:1248px; padding-inline:24px; }
+  .home-page .hero { padding-block:24px 64px; }
+  .home-page .hero h1 { font-size:7rem; }
+  ol.episodes { grid-template-columns:repeat(2, minmax(0, 1fr)); gap:20px; }
+}
+@media (min-width:1200px) {
+  .site-header nav { padding-inline:0; }
+  .episode-layout { display:grid; grid-template-columns:220px 760px 220px; max-width:1200px; margin:0 auto; }
+  .episode-page main { grid-column:2; min-width:0; width:100%; max-width:none; padding-inline:0; font-size:20px; }
+  .episode-page main > :is(.sim, .ask.predict, section.quiz, section.comments) { width:980px; margin-inline:0; }
+  .episode-page dfn[data-def]::after { left:0; }
+  .page-toc { display:block; position:sticky; top:32px; align-self:start; max-height:calc(100vh - 64px);
+    overflow-y:auto; padding:4px 24px 16px 0; font:400 12px/1.6 var(--sans); }
+  .page-toc .toc-label { margin:0 0 16px; color:var(--muted); font-weight:600; }
+  .page-toc ol { list-style:none; margin:0; padding:0; border-left:1px solid var(--line); }
+  .page-toc li { margin:0; }
+  .page-toc a { display:block; padding:7px 0 7px 16px; color:var(--muted); text-decoration:none;
+    border-left:1px solid transparent; margin-left:-1px; }
+  .page-toc a:hover { color:var(--fg); }
+  .page-toc a[aria-current="location"] { color:var(--accent); border-left-color:var(--accent); }
+  .episode-page :is(h2, .deep > summary) { scroll-margin-top:32px; }
+}

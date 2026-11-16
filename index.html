@@ -1,5 +1,13 @@
 <!doctype html>
 <html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<script>
+  let preferred;
+  try { preferred = localStorage.getItem('sophon-lang'); } catch {}
+  const lang = ['vi', 'en'].includes(preferred) ? preferred :
+    ((navigator.languages || [navigator.language]).some(lang => /^vi/i.test(lang)) ? 'vi' : 'en');
+  location.replace(`/${lang}/`);
+</script>
+<noscript><meta http-equiv="refresh" content="0; url=/vi/"></noscript>
 <title>Sophon</title>
 <meta name="description" content="Những thí nghiệm làm nên vật lý. The experiments that shaped physics.">
 <meta property="og:type" content="website">
@@ -17,13 +25,13 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&display=swap">
 <link rel="stylesheet" href="style.css"><!-- Cloudflare Web Analytics (cookieless) --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "1c73ba8208884aa18a21e8f30432ae9f"}'></script>
 </head>
-<body><main>
-<nav><a class="brand" href="./">sophon</a><span class="links"><a href="vi/">Tiếng Việt</a><a href="en/">English</a></span></nav>
-<section class="hero">
-<p class="year">Lịch sử vật lý · History of physics</p>
-<h1>sophon</h1>
-<p class="lede">Lịch sử vật lý qua từng bước ngoặt: bối cảnh ra đời, những con người đứng sau, và mô phỏng để bạn tự tay làm lại thí nghiệm.<br>
-The history of physics through its turning points: the context, the people behind them, and a simulation that lets you run each experiment yourself.</p>
-<p class="cta"><a class="btn primary" href="vi/">Đọc tiếng Việt →</a><a class="btn" href="en/">Read in English →</a></p>
-</section>
-</main></body></html>
+<body>
+<footer class="author-footer">
+  <div class="social-links">
+    <a href="https://www.facebook.com/nam.son.178624/" aria-label="Facebook" rel="me noopener" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 21v-8h3l.5-4H14V6.5c0-1 .4-1.5 1.5-1.5H18V2h-3c-3 0-5 1.8-5 5v2H7v4h3v8"/></svg></a>
+    <a href="https://www.instagram.com/fet.sofn/" aria-label="Instagram" rel="me noopener" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".8" fill="currentColor" stroke="none"/></svg></a>
+    <a href="https://github.com/JasonDE03/sophon" aria-label="GitHub" rel="me noopener" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 21v-3c-3 .8-3-1.5-4-2m10 5v-4c0-1-.3-1.6-.8-2 2.7-.3 5.3-1.3 5.3-6A4.7 4.7 0 0 0 18.2 6c.2-1 .1-2-.3-3-1.5 0-2.8.8-3.5 1.3a12 12 0 0 0-4.8 0C8.9 3.8 7.6 3 6.1 3c-.4 1-.5 2-.3 3A4.7 4.7 0 0 0 4.5 9c0 4.7 2.6 5.7 5.3 6-.5.4-.8 1-.8 2"/></svg></a>
+  </div>
+  <p>© 2026 Nguyen Phan Nam Son</p>
+</footer>
+</body></html>

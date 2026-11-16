@@ -76,3 +76,36 @@ document.querySelectorAll('.ask').forEach(ask => {
     });
   });
 });
+
+// Build the desktop outline from the same headings readers see in the article.
+const toc = document.querySelector('.page-toc');
+if (toc) {
+  const headings = [...document.querySelectorAll('main h2, main .deep > summary')];
+  const label = document.createElement('p'), list = document.createElement('ol');
+  label.className = 'toc-label';
+  label.textContent = document.documentElement.lang === 'vi' ? 'Trong bài này' : 'On this page';
+  toc.setAttribute('aria-label', label.textContent);
+  const links = headings.map((heading, i) => {
+    heading.id ||= `section-${i + 1}`;
+    const item = document.createElement('li'), link = document.createElement('a');
+    link.href = `#${heading.id}`;
+    link.textContent = heading.firstChild.textContent.trim();
+    link.addEventListener('click', () => {
+      if (heading.matches('summary')) heading.parentElement.open = true;
+    });
+    item.append(link); list.append(item);
+    return link;
+  });
+  toc.append(label, list);
+  const updateTOC = () => {
+    const current = headings.filter(heading => heading.getBoundingClientRect().top <= innerHeight * .35).pop() || headings[0];
+    links.forEach((link, i) => {
+      if (headings[i] === current) link.setAttribute('aria-current', 'location');
+      else link.removeAttribute('aria-current');
+    });
+  };
+  const observer = new IntersectionObserver(updateTOC, { rootMargin: '0px 0px -65% 0px' });
+  // Also cover anchor jumps that skip every heading in the observer's viewport.
+  document.addEventListener('scroll', updateTOC, { passive: true });
+  headings.forEach(heading => observer.observe(heading));
+}
