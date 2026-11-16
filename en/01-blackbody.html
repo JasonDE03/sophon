@@ -21,13 +21,14 @@
 <p>The pieces arrived one at a time. Stefan (1879, empirically) and Boltzmann (1884, from thermodynamics) showed that total emitted power scales as $T^4$. In 1893 Wilhelm Wien proved that the peak shifts to shorter wavelengths as the body heats up: $\lambda_{\max} T = \text{const}$. That is why heated iron goes from red to white.</p>
 
 <h2>Redo the experiment</h2>
-<p>Drag the temperature slider. The bold line is the real spectrum (Planck's formula); the blue line is the classical prediction. The Sun's surface is about 5800 K; an incandescent filament is about 2700 K.</p>
+<p>The simulation has three parts: the colour and spectrum of hot objects, the classical prediction, and the 1900 infrared measurements described further down. Drag the temperature slider or click one of the presets.</p>
 <div class="sim" id="sim"></div>
 <script type="module">import { mount } from '../sims/blackbody.js'; mount(document.getElementById('sim'));</script>
-<p>Watch for two things:</p>
+<p>Watch for three things:</p>
 <ul>
-<li>At long wavelengths (right), the classical curve hugs the real one. At short wavelengths it shoots to infinity. If it were right, every warm object would radiate infinite energy in the ultraviolet.</li>
-<li>Turn on Wien's curve (green): it fits short wavelengths well and drifts at long ones. Each formula is only half right.</li>
+<li>In "Colour of hot things", raise the temperature from 1000 K to 10000 K. The peak moves from the infrared into the visible, and the colour goes from red to white to slightly blue. That is Wien's displacement law.</li>
+<li>In "Classical physics", the Rayleigh–Jeans curve hugs the real spectrum at long wavelengths but shoots to infinity at short ones. If it were right, every hot object would radiate infinite energy in the ultraviolet.</li>
+<li>In "The 1900 data", Wien's formula barely grows as the body gets hotter, while the measurements rise steadily with temperature. Wien works at short wavelengths, Rayleigh–Jeans at long ones: each formula is only half right.</li>
 </ul>
 
 <h2>The lab in Berlin</h2>

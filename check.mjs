@@ -11,6 +11,10 @@ assert.ok(Math.abs(arg / peak(T) - 1) < 1e-3, `peak ${arg} vs ${peak(T)}`);
 // Classical limit (long λ) and Wien limit (short λ).
 assert.ok(Math.abs(rayleighJeans(1e-3, T) / planck(1e-3, T) - 1) < 2e-3);
 assert.ok(Math.abs(wien(300e-9, 3000) / planck(300e-9, 3000) - 1) < 1e-6);
+// Rubens–Kurlbaum regime: Planck grows nearly linearly; Wien nearly saturates.
+const longWaveRatio = planck(50e-6, 2000) / planck(50e-6, 1000);
+assert.ok(longWaveRatio > 2.1 && longWaveRatio < 2.2);
+assert.ok(wien(50e-6, 2000) / wien(50e-6, 1000) < 1.2);
 // Stefan–Boltzmann: π∫B_λ dλ = σT⁴.
 let sum = 0; const dl = 1e-9;
 for (let l = dl; l < 1e-3; l += dl) sum += planck(l, T) * dl;

@@ -25,57 +25,150 @@ const TXT = {
 };
 
 export function mount(el) {
-  const t = TXT[document.documentElement.lang] || TXT.en;
-  el.innerHTML = `<canvas></canvas><div class="controls">
-    <label>${t.T}: <b class="tv"></b> K <input type="range" min="1000" max="10000" step="50" value="5800"></label>
-    <span class="swatch"></span>
-    <label><input type="checkbox" class="rj" checked> <span style="color:var(--blue)">${t.rj}</span></label>
-    <label><input type="checkbox" class="wn"> <span style="color:var(--green)">${t.wien}</span></label>
-    <label><input type="checkbox" class="lock"> ${t.lock}</label>
-    <div class="readout"></div></div>`;
-  const $ = s => el.querySelector(s), cv = $('canvas'), ctx = cv.getContext('2d');
-  const L0 = 100e-9, L1 = 3000e-9;
-  let yMax = 0;
-
-  function draw() {
-    const T = +$('input[type=range]').value;
-    const dpr = devicePixelRatio || 1, W = cv.clientWidth, H = cv.clientHeight;
-    cv.width = W * dpr; cv.height = H * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    const css = getComputedStyle(document.documentElement), v = n => css.getPropertyValue(n).trim(), fg = v('--fg'), mu = v('--muted'), fa = v('--faint') || mu;
-    if (!$('.lock').checked || !yMax) yMax = planck(peak(T), T) * 1.3;
-    const P = { l: 40, r: 28, t: 10, b: 36 }, pw = W - P.l - P.r, ph = H - P.t - P.b;
-    const X = l => P.l + (l - L0) / (L1 - L0) * pw, Y = v => P.t + ph - v / yMax * ph;
-
-    ctx.clearRect(0, 0, W, H);
-    const g = ctx.createLinearGradient(X(380e-9), 0, X(750e-9), 0);
-    ['#7f00ff', '#0000ff', '#00ffff', '#00ff00', '#ffff00', '#ff7f00', '#ff0000'].forEach((col, i, a) => g.addColorStop(i / (a.length - 1), col));
-    ctx.globalAlpha = 0.18; ctx.fillStyle = g; ctx.fillRect(X(380e-9), P.t, X(750e-9) - X(380e-9), ph); ctx.globalAlpha = 1;
-    ctx.fillStyle = mu; ctx.font = '12px Inter, system-ui'; ctx.fillText(t.visible, X(400e-9), P.t + 14);
-
-    ctx.strokeStyle = fa; ctx.lineWidth = 1; ctx.beginPath();
-    ctx.moveTo(P.l, P.t); ctx.lineTo(P.l, P.t + ph); ctx.lineTo(P.l + pw, P.t + ph); ctx.stroke();
-    for (let nm = 500; nm <= 3000; nm += 500) ctx.fillText(nm, X(nm * 1e-9) - 12, H - 20);
-    ctx.fillText(t.x, P.l + pw / 2 - 40, H - 4);
-    ctx.save(); ctx.translate(14, P.t + ph / 2 + 25); ctx.rotate(-Math.PI / 2); ctx.fillText(t.y, 0, 0); ctx.restore();
-
-    ctx.save(); ctx.beginPath(); ctx.rect(P.l, P.t, pw, ph); ctx.clip();
-    const curve = (f, col, w) => {
-      ctx.strokeStyle = col; ctx.lineWidth = w; ctx.beginPath();
-      for (let i = 0; i <= pw; i++) { const l = L0 + i / pw * (L1 - L0); ctx.lineTo(P.l + i, Math.max(Y(f(l, T)), -10)); }
-      ctx.stroke();
-    };
-    if ($('.rj').checked) curve(rayleighJeans, v('--blue'), 2);
-    if ($('.wn').checked) curve(wien, v('--green'), 2);
-    curve(planck, fg, 2.5);
-    const lp = peak(T);
-    ctx.setLineDash([4, 4]); ctx.strokeStyle = v('--accent'); ctx.beginPath(); ctx.moveTo(X(lp), Y(planck(lp, T))); ctx.lineTo(X(lp), P.t + ph); ctx.stroke();
-    ctx.restore();
-
-    $('.tv').textContent = T;
-    const rgb = kelvinToRgb(T); $('.swatch').style.background = rgb; $('.swatch').style.boxShadow = `0 0 18px ${rgb}`;
-    $('.readout').textContent = `${t.peak}: λ = ${(lp * 1e9).toFixed(0)} nm · ${t.power}: σT⁴ = ${(SIGMA * T ** 4 / 1e6).toFixed(2)} MW/m²`;
+  const lang = document.documentElement.lang === 'vi' ? 'vi' : 'en', vi = lang === 'vi';
+  const t = { ...TXT[lang],
+    modes: vi ? ['Màu của vật nóng', 'Vật lý cổ điển', 'Dữ liệu năm 1900'] : ['Colour of hot things', 'Classical physics', 'The 1900 data'],
+    y: vi ? 'Cường độ (tương đối)' : 'Intensity (relative)', colour: vi ? 'màu mắt thấy' : 'colour you would see',
+    compare: vi ? 'So với Mặt Trời (cùng thang đo)' : 'Compare with the Sun (same scale)', sun: vi ? 'Mặt Trời' : 'Sun',
+    presets: vi ? ['sắt nung đỏ', 'bóng đèn sợi đốt', 'bề mặt Mặt Trời', 'sao Thiên Lang (Sirius)'] : ['red-hot iron', 'incandescent bulb', 'surface of the Sun', 'Sirius'],
+    reality: vi ? 'Planck (thực tế)' : 'Planck (reality)', infinity: vi ? '→ vô hạn' : '→ infinity',
+    title: vi ? 'Cường độ ở bước sóng 50 μm theo nhiệt độ' : 'Intensity at 50 μm versus temperature',
+    aria: vi ? ['Màu vật nóng và phổ Planck theo bước sóng', 'Phổ Planck so với dự đoán Rayleigh–Jeans', 'Planck, Rayleigh–Jeans và Wien ở 50 μm theo nhiệt độ'] :
+      ['Hot object colour and Planck spectrum versus wavelength', 'Planck spectrum compared with the Rayleigh–Jeans prediction', 'Planck, Rayleigh–Jeans and Wien at 50 μm versus temperature'] };
+  const fmt = (v, n = 0) => v.toLocaleString(lang, { useGrouping: false, minimumFractionDigits: n, maximumFractionDigits: n });
+  const presets = [1000, 2700, 5800, 9900];
+  el.classList.add('blackbody');
+  el.innerHTML = `<style>
+    .blackbody .modes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border:1px solid var(--faint);border-radius:12px;overflow:hidden;margin-bottom:12px}
+    .blackbody button{cursor:pointer;font:inherit;line-height:1.4;background:transparent;color:var(--muted)}
+    .blackbody .modes button{border:0;padding:10px 6px;font-size:13px}.blackbody button[aria-pressed=true]{color:var(--fg);background:var(--faint);box-shadow:inset 0 -2px var(--accent)}
+    .blackbody .controls{display:grid;gap:16px}.blackbody label{flex-wrap:wrap;min-width:0}.blackbody [hidden]{display:none!important}
+    .blackbody .presets{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+    .blackbody .presets button{border:1px solid var(--faint);border-radius:12px;padding:8px;font-size:12px}
+    .blackbody input[type=range]{appearance:none;width:100%;height:8px;border-radius:8px;background:var(--faint);margin:8px 0}
+    .blackbody input[type=range]::-webkit-slider-thumb{appearance:none;width:18px;height:18px;border-radius:50%;background:var(--fg);border:3px solid var(--accent)}
+    .blackbody input[type=range]::-moz-range-thumb{width:12px;height:12px;border-radius:50%;background:var(--fg);border:3px solid var(--accent)}
+    .blackbody :focus-visible{outline:2px solid var(--blue);outline-offset:4px}
+    .blackbody .explanation{font-size:14px;line-height:1.7;color:var(--fg);margin:0}
+    </style><div class="modes" role="group" aria-label="${t.modes.join(' / ')}">
+    ${t.modes.map((s, i) => `<button type="button" data-mode="${i}" aria-pressed="${!i}">${s}</button>`).join('')}</div>
+    <canvas role="img"></canvas><p class="explanation" aria-live="polite"></p>
+    <div class="controls"><label>${t.T}: <b class="tv"></b> K<input type="range" aria-label="${t.T}" min="1000" max="10000" step="50" value="5800"></label>
+    <div class="presets">${presets.map((T, i) => `<button type="button" data-temperature="${T}">${T} K · ${t.presets[i]}</button>`).join('')}</div>
+    <label class="compare"><input type="checkbox"> ${t.compare}</label></div>`;
+  const $ = s => el.querySelector(s), cv = $('canvas'), ctx = cv.getContext('2d'), slider = $('input[type=range]');
+  const temperatures = [5800, 1500], H = 360;
+  let mode = 0, W = 0, colours;
+  function update() {
+    const T = temperatures[mode === 2 ? 1 : 0], nm = peak(T) * 1e9, power = SIGMA * T ** 4;
+    slider.min = mode === 2 ? 100 : 1000; slider.max = mode === 2 ? 2000 : 10000; slider.value = T;
+    $('.tv').textContent = fmt(T); $('.presets').hidden = mode === 2; $('.compare').hidden = mode !== 0;
+    cv.setAttribute('aria-label', `${t.aria[mode]} · ${fmt(T)} K`);
+    for (const b of el.querySelectorAll('[data-mode]')) b.setAttribute('aria-pressed', String(+b.dataset.mode === mode));
+    for (const b of el.querySelectorAll('[data-temperature]')) b.setAttribute('aria-pressed', String(+b.dataset.temperature === T));
+    const zone = nm < 380 ? (vi ? 'vùng tử ngoại' : 'ultraviolet') : nm <= 750 ? (vi ? 'vùng nhìn thấy' : 'visible') : (vi ? 'vùng hồng ngoại, mắt không thấy' : 'infrared, invisible');
+    const P = `${fmt(power / (power < 1e6 ? 1e3 : 1e6), 2)} ${power < 1e6 ? 'kW/m²' : 'MW/m²'}`;
+    const r = fmt(rayleighJeans(400e-9, T) / planck(400e-9, T)), pct = fmt(100 * wien(50e-6, T) / planck(50e-6, T));
+    $('.explanation').textContent = mode === 0 ? (vi ?
+      `Ở ${fmt(T)} K, phổ đạt đỉnh ở ${fmt(nm)} nm (${zone}) và mỗi mét vuông bề mặt phát ra ${P}. Nóng gấp đôi thì công suất phát tăng 16 lần.` :
+      `At ${fmt(T)} K the spectrum peaks at ${fmt(nm)} nm (${zone}) and each square metre of surface emits ${P}. Twice as hot means 16 times the power.`) : mode === 1 ? (vi ?
+      `Ở bước sóng dài (bên phải), công thức cổ điển gần trùng với thực tế. Ở 400 nm (ánh sáng tím), nó đã cho gấp ${r} lần, và càng về bước sóng ngắn càng sai: cộng hết lại, năng lượng phát ra là vô hạn.` :
+      `At long wavelengths (on the right), the classical formula almost matches reality. At 400 nm (violet light), it already predicts ${r} times as much, and gets ever worse at shorter wavelengths: added up, the emitted energy is infinite.`) : (vi ?
+      `Ở bước sóng dài 50 μm, cường độ theo Planck tăng gần như tỉ lệ thuận với nhiệt độ, đúng như Rubens và Kurlbaum đo được năm 1900. Công thức Wien ở ${fmt(T)} K chỉ cho ${pct}% giá trị đó và gần như ngừng tăng khi vật nóng thêm. Đây là chỗ Wien sai, và là manh mối dẫn Planck tới công thức của mình.` :
+      `At the long wavelength of 50 μm, Planck's intensity increases almost in proportion to temperature, just as Rubens and Kurlbaum measured in 1900. At ${fmt(T)} K, Wien's formula gives only ${pct}% of that value and almost stops increasing as the object gets hotter. This is where Wien fails, and the clue that led Planck to his formula.`);
+    draw();
   }
-  el.addEventListener('input', draw);
-  addEventListener('resize', draw);
-  draw(); document.fonts?.ready.then(draw);
+  function resize() {
+    W = cv.clientWidth; const dpr = devicePixelRatio || 1;
+    cv.width = Math.round(W * dpr); cv.height = H * dpr; cv.style.height = `${H}px`; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    const css = getComputedStyle(document.documentElement);
+    colours = Object.fromEntries(['fg', 'muted', 'faint', 'accent', 'blue', 'green'].map(k => [k, css.getPropertyValue(`--${k}`).trim()]));
+    draw();
+  }
+  function wrapped(text, x, y, width, colour, align = 'left') {
+    ctx.fillStyle = colour; ctx.textAlign = align; let line = '';
+    for (const word of text.split(' ')) { const next = line ? `${line} ${word}` : word;
+      if (line && ctx.measureText(next).width > width) { ctx.fillText(line, x, y); y += 16; line = word; } else line = next; }
+    ctx.fillText(line, x, y);
+  }
+  function draw() {
+    if (!colours || !W) return;
+    const { fg, muted, faint, accent, blue, green } = colours, T = temperatures[mode === 2 ? 1 : 0];
+    const data = mode === 2, compact = mode === 0 && W < 440, compare = mode === 0 && $('input[type=checkbox]').checked;
+    const left = mode === 0 && !compact ? W * .22 + 34 : 38, right = data ? W - 94 : W - 18, top = data ? 78 : compact ? 130 : 100, bottom = H - 48;
+    const ymax = data ? 1.1 * planck(50e-6, 2000) : (mode === 1 ? 1.3 : 1.15) * Math.max(planck(peak(T), T), compare ? planck(peak(5800), 5800) : 0);
+    const lo = data ? 0 : 100, hi = data ? 2000 : 3000, X = x => left + (x - lo) / (hi - lo) * (right - left), Y = y => bottom - y / ymax * (bottom - top);
+    const value = (f, x, temp = T) => data ? (x ? f(50e-6, x) : 0) : f(x * 1e-9, temp);
+    ctx.clearRect(0, 0, W, H); ctx.font = '12px Inter, system-ui'; ctx.textAlign = 'left';
+    if (mode === 0) {
+      const x = W * (compact ? .5 : .11), y = compact ? 36 : 177, radius = compact ? 18 : Math.min(30, W * .065), rgb = kelvinToRgb(T);
+      const glow = ctx.createRadialGradient(x, y, radius * .5, x, y, radius * 1.8);
+      glow.addColorStop(0, rgb); glow.addColorStop(1, `${rgb.slice(0, -1).replace('rgb(', 'rgba(')},0)`);
+      ctx.fillStyle = glow; ctx.beginPath(); ctx.arc(x, y, radius * 1.8, 0, 2 * Math.PI); ctx.fill();
+      ctx.fillStyle = rgb; ctx.beginPath(); ctx.arc(x, y, radius, 0, 2 * Math.PI); ctx.fill();
+      wrapped(t.colour, x, y + radius + 28, compact ? W - 8 : W * .22 - 16, muted, 'center');
+    }
+    if (data) wrapped(t.title, left, 24, W - left - 4, fg);
+    else {
+      const g = ctx.createLinearGradient(X(380), 0, X(750), 0);
+      ['#7f00ff', '#0000ff', '#00ffff', '#00ff00', '#ffff00', '#ff7f00', '#ff0000'].forEach((c, i) => g.addColorStop(i / 6, c));
+      ctx.globalAlpha = .18; ctx.fillStyle = g; ctx.fillRect(X(380), top, X(750) - X(380), bottom - top); ctx.globalAlpha = 1;
+      ctx.textAlign = 'left'; ctx.fillStyle = muted; ctx.fillText(t.visible, X(380), top - 12);
+    }
+    ctx.strokeStyle = faint; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(left, top); ctx.lineTo(left, bottom); ctx.lineTo(right, bottom); ctx.stroke();
+    ctx.fillStyle = muted; ctx.textAlign = 'center';
+    for (let x = data ? 0 : 500; x <= hi; x += 500) {
+      ctx.beginPath(); ctx.moveTo(X(x), bottom); ctx.lineTo(X(x), bottom + 4); ctx.stroke(); ctx.fillText(fmt(x), X(x), bottom + 20);
+    }
+    ctx.fillText(data ? `${t.T} (K)` : t.x, (left + right) / 2, H - 5);
+    ctx.save(); ctx.translate(left - 24, (top + bottom) / 2); ctx.rotate(-Math.PI / 2); ctx.fillText(t.y, 0, 0); ctx.restore();
+    const path = (f, temp = T, reverse = false) => {
+      for (let i = 0; i <= 600; i++) { const x = lo + (reverse ? 600 - i : i) / 600 * (hi - lo);
+        ctx.lineTo(X(x), Math.max(top - 2, Y(value(f, x, temp)))); }
+    };
+    const curve = (f, colour, dash = [], temp = T) => {
+      ctx.strokeStyle = colour; ctx.lineWidth = 2; ctx.setLineDash(dash); ctx.beginPath(); path(f, temp); ctx.stroke(); ctx.setLineDash([]);
+    };
+    ctx.save(); ctx.beginPath(); ctx.rect(left, top, right - left, bottom - top); ctx.clip();
+    if (mode === 0) {
+      ctx.beginPath(); ctx.moveTo(left, bottom); path(planck); ctx.lineTo(right, bottom); ctx.closePath(); ctx.fillStyle = fg; ctx.globalAlpha = .06; ctx.fill(); ctx.globalAlpha = 1;
+      if (compare) curve(planck, muted, [], 5800);
+    }
+    if (mode === 1) {
+      ctx.beginPath(); path(rayleighJeans); path(planck, T, true); ctx.closePath(); ctx.fillStyle = blue; ctx.globalAlpha = .15; ctx.fill(); ctx.globalAlpha = 1;
+      curve(rayleighJeans, blue);
+    }
+    if (data) {
+      curve(rayleighJeans, blue, [5, 4]); curve(wien, green);
+      ctx.strokeStyle = faint; ctx.beginPath(); ctx.moveTo(X(T), top); ctx.lineTo(X(T), bottom); ctx.stroke();
+    }
+    curve(planck, fg);
+    if (mode === 0) {
+      const nm = peak(T) * 1e9;
+      ctx.strokeStyle = accent; ctx.setLineDash([4, 4]); ctx.beginPath(); ctx.moveTo(X(nm), Y(planck(peak(T), T))); ctx.lineTo(X(nm), bottom); ctx.stroke(); ctx.setLineDash([]);
+    }
+    ctx.restore(); ctx.textAlign = 'left';
+    if (mode === 0) {
+      const label = `${vi ? 'đỉnh' : 'peak'} ${fmt(peak(T) * 1e9)} nm`;
+      ctx.fillStyle = accent; ctx.fillText(label, Math.min(right - ctx.measureText(label).width, Math.max(left, X(peak(T) * 1e9) - 20)), Y(planck(peak(T), T)) - 10);
+      if (compare) { ctx.fillStyle = muted; ctx.fillText(t.sun, X(1100), Math.min(bottom - 8, Y(planck(1100e-9, 5800)) + 18)); }
+    } else if (mode === 1) {
+      ctx.textAlign = 'right'; ctx.fillStyle = fg; ctx.fillText(t.reality, right, 25); ctx.fillStyle = blue; ctx.fillText(t.rj, right, 45);
+      const x = Math.min(right - 6, Math.max(left + 6, X((2 * c * k * T / ymax) ** .25 * 1e9)));
+      ctx.strokeStyle = blue; ctx.beginPath(); ctx.moveTo(x, top + 30); ctx.lineTo(x, top + 2); ctx.moveTo(x - 5, top + 9); ctx.lineTo(x, top + 2); ctx.lineTo(x + 5, top + 9); ctx.stroke();
+      ctx.textAlign = 'left'; ctx.fillText(t.infinity, Math.min(x + 9, right - ctx.measureText(t.infinity).width), top + 22);
+    } else {
+      for (const [f, label, colour, offset] of [[rayleighJeans, 'Rayleigh–Jeans', blue, -5], [planck, 'Planck', fg, 12], [wien, 'Wien', green, 4]]) {
+        ctx.fillStyle = colour; ctx.fillText(label, right + 6, Y(value(f, 2000)) + offset);
+        ctx.beginPath(); ctx.arc(X(T), Y(value(f, T)), 3.5, 0, 2 * Math.PI); ctx.fill();
+      }
+    }
+  }
+  slider.addEventListener('input', () => { temperatures[mode === 2 ? 1 : 0] = +slider.value; update(); });
+  $('input[type=checkbox]').addEventListener('input', draw);
+  el.querySelectorAll('[data-mode]').forEach(b => b.addEventListener('click', () => { mode = +b.dataset.mode; update(); }));
+  el.querySelectorAll('[data-temperature]').forEach(b => b.addEventListener('click', () => { temperatures[0] = +b.dataset.temperature; update(); }));
+  new ResizeObserver(resize).observe(cv); addEventListener('resize', resize);
+  new IntersectionObserver(([entry]) => { if (entry.isIntersecting) draw(); }).observe(el);
+  resize(); update(); document.fonts?.ready.then(resize);
 }

@@ -21,13 +21,14 @@
 <p>Trong khoảng thời gian đó, người ta tìm ra từng mảnh. Stefan (1879, từ thực nghiệm) và Boltzmann (1884, từ nhiệt động lực học) cho thấy tổng công suất phát tỉ lệ với $T^4$. Năm 1893, Wilhelm Wien chứng minh đỉnh phổ dịch về phía bước sóng ngắn khi vật nóng lên: $\lambda_{\max} T = \text{hằng số}$. Đó là lý do sắt nung chuyển từ đỏ sang trắng.</p>
 
 <h2>Tự làm lại thí nghiệm</h2>
-<p>Kéo thanh nhiệt độ. Đường đậm là phổ thật (công thức Planck), đường xanh dương là dự đoán của vật lý cổ điển. Mặt Trời có nhiệt độ bề mặt khoảng 5800 K, dây tóc bóng đèn sợi đốt khoảng 2700 K.</p>
+<p>Mô phỏng có ba phần: màu và phổ của vật nóng, dự đoán của vật lý cổ điển, và phép đo hồng ngoại năm 1900 mà bạn sẽ đọc ở phần sau. Kéo thanh nhiệt độ hoặc bấm các mốc có sẵn.</p>
 <div class="sim" id="sim"></div>
 <script type="module">import { mount } from '../sims/blackbody.js'; mount(document.getElementById('sim'));</script>
-<p>Hãy để ý hai điều:</p>
+<p>Hãy để ý ba điều:</p>
 <ul>
-<li>Ở bước sóng dài (bên phải), đường cổ điển bám sát phổ thật. Ở bước sóng ngắn, nó vọt lên vô hạn. Nếu nó đúng thì mọi vật nóng sẽ phát ra năng lượng vô hạn ở vùng tử ngoại.</li>
-<li>Bật đường Wien (xanh lá): nó khớp tốt ở bước sóng ngắn nhưng lệch dần ở bước sóng dài. Mỗi công thức chỉ đúng được một nửa.</li>
+<li>Ở "Màu của vật nóng", tăng nhiệt độ từ 1000 K lên 10000 K. Đỉnh phổ dịch từ vùng hồng ngoại vào vùng nhìn thấy, màu vật chuyển từ đỏ sang trắng rồi hơi ngả xanh. Đó là định luật dịch chuyển Wien.</li>
+<li>Ở "Vật lý cổ điển", đường Rayleigh–Jeans bám sát phổ thật ở bước sóng dài nhưng vọt lên vô hạn ở bước sóng ngắn. Nếu nó đúng thì mọi vật nóng sẽ phát ra năng lượng vô hạn ở vùng tử ngoại.</li>
+<li>Ở "Dữ liệu năm 1900", công thức Wien gần như không tăng khi vật nóng thêm, còn phép đo cho thấy cường độ tăng đều theo nhiệt độ. Wien đúng ở bước sóng ngắn, Rayleigh–Jeans đúng ở bước sóng dài: mỗi công thức chỉ đúng được một nửa.</li>
 </ul>
 
 <h2>Phòng thí nghiệm ở Berlin</h2>
