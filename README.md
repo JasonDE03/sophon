@@ -1,12 +1,14 @@
 # Sophon
 
+**Read it here: https://sophon.jasonng-1407.workers.dev** ([Tiếng Việt](https://sophon.jasonng-1407.workers.dev/vi/) · [English](https://sophon.jasonng-1407.workers.dev/en/))
+
 Physics history, rebuilt by hand (Lịch sử vật lý, tự tay làm lại). A bilingual (Vietnamese/English) site that retells the history of physics as interactive episodes. Each episode covers one experiment or discovery and has three parts: the historical context, the people involved, and a simulation the reader drives to redo the experiment.
 
 Plain static HTML with no build step, no backend and no dependencies to install. KaTeX loads from a CDN.
 
 ## Run locally
 
-Simulations are ES modules, so the pages must be served over HTTP. Opening them with `file://` does not work.
+Only needed if you want to edit the site. Simulations are ES modules, so the pages must be served over HTTP. Opening them with `file://` does not work.
 
 ```bash
 python3 -m http.server 8000
@@ -41,4 +43,4 @@ check.mjs           assert-based physics checks
 
 ## Deploy
 
-Push to GitHub and enable Pages, or connect the repo to Cloudflare Pages with no build command and the repo root as the output directory.
+The repo is connected to Cloudflare Workers (static assets). Every push to `main` deploys automatically; other branches get preview URLs.
