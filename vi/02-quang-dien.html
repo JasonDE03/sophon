@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Hiệu ứng quang điện — Sophon</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 16 16%27><circle cx=%278%27 cy=%278%27 r=%275%27 fill=%27%23f0b35a%27/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&display=swap">
+<link rel="stylesheet" href="../style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"
+  onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]})"></script>
+</head><body><main>
+<nav><a class="brand" href="../">sophon</a><span class="links"><a href="./">Mục lục</a><a href="../en/02-photoelectric.html">English</a></span></nav>
+
+<p class="year">Bài 2 · 1887–1916</p>
+<h1>Hiệu ứng quang điện: ánh sáng đến từng hạt</h1>
+<p class="lede">Năm 1900, không ai nghi ngờ ánh sáng là sóng. Vậy mà chiếu ánh sáng đỏ mạnh đến mấy vào một tấm kẽm cũng không bứt ra nổi một electron, còn một tia tử ngoại thật yếu thì làm được ngay.</p>
+
+<h2>Ánh sáng là sóng</h2>
+<p>Đến cuối thế kỷ 19, bản chất sóng của ánh sáng được xem là chuyện đã ngã ngũ. Đầu thế kỷ, Thomas Young và Augustin Fresnel giải thích giao thoa và nhiễu xạ bằng lý thuyết sóng. Năm 1865, James Clerk Maxwell chỉ ra ánh sáng là sóng điện từ. Năm 1887–1888, Heinrich Hertz tạo ra và thu được sóng điện từ ngay trong phòng thí nghiệm, xác nhận lý thuyết của Maxwell.</p>
+<p>Năng lượng của một con sóng tỉ lệ với bình phương biên độ, tức là với cường độ. Từ đó có thể đoán ba điều: ánh sáng càng mạnh thì electron bị bứt ra càng nhanh; ánh sáng màu nào cũng bứt được electron, miễn là đủ mạnh; ánh sáng yếu thì electron phải chờ một lúc mới tích đủ năng lượng để thoát ra. Cả ba đều sai.</p>
+
+<h2>Tự làm lại thí nghiệm</h2>
+<p>Một tấm kim loại đặt trong chân không được chiếu sáng. Chọn kim loại, kéo màu và độ sáng của ánh sáng. Thanh năng lượng bên dưới so sánh năng lượng của một hạt ánh sáng với năng lượng cần để bứt một electron ra khỏi kim loại.</p>
+<div class="sim" id="sim"></div>
+<script type="module">import { mount } from '../sims/photoelectric.js'; mount(document.getElementById('sim'));</script>
+<p>Hãy để ý:</p>
+<ul>
+<li>Với natri, kéo màu ánh sáng từ tím sang đỏ. Qua khoảng 451 nm, electron ngừng bay ra, kể cả khi độ sáng là 100%.</li>
+<li>Tăng độ sáng chỉ làm có <b>nhiều</b> electron hơn, không làm chúng nhanh hơn. Muốn electron nhanh hơn, phải đổi màu ánh sáng.</li>
+<li>Chọn kẽm: không màu nào trong ánh sáng nhìn thấy đủ sức. Phải xuống dưới khoảng 286 nm, tức là tia tử ngoại.</li>
+<li>Bấm "Lý thuyết sóng (dự đoán cũ)" để xem mọi thứ lẽ ra sẽ thế nào nếu ánh sáng chỉ là sóng: màu nào cũng được, chỉ cần chờ.</li>
+<li>Mở "Thử đo h/e như Millikan" và ghi vài điểm ở các màu khác nhau. Các điểm nằm trên một đường thẳng, và độ dốc của nó không đổi khi bạn đổi sang kim loại khác.</li>
+</ul>
+
+<h2>Từ Hertz đến Lenard</h2>
+<p>Trớ trêu là chính thí nghiệm xác nhận ánh sáng là sóng lại để lộ vết nứt đầu tiên. Năm 1887, trong lúc làm thí nghiệm sóng điện từ, Hertz nhận thấy tia lửa điện ở khe thu phóng dễ hơn khi khe được chiếu tia tử ngoại từ tia lửa của máy phát. Ông công bố hiện tượng, không giải thích được, rồi quay lại với sóng điện từ.</p>
+<p>Năm 1888, Wilhelm Hallwachs cho thấy một tấm kẽm tích điện âm sẽ mất dần điện tích khi bị chiếu tử ngoại, còn tấm tích điện dương thì không. Ánh sáng đã đánh bật thứ gì đó mang điện âm ra khỏi kim loại. Năm 1899, J. J. Thomson đo tỉ số điện tích trên khối lượng của các hạt này và thấy chúng chính là electron, loại hạt ông đã phát hiện hai năm trước trong tia âm cực.</p>
+<p>Năm 1902, Philipp Lenard, người từng làm trợ lý cho Hertz, đo năng lượng của các electron đó. Ông đặt một hiệu điện thế hãm giữa tấm kim loại và cực thu, rồi tăng dần cho đến khi không còn electron nào tới được cực thu. Kết quả rất lạ. Khi đổi cường độ của đèn hồ quang, số electron thay đổi nhưng năng lượng lớn nhất của chúng thì không. Năng lượng ấy lại phụ thuộc vào loại ánh sáng. Lenard cho rằng ánh sáng chỉ đóng vai trò "kích nổ": nó mở chốt, còn năng lượng của electron vốn đã có sẵn bên trong nguyên tử.</p>
+
+<h2>Einstein, 1905</h2>
+<p>Tháng 3/1905, Einstein gửi tới tạp chí <i>Annalen der Physik</i> bài báo "Về một quan điểm gợi mở liên quan đến sự phát sinh và biến đổi của ánh sáng". Trong thư gửi người bạn Conrad Habicht tháng 5 năm đó, ông tự nhận bài này "rất cách mạng".</p>
+<p>Điểm xuất phát của Einstein không phải là hiệu ứng quang điện. Ông xét entropy của bức xạ trong vùng mà định luật Wien còn đúng, và thấy nó thay đổi theo thể tích y hệt entropy của một chất khí gồm các hạt độc lập. Từ đó ông đề xuất rằng ánh sáng hành xử như thể gồm những lượng tử năng lượng định xứ, mỗi lượng tử mang năng lượng $h\nu$. Planck mới chỉ lượng tử hoá năng lượng của các dao động tử trong vật chất. Einstein đi xa hơn: lượng tử hoá chính ánh sáng.</p>
+<p>Hiệu ứng quang điện chỉ là một trong ba ứng dụng ở cuối bài. Nếu mỗi lượng tử trao toàn bộ năng lượng cho một electron, và electron phải tốn một phần năng lượng $\phi$ (công thoát) để rời khỏi kim loại, thì</p>
+$$K_{\max} = h\nu - \phi.$$
+<p>Phương trình này giải thích ngay kết quả của Lenard: ánh sáng mạnh hơn nghĩa là nhiều lượng tử hơn, nên có nhiều electron hơn, nhưng mỗi electron vẫn chỉ nhận được $h\nu$. Nó còn đưa ra một dự đoán định lượng mà dữ liệu thời đó chưa kiểm tra được: $K_{\max}$ tăng <b>tuyến tính</b> theo tần số, với độ dốc đúng bằng hằng số $h$ của Planck, cho mọi kim loại.</p>
+
+<h2>Millikan, người không tin</h2>
+<p>Ở Đại học Chicago, Robert Millikan dành gần mười năm để kiểm tra phương trình của Einstein. Ông dùng các kim loại kiềm vì chúng nhạy cả với ánh sáng nhìn thấy, nhưng bề mặt của chúng bị oxy hoá rất nhanh. Để có bề mặt sạch, ông chế tạo thứ mà ông gọi là "xưởng cơ khí trong chân không": một con dao điều khiển từ bên ngoài, gọt bề mặt kim loại ngay trong bình chân không trước mỗi lần đo.</p>
+<p>Năm 1916, ông công bố kết quả trên <i>Physical Review</i>: hiệu điện thế hãm tăng tuyến tính theo tần số, và độ dốc cho ra giá trị $h$ khớp với giá trị Planck tìm được từ bức xạ vật đen. Phương trình của Einstein đúng. Dù vậy Millikan vẫn không chấp nhận lý thuyết đằng sau nó. Ngay trong bài báo ấy, ông gọi lượng tử ánh sáng là một giả thuyết "táo bạo, nếu không muốn nói là liều lĩnh", vì nó có vẻ mâu thuẫn với hiện tượng giao thoa, thứ mà lý thuyết sóng giải thích rất trọn vẹn.</p>
+<p>Năm 1949, ông viết rằng mình đã mất mười năm kiểm tra phương trình năm 1905 và, "trái với mọi kỳ vọng", buộc phải khẳng định nó đúng, "bất chấp sự vô lý của nó". Câu chuyện "Millikan muốn chứng minh Einstein sai" mà nhiều sách kể bắt nguồn từ hồi ức này. Năm 1916, lập trường của ông tinh tế hơn: ông tin phương trình, nhưng không tin vào hạt ánh sáng.</p>
+
+<h2>Toán vừa đủ</h2>
+<p>Gọi $V_0$ là hiệu điện thế hãm vừa đủ chặn electron nhanh nhất. Khi đó $eV_0 = K_{\max}$, nên</p>
+$$V_0 = \frac{h}{e}\,\nu - \frac{\phi}{e}.$$
+<p>Vẽ $V_0$ theo $\nu$ ta được một đường thẳng. Độ dốc $h/e$ như nhau với mọi kim loại, còn điểm cắt trục hoành là tần số ngưỡng $\nu_0 = \phi/h$. Millikan đo $h$ đúng theo cách này: biết $e$ từ thí nghiệm giọt dầu của chính ông, đo độ dốc là ra $h$.</p>
+<p>Muốn tự khớp đường thẳng này bằng Python? <a href="https://colab.research.google.com/github/JasonDE03/sophon/blob/main/lab/02_photoelectric.ipynb">Mở notebook trong Google Colab</a>: chạy ngay trên trình duyệt, không cần cài gì.</p>
+<p>Ví dụ: vạch thuỷ ngân 253,7 nm có $h\nu = hc/\lambda \approx 4{,}89$ eV. Chiếu vào kẽm ($\phi \approx 4{,}33$ eV) thì $K_{\max} \approx 0{,}56$ eV, cần hiệu điện thế hãm khoảng 0,56 V. Ngưỡng của kẽm là $\lambda_0 = hc/\phi \approx 286$ nm, nằm trong vùng tử ngoại, nên ánh sáng nhìn thấy dù mạnh đến đâu cũng không làm được.</p>
+<details><summary>Thêm: lập luận entropy của Einstein</summary>
+<p>Với bức xạ đơn sắc tần số $\nu$, năng lượng $E$, ở vùng Wien, Einstein tính được rằng khi thể tích đổi từ $V_1$ sang $V$, entropy thay đổi một lượng</p>
+$$S - S_1 = k_B\,\frac{E}{h\nu}\,\ln\frac{V}{V_1}.$$
+<p>Với khí lý tưởng gồm $n$ hạt độc lập, cùng phép biến đổi cho $S - S_1 = n\,k_B\ln(V/V_1)$. Hai biểu thức trùng nhau nếu $n = E/h\nu$: về mặt nhiệt động, bức xạ hành xử như một "chất khí" gồm $E/h\nu$ hạt, mỗi hạt mang năng lượng $h\nu$. Trong bài gốc, Einstein không dùng ký hiệu $h$ mà viết lượng tử năng lượng là $(R/N)\beta\nu$, với $\beta$ là hằng số trong định luật Wien. Biểu thức này đúng bằng $h\nu$.</p>
+</details>
+
+<h2>Một hiểu lầm phổ biến</h2>
+<p><b>"Einstein được giải Nobel nhờ thuyết tương đối."</b> Không phải. Giải Nobel Vật lý năm 1921, trao vào năm 1922, ghi rõ: "vì những đóng góp cho vật lý lý thuyết, đặc biệt là việc phát hiện định luật của hiệu ứng quang điện". Ủy ban Nobel tránh nhắc đến thuyết tương đối, khi đó vẫn còn gây tranh cãi. Giải thưởng cũng chỉ nói đến <i>định luật</i>, tức phương trình đã được Millikan kiểm chứng, chứ không phải giả thuyết lượng tử ánh sáng.</p>
+<p><b>"Hiệu ứng quang điện chứng minh photon tồn tại."</b> Riêng hiện tượng này thì chưa đủ. Năm 1969, Willis Lamb và Marlan Scully chỉ ra rằng có thể giải thích những đặc điểm chính của nó, như tần số ngưỡng hay động năng không phụ thuộc cường độ, khi coi electron tuân theo cơ học lượng tử còn ánh sáng vẫn là sóng cổ điển. Bằng chứng thuyết phục hơn cho hạt ánh sáng đến từ chỗ khác: tán xạ Compton năm 1923, và về sau là các thí nghiệm quang học lượng tử từ cuối thập niên 1970. Phương trình của Einstein vẫn đúng, chỉ là nó chưa buộc phải có photon. Ngay cả chữ "photon" cũng chỉ trở nên phổ biến sau một bức thư năm 1926 của Gilbert Lewis gửi tạp chí <i>Nature</i>.</p>
+
+<h2>Hệ quả</h2>
+<p>Năm 1913, khi đề cử Einstein vào Viện Hàn lâm Khoa học Phổ, Planck và các đồng nghiệp viết rằng việc ông đôi khi "bắn trượt" trong các suy đoán, "chẳng hạn giả thuyết lượng tử ánh sáng", không nên bị coi là điểm trừ quá nặng. Phải đến khi Arthur Compton đo tán xạ tia X trên electron năm 1923, phần lớn giới vật lý mới chấp nhận ánh sáng có tính hạt.</p>
+<p>Trong khi đó, một câu hỏi khác đang chờ: những electron mà ánh sáng bứt ra nằm ở đâu bên trong nguyên tử? Năm 1909, ở Manchester, Hans Geiger và cậu sinh viên Ernest Marsden, theo gợi ý của Ernest Rutherford, bắt đầu bắn hạt alpha vào một lá vàng mỏng.</p>
+<p><a href="./">→ Bài 3: Thí nghiệm Rutherford (1909–1911), sắp ra</a></p>
+
+<h2>Nguồn</h2>
+<ul class="sources">
+<li>H. Hertz, <i>Ann. Phys.</i> 31, 983 (1887). W. Hallwachs, <i>Ann. Phys.</i> 33, 301 (1888).</li>
+<li>J. J. Thomson, <i>Phil. Mag.</i> 48, 547 (1899). P. Lenard, <i>Ann. Phys.</i> 8, 149 (1902).</li>
+<li>A. Einstein, "Über einen die Erzeugung und Verwandlung des Lichtes betreffenden heuristischen Gesichtspunkt", <i>Ann. Phys.</i> 17, 132 (1905).</li>
+<li>R. A. Millikan, "A Direct Photoelectric Determination of Planck's 'h'", <i>Phys. Rev.</i> 7, 355 (1916); "Albert Einstein on his seventieth birthday", <i>Rev. Mod. Phys.</i> 21, 343 (1949).</li>
+<li>W. E. Lamb Jr. và M. O. Scully, "The photoelectric effect without photons", trong <i>Polarisation, matière et rayonnement</i> (Presses Universitaires de France, 1969).</li>
+<li>A. Pais, <i>Subtle is the Lord: The Science and the Life of Albert Einstein</i> (1982).</li>
+<li>R. H. Stuewer, <i>The Compton Effect: Turning Point in Physics</i> (1975). H. Kragh, <i>Quantum Generations</i> (1999).</li>
+</ul>
+</main></body></html>

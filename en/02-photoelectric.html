@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The photoelectric effect — Sophon</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 16 16%27><circle cx=%278%27 cy=%278%27 r=%275%27 fill=%27%23f0b35a%27/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&display=swap">
+<link rel="stylesheet" href="../style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"
+  onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]})"></script>
+</head><body><main>
+<nav><a class="brand" href="../">sophon</a><span class="links"><a href="./">Contents</a><a href="../vi/02-quang-dien.html">Tiếng Việt</a></span></nav>
+
+<p class="year">Episode 2 · 1887–1916</p>
+<h1>The photoelectric effect: light arrives one particle at a time</h1>
+<p class="lede">In 1900, no one doubted that light was a wave. Yet red light could not knock a single electron out of a zinc plate, however bright it was. A very faint beam of ultraviolet light could do it at once.</p>
+
+<h2>Light is a wave</h2>
+<p>By the end of the 19th century, the wave nature of light was considered settled. Early in the century, Thomas Young and Augustin Fresnel had explained interference and diffraction using wave theory. In 1865, James Clerk Maxwell showed that light was an electromagnetic wave. In 1887–1888, Heinrich Hertz generated and detected electromagnetic waves in the laboratory, confirming Maxwell's theory.</p>
+<p>A wave's energy is proportional to the square of its amplitude, and hence to its intensity. This suggests three predictions: brighter light should eject faster electrons; light of any colour should eject electrons, provided it is bright enough; and under faint light, electrons should have to wait until they have accumulated enough energy to escape. All three are wrong.</p>
+
+<h2>Redo the experiment</h2>
+<p>A metal plate in a vacuum is exposed to light. Choose a metal and adjust the colour and brightness of the light. The energy bar below compares the energy of one light quantum with the energy needed to free one electron from the metal.</p>
+<div class="sim" id="sim"></div>
+<script type="module">import { mount } from '../sims/photoelectric.js'; mount(document.getElementById('sim'));</script>
+<p>Things to notice:</p>
+<ul>
+<li>With sodium, slide the colour from violet to red. Past about 451 nm, electrons stop coming out, even at 100% brightness.</li>
+<li>Raising the brightness only gives <b>more</b> electrons, not faster ones. To get faster electrons, you have to change the colour of the light.</li>
+<li>Choose zinc: no visible colour is enough. You have to go below about 286 nm, into the ultraviolet.</li>
+<li>Click "Wave theory (old prediction)" to see what we would expect if light were only a wave: any colour works if you wait.</li>
+<li>Open "Try measuring h/e like Millikan" and record a few points at different colours. They fall on a straight line, and its slope stays the same when you switch to another metal.</li>
+</ul>
+
+<h2>From Hertz to Lenard</h2>
+<p>Ironically, the very experiment that confirmed light's wave nature also revealed the first crack. In 1887, while experimenting with electromagnetic waves, Hertz noticed that sparks crossed the receiving gap more readily when it was illuminated by ultraviolet light from the transmitter's spark. He published the observation, could not explain it, and returned to electromagnetic waves.</p>
+<p>In 1888, Wilhelm Hallwachs showed that a negatively charged zinc plate gradually lost its charge under ultraviolet light, while a positively charged plate did not. Light was knocking something negatively charged out of the metal. In 1899, J. J. Thomson measured the charge-to-mass ratio of these particles and found that they were electrons, the particles he had discovered in cathode rays two years earlier.</p>
+<p>In 1902, Philipp Lenard, who had been Hertz's assistant, measured the energy of these electrons. He applied a retarding voltage between the metal plate and the collector, then increased it until no electrons could reach the collector. The result was puzzling. Changing the intensity of the arc lamp changed the number of electrons, but not their maximum energy. That energy depended instead on the type of light. Lenard thought light merely acted as a "trigger": it released a catch, while the electron's energy was already stored inside the atom.</p>
+
+<h2>Einstein, 1905</h2>
+<p>In March 1905, Einstein submitted a paper to <i>Annalen der Physik</i> titled "On a Heuristic Point of View Concerning the Production and Transformation of Light". In a letter to his friend Conrad Habicht that May, he described the paper as "very revolutionary".</p>
+<p>Einstein's starting point was not the photoelectric effect. He considered the entropy of radiation in the region where Wien's law held, and found that it varied with volume in exactly the same way as the entropy of a gas of independent particles. He therefore proposed that light behaved as though it consisted of localised energy quanta, each carrying energy $h\nu$. Planck had only quantised the energy of oscillators in matter. Einstein went further: he quantised light itself.</p>
+<p>The photoelectric effect was just one of three applications at the end of the paper. If each quantum transfers all its energy to one electron, and the electron must spend an amount of energy $\phi$ (the work function) to leave the metal, then</p>
+$$K_{\max} = h\nu - \phi.$$
+<p>This equation immediately explains Lenard's result: brighter light means more quanta, so more electrons, but each electron still receives only $h\nu$. It also makes a quantitative prediction that the data of the time could not yet test: $K_{\max}$ increases <b>linearly</b> with frequency, with a slope exactly equal to Planck's constant $h$, for every metal.</p>
+
+<h2>Millikan, the sceptic</h2>
+<p>At the University of Chicago, Robert Millikan spent nearly ten years testing Einstein's equation. He used alkali metals because they were sensitive even to visible light, but their surfaces oxidised very quickly. To obtain a clean surface, he built what he called a "machine shop in vacuo": a knife operated from outside the vacuum vessel that shaved the metal's surface inside it before each measurement.</p>
+<p>In 1916, he published his results in <i>Physical Review</i>: the stopping voltage increased linearly with frequency, and the slope gave a value of $h$ that agreed with the value Planck had found from blackbody radiation. Einstein's equation was right. Yet Millikan still rejected the theory behind it. In that same paper, he called the idea of an electromagnetic light corpuscle a "bold, not to say reckless, hypothesis", because it seemed to contradict interference, which wave theory explained so well.</p>
+<p>In 1949, he wrote that he had spent ten years testing the 1905 equation and, "contrary to all my expectations", had been forced to confirm it, "in spite of its unreasonableness". The story told in many books, that "Millikan set out to prove Einstein wrong", comes from this recollection. In 1916, his position was more nuanced: he accepted the equation, but not particles of light.</p>
+
+<h2>Just enough maths</h2>
+<p>Let $V_0$ be the stopping voltage just sufficient to stop the fastest electron. Then $eV_0 = K_{\max}$, so</p>
+$$V_0 = \frac{h}{e}\,\nu - \frac{\phi}{e}.$$
+<p>Plotting $V_0$ against $\nu$ gives a straight line. The slope $h/e$ is the same for every metal, while the horizontal intercept is the threshold frequency $\nu_0 = \phi/h$. This is exactly how Millikan measured $h$: knowing $e$ from his own oil-drop experiment, he could find $h$ by measuring the slope.</p>
+<p>Want to fit this line yourself in Python? <a href="https://colab.research.google.com/github/JasonDE03/sophon/blob/main/lab/02_photoelectric.ipynb">Open the notebook in Google Colab</a>: it runs in the browser with nothing to install.</p>
+<p>For example, the 253.7 nm mercury line has $h\nu = hc/\lambda \approx 4.89$ eV. Shining it on zinc ($\phi \approx 4.33$ eV) gives $K_{\max} \approx 0.56$ eV, requiring a stopping voltage of about 0.56 V. Zinc's threshold is $\lambda_0 = hc/\phi \approx 286$ nm, in the ultraviolet, so visible light cannot do the job however bright it is.</p>
+<details><summary>More: Einstein's entropy argument</summary>
+<p>For monochromatic radiation of frequency $\nu$ and energy $E$ in the Wien region, Einstein calculated that changing the volume from $V_1$ to $V$ changes the entropy by</p>
+$$S - S_1 = k_B\,\frac{E}{h\nu}\,\ln\frac{V}{V_1}.$$
+<p>For an ideal gas of $n$ independent particles, the same change gives $S - S_1 = n\,k_B\ln(V/V_1)$. The two expressions agree if $n = E/h\nu$: thermodynamically, radiation behaves like a "gas" of $E/h\nu$ particles, each carrying energy $h\nu$. In the original paper, Einstein did not use the symbol $h$, but wrote the energy quantum as $(R/N)\beta\nu$, where $\beta$ is the constant in Wien's law. This expression is exactly equal to $h\nu$.</p>
+</details>
+
+<h2>A common misconception</h2>
+<p><b>"Einstein won the Nobel Prize for relativity."</b> He did not. The 1921 Nobel Prize in Physics, awarded in 1922, explicitly states: "for his services to Theoretical Physics, and especially for his discovery of the law of the photoelectric effect". The Nobel Committee avoided mentioning relativity, which was still controversial. The citation also refers only to the <i>law</i>, the equation Millikan had verified, rather than the light quantum hypothesis.</p>
+<p><b>"The photoelectric effect proves that photons exist."</b> This phenomenon alone is not enough. In 1969, Willis Lamb and Marlan Scully showed that its main features, such as the threshold frequency and the independence of kinetic energy from intensity, could be explained by treating electrons quantum mechanically while keeping light as a classical wave. More convincing evidence for particles of light came from elsewhere: Compton scattering in 1923, and later quantum optics experiments from the late 1970s onwards. Einstein's equation remains correct; it simply does not require photons. Even the word "photon" only caught on after a 1926 letter from Gilbert Lewis to <i>Nature</i>.</p>
+
+<h2>What came next</h2>
+<p>In 1913, when nominating Einstein to the Prussian Academy of Sciences, Planck and his colleagues wrote: "That he may sometimes have missed the target in his speculations, as, for example, in his hypothesis of light quanta, cannot really be held too much against him." It was not until Arthur Compton measured the scattering of X-rays by electrons in 1923 that most physicists accepted the particle nature of light.</p>
+<p>Meanwhile, another question awaited an answer: where inside the atom were the electrons that light knocked out? In 1909, in Manchester, Hans Geiger and the student Ernest Marsden, at Ernest Rutherford's suggestion, began firing alpha particles at a thin gold foil.</p>
+<p><a href="./">→ Episode 3: Rutherford scattering (1909–1911), coming soon</a></p>
+
+<h2>Sources</h2>
+<ul class="sources">
+<li>H. Hertz, <i>Ann. Phys.</i> 31, 983 (1887). W. Hallwachs, <i>Ann. Phys.</i> 33, 301 (1888).</li>
+<li>J. J. Thomson, <i>Phil. Mag.</i> 48, 547 (1899). P. Lenard, <i>Ann. Phys.</i> 8, 149 (1902).</li>
+<li>A. Einstein, "Über einen die Erzeugung und Verwandlung des Lichtes betreffenden heuristischen Gesichtspunkt", <i>Ann. Phys.</i> 17, 132 (1905).</li>
+<li>R. A. Millikan, "A Direct Photoelectric Determination of Planck's 'h'", <i>Phys. Rev.</i> 7, 355 (1916); "Albert Einstein on his seventieth birthday", <i>Rev. Mod. Phys.</i> 21, 343 (1949).</li>
+<li>W. E. Lamb Jr. and M. O. Scully, "The photoelectric effect without photons", in <i>Polarisation, matière et rayonnement</i> (Presses Universitaires de France, 1969).</li>
+<li>A. Pais, <i>Subtle is the Lord: The Science and the Life of Albert Einstein</i> (1982).</li>
+<li>R. H. Stuewer, <i>The Compton Effect: Turning Point in Physics</i> (1975). H. Kragh, <i>Quantum Generations</i> (1999).</li>
+</ul>
+</main></body></html>
