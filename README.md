@@ -1,91 +1,72 @@
 # Sophon
 
-**Read it here: https://sophon.jasonng-1407.workers.dev** ([Tiếng Việt](https://sophon.jasonng-1407.workers.dev/vi/) · [English](https://sophon.jasonng-1407.workers.dev/en/))
+**The experiments that shaped physics** — an interactive, bilingual (Vietnamese / English) history of physics.
 
-The experiments that shaped physics (Những thí nghiệm làm nên vật lý). A bilingual (Vietnamese/English) site that retells the history of physics as interactive episodes. Each episode covers one experiment or discovery and has three parts: the historical context, the people involved, and a simulation the reader drives to redo the experiment.
+**→ [sophon.jasonng-1407.workers.dev](https://sophon.jasonng-1407.workers.dev)** · [Tiếng Việt](https://sophon.jasonng-1407.workers.dev/vi/) · [English](https://sophon.jasonng-1407.workers.dev/en/)
 
-Plain static HTML with no build step or dependencies to install, plus a tiny Cloudflare Worker for comments. KaTeX loads from a CDN.
+![Sophon](og/en-index.png)
 
-## Run locally
+## About
 
-Only needed if you want to edit the site. Simulations are ES modules, so the pages must be served over HTTP. Opening them with `file://` does not work.
+Sophon retells the history of physics one experiment at a time, in the order it happened. Each episode covers a single experiment or discovery: what people believed at the time, what did not fit, who worked it out, and a simulation in the browser that lets you redo the experiment yourself.
 
-```bash
-python3 -m http.server 8000
-# open http://localhost:8000
-```
+Historical accuracy comes first. Dates, quotations and attributions are sourced from the original papers and from established histories of science, and each episode points out where popular accounts get the story wrong.
 
-Physics checks for the simulation formulas:
+## Episodes
 
-```bash
-node check.mjs   # prints "ok"
-```
+Arc 1 — The quantum crisis (1900–1927)
 
-## Layout
+| # | Episode | Years | Simulation |
+|---|---------|-------|------------|
+| 1 | [Blackbody radiation](https://sophon.jasonng-1407.workers.dev/en/01-blackbody) | 1859–1900 | Colour of hot objects, the classical divergence, the 1900 infrared data |
+| 2 | [The photoelectric effect](https://sophon.jasonng-1407.workers.dev/en/02-photoelectric) | 1887–1916 | Light quanta vs. work function; measure h/e like Millikan |
+| 3 | [Rutherford scattering](https://sophon.jasonng-1407.workers.dev/en/03-rutherford) | 1909–1913 | Alpha particles on a gold foil; Thomson vs. Rutherford atom |
+| 4 | [The Bohr model and hydrogen lines](https://sophon.jasonng-1407.workers.dev/en/04-bohr) | 1885–1913 | Electron jumps on an energy ladder; the hydrogen spectrum |
 
-```
-index.html          landing page / language chooser
-style.css           shared styles (dark theme)
-vi/index.html       Vietnamese contents
-vi/NN-<slug>.html   Vietnamese episode
-en/index.html       English contents
-en/NN-<slug>.html   English episode
-sims/<name>.js      one simulation per episode, shared by both languages
-check.mjs           assert-based physics checks
-```
+More episodes follow: Stern–Gerlach, de Broglie, Schrödinger, Heisenberg, Davisson–Germer and the 1927 Solvay conference.
 
-## Adding an episode
+## Features
 
-1. Write `sims/<name>.js`. It exports pure physics functions plus `mount(el)`. UI labels go in a `{vi, en}` dictionary chosen by `document.documentElement.lang`.
-2. Add asserts for the physics to `check.mjs`, such as limiting cases or known values, and run `node check.mjs`.
-3. Copy `vi/01-vat-den.html` as a template and write the Vietnamese page, then the English page. Each page links to its counterpart in the `<nav>`.
-4. Turn the "coming soon" line in both `index.html` contents pages into a link, and update the "next episode" link in the previous episode.
+- **Interactive simulations** written from scratch in plain JavaScript and canvas, one per episode.
+- **Two reading depths**: a short summary, a prediction question and a quiz for newcomers; derivations and sources one click away.
+- **Python notebooks** in [`lab/`](lab/) that derive and check the physics, runnable in Google Colab without installing anything.
+- **Physics checks**: every simulation's formulas are tested against limiting cases and known values.
+- **Comments** without accounts, so readers can ask questions and send corrections.
 
-## Deploy
+## Tech stack
 
-The repo is connected to Cloudflare Workers (static assets). Every push to `main` deploys automatically; other branches get preview URLs.
+Static HTML, CSS and vanilla JavaScript modules, with no framework and no build step. Maths is rendered with [KaTeX](https://katex.org). The site is served by [Cloudflare Workers](https://workers.cloudflare.com); a small Worker with a D1 database handles comments. Notebooks use NumPy, SciPy and Matplotlib.
 
-## Comments
-
-Public comments appear immediately, shared by Vietnamese and English pages for each episode. Anyone can reply to a top-level comment; replies appear indented, oldest first. Replies to replies attach to the same top-level parent. The Reply button moves the single form under that thread; Cancel returns it to the bottom. A name and message are enough; no login is needed. Turnstile verifies submissions and D1 limits each salted IP hash to five comments per ten minutes. Raw IP addresses are never stored in D1. The unlinked `/admin` page lists the latest 200 comments, marks replies and authors, and lets the owner delete comments using an admin token. Deleting a top-level comment also deletes its replies.
-
-For the existing live database, run this migration yourself before deploying the updated Worker (existing comments keep `parent_id = NULL` and `is_author = 0`):
+## Running locally
 
 ```bash
-npx wrangler d1 execute sophon-comments --remote --file=migrations/0001_replies_author.sql
+git clone https://github.com/JasonDE03/sophon.git
+cd sophon
+python3 -m http.server 8000      # open http://localhost:8000
+node check.mjs                   # physics checks, prints "ok"
 ```
 
-Fresh databases use the updated `schema.sql` below; do not also run the migration on a fresh database.
+Comments only work on the deployed site. To run the notebooks locally, see [`lab/README.md`](lab/README.md).
 
-To post as the author, open `/admin`, enter a valid admin token, and check “Ghi nhớ trên trình duyệt này để bình luận với tư cách tác giả”. After validation, this saves the token in this browser's localStorage under `sophon-author`. Episode comment forms then show an author note and skip Turnstile. Only comment POST requests send the saved token, as `Authorization: Bearer <ADMIN_TOKEN>`; public GET requests never send it. The server alone sets the verified “✓ Tác giả” / “✓ Author” badge and skips the rate limit for valid author posts. An expired or invalid saved token is removed after a 401, and the form returns to Turnstile with the draft preserved. Use “Quên trên trình duyệt này” on `/admin` to remove the saved author token.
+## Project structure
 
-One-time Cloudflare setup (run these yourself):
-
-```bash
-npx wrangler d1 create sophon-comments
-# Paste the returned database_id into wrangler.jsonc, replacing REPLACE_WITH_D1_ID.
-npx wrangler d1 execute sophon-comments --remote --file=schema.sql
-npx wrangler secret put TURNSTILE_SECRET
-npx wrangler secret put IP_SALT
-npx wrangler secret put ADMIN_TOKEN
+```
+vi/, en/          episode pages and home pages, one folder per language
+sims/             one simulation module per episode, shared by both languages
+lab/              Python notebooks (Colab-ready)
+check.mjs         physics checks for the simulations
+style.css         site styles
+learn.js          summaries, questions, glossary and table of contents
+comments.js       comment section (client)
+worker.js         comment API (Cloudflare Worker + D1)
+tools/            page and share-image generators
+og/               share images
 ```
 
-Use a long random value for each of `IP_SALT` and `ADMIN_TOKEN`. Create a Turnstile widget for the site hostname, put its real secret in `TURNSTILE_SECRET`, and replace `TURNSTILE_SITE_KEY` in `wrangler.jsonc` with its public site key. The committed site key is a production key; override it locally with the test key below. Workers Builds continues to run `npx wrangler deploy` with the committed config, preserving pretty episode URLs.
+## Contributing
 
-For a full local preview, create a gitignored `.dev.vars` file:
+Found a historical or physics error? Please [open an issue](https://github.com/JasonDE03/sophon/issues) with a source, or leave a comment under the episode. Corrections are very welcome.
 
-```dotenv
-TURNSTILE_SECRET=1x0000000000000000000000000000000AA
-IP_SALT=local-test-salt
-ADMIN_TOKEN=local-test-admin-token
-```
+## Author
 
-Add `TURNSTILE_SITE_KEY=1x00000000000000000000AA` to `.dev.vars` to override the production key locally, then run:
-
-```bash
-npx wrangler d1 execute sophon-comments --local --file=schema.sql
-npx wrangler dev
-# Open http://localhost:8787/vi/04-bohr and http://localhost:8787/admin
-```
-
-Local D1 is separate from the remote database; these commands need no Cloudflare login. The test token `XXXX.DUMMY.TOKEN.XXXX` also works for direct POST requests with the test secret. `python3 -m http.server 8000` still previews the site; comments show a deployed-site-only note there. Worker source, config, schema, migrations, Markdown docs, tools, and local secrets are excluded from deployed static assets by `.assetsignore`.
+Nguyen Phan Nam Son · [Facebook](https://www.facebook.com/nam.son.178624/) · [Instagram](https://www.instagram.com/fet.sofn/)
