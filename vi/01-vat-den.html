@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Bức xạ vật đen — Sophon</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 16 16%27><circle cx=%278%27 cy=%278%27 r=%275%27 fill=%27%23f0b35a%27/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&display=swap">
+<link rel="stylesheet" href="../style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"
+  onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]})"></script>
+</head><body><main>
+<nav><a class="brand" href="./">sophon</a><span class="links"><a href="./">Mục lục</a><a href="../en/01-blackbody.html">English</a></span></nav>
+
+<p class="year">Bài 1 · 1859–1900</p>
+<h1>Bức xạ vật đen: lỗ hổng nhỏ làm sập vật lý cổ điển</h1>
+<p class="lede">Cuối thế kỷ 19, nhiều người tin vật lý gần như đã xong. Còn sót lại một câu hỏi nghe rất tầm thường: một vật nóng phát ra ánh sáng màu gì?</p>
+
+<h2>Câu hỏi của Kirchhoff</h2>
+<p>Năm 1859–1860, Gustav Kirchhoff chứng minh rằng một vật hấp thụ hoàn toàn mọi bức xạ chiếu vào nó, ông gọi là <b>vật đen</b>, sẽ phát ra một phổ chỉ phụ thuộc vào <b>nhiệt độ</b>. Phổ này không phụ thuộc chất liệu hay hình dạng. Như vậy phải tồn tại một hàm phổ quát $B(\lambda, T)$. Ông không biết hàm đó trông thế nào, và câu hỏi này bỏ ngỏ suốt 40 năm.</p>
+<p>Trong khoảng thời gian đó, người ta tìm ra từng mảnh. Stefan (1879, từ thực nghiệm) và Boltzmann (1884, từ nhiệt động lực học) cho thấy tổng công suất phát tỉ lệ với $T^4$. Năm 1893, Wilhelm Wien chứng minh đỉnh phổ dịch về phía bước sóng ngắn khi vật nóng lên: $\lambda_{\max} T = \text{hằng số}$. Đó là lý do sắt nung chuyển từ đỏ sang trắng.</p>
+
+<h2>Tự làm lại thí nghiệm</h2>
+<p>Kéo thanh nhiệt độ. Đường đậm là phổ thật (công thức Planck), đường xanh dương là dự đoán của vật lý cổ điển. Mặt Trời có nhiệt độ bề mặt khoảng 5800 K, dây tóc bóng đèn sợi đốt khoảng 2700 K.</p>
+<div class="sim" id="sim"></div>
+<script type="module">import { mount } from '../sims/blackbody.js'; mount(document.getElementById('sim'));</script>
+<p>Hãy để ý hai điều:</p>
+<ul>
+<li>Ở bước sóng dài (bên phải), đường cổ điển bám sát phổ thật. Ở bước sóng ngắn, nó vọt lên vô hạn. Nếu nó đúng thì mọi vật nóng sẽ phát ra năng lượng vô hạn ở vùng tử ngoại.</li>
+<li>Bật đường Wien (xanh lá): nó khớp tốt ở bước sóng ngắn nhưng lệch dần ở bước sóng dài. Mỗi công thức chỉ đúng được một nửa.</li>
+</ul>
+
+<h2>Phòng thí nghiệm ở Berlin</h2>
+<p>Năm 1896, Wien đề xuất một công thức phân bố khớp khá tốt với dữ liệu thời đó. Tại Viện Vật lý–Kỹ thuật Đế quốc (PTR) ở Berlin, Otto Lummer, Ernst Pringsheim và Ferdinand Kurlbaum chế tạo được "vật đen" thật: một hốc kín được nung đều, chỉ khoét một lỗ nhỏ để đo. Từ năm 1899, phép đo của họ bắt đầu lệch khỏi định luật Wien ở vùng hồng ngoại.</p>
+<p>Năm 1900, Heinrich Rubens và Kurlbaum đo được ở vùng hồng ngoại rất xa, khoảng 30–50 μm. Ở đó cường độ tăng <b>tuyến tính theo $T$</b>, trong khi công thức Wien cho kết quả khác hẳn.</p>
+<p>Cũng trong năm 1900, Lord Rayleigh dùng định lý phân bố đều năng lượng của cơ học thống kê cổ điển để suy ra một định luật tỉ lệ với $T/\lambda^4$. James Jeans sửa lại hệ số vào năm 1905. Kết quả đúng ở bước sóng dài, nhưng như bạn vừa thấy ở mô phỏng, nó vô lý ở bước sóng ngắn.</p>
+
+<h2>Tối Chủ nhật, 7/10/1900</h2>
+<p>Rubens cùng vợ ghé thăm Max Planck và kể cho ông kết quả đo mới. Ngay tối hôm đó, Planck tìm ra một công thức "nội suy" nối hai giới hạn lại với nhau, rồi gửi bưu thiếp báo cho Rubens. Ngày 19/10/1900, ông trình bày công thức trước Hội Vật lý Đức. Rubens đem so với dữ liệu và thấy nó khớp ở mọi bước sóng đã đo.</p>
+<p>Planck vẫn chưa hài lòng, vì một công thức đoán đúng thì chưa phải là lý thuyết. Ông mất tám tuần để tìm cách suy ra nó, và cuối cùng phải dùng đến phương pháp thống kê tổ hợp của Boltzmann, thứ ông vốn không ưa. Để phép đếm có nghĩa, ông phải chia năng lượng của các dao động tử thành những "phần tử" hữu hạn:</p>
+$$\varepsilon = h\nu$$
+<p>Ngày 14/12/1900, ông trình bày cách suy ra này. Ba mươi năm sau, trong một lá thư gửi Robert W. Wood (1931), ông gọi bước đi ấy là <i>"một hành động liều lĩnh"</i>.</p>
+
+<h2>Toán vừa đủ</h2>
+<p>Định luật Planck (cường độ phổ theo bước sóng):</p>
+$$B_\lambda(\lambda,T) = \frac{2hc^2}{\lambda^5}\,\frac{1}{e^{hc/\lambda k_B T}-1}$$
+<p>Đặt $x = hc/\lambda k_B T$. Với bước sóng dài ($x \ll 1$), $e^x - 1 \approx x$, ta được đúng Rayleigh–Jeans $B_\lambda \approx 2ck_BT/\lambda^4$. Với bước sóng ngắn ($x \gg 1$), số hạng $-1$ không còn đáng kể, ta được định luật Wien. Công thức Planck chứa cả hai làm trường hợp giới hạn.</p>
+<details><summary>Thêm: suy ra định luật dịch chuyển Wien và Stefan–Boltzmann</summary>
+<p>Đạo hàm $B_\lambda$ theo $\lambda$ rồi cho bằng 0 dẫn tới phương trình $x = 5(1-e^{-x})$, nghiệm $x \approx 4{,}965$. Do đó $\lambda_{\max}T = hc/(4{,}965\,k_B) \approx 2{,}898\times10^{-3}$ m·K.</p>
+<p>Lấy tích phân theo mọi bước sóng: $\pi\!\int_0^\infty B_\lambda\,d\lambda = \sigma T^4$ với $\sigma = \dfrac{2\pi^5 k_B^4}{15 c^2 h^3}$. Như vậy định luật Stefan–Boltzmann cũng nằm sẵn trong công thức Planck.</p>
+</details>
+<p>Một phần thưởng bất ngờ: chỉ từ việc khớp dữ liệu, Planck tính được $h \approx 6{,}55\times10^{-34}$ J·s (giá trị ngày nay là $6{,}626\times10^{-34}$) và $k_B$, hằng số mà chính ông đặt tên theo Boltzmann. Từ đó ông suy ra cả số Avogadro và điện tích nguyên tố, chính xác hơn mọi phép đo đương thời.</p>
+
+<h2>Một hiểu lầm phổ biến</h2>
+<p>Sách phổ thông hay kể rằng Planck đưa ra lượng tử để giải quyết "thảm hoạ tử ngoại". Thực tế thì cụm từ <b>"thảm hoạ tử ngoại"</b> do Paul Ehrenfest đặt ra năm <b>1911</b>, tức 11 năm sau. Planck năm 1900 không xuất phát từ định luật Rayleigh–Jeans. Ông bị dẫn dắt bởi <b>dữ liệu hồng ngoại</b> của Rubens và Kurlbaum. Bản thân Planck cũng không tin năng lượng thật sự bị chia nhỏ. Ông xem $h\nu$ là một thủ thuật tính toán và nhiều năm sau vẫn cố tìm cách bỏ nó đi.</p>
+
+<h2>Hệ quả</h2>
+<p>Người đầu tiên coi lượng tử là thật chính là một nhân viên phòng cấp bằng sáng chế 26 tuổi ở Bern. Năm 1905, Einstein đề xuất rằng chính <b>ánh sáng</b> được tạo thành từ các lượng tử, và dùng ý tưởng đó giải thích một hiện tượng mà lý thuyết sóng bó tay: hiệu ứng quang điện.</p>
+<p><a href="./">→ Bài 2: Hiệu ứng quang điện (1905), sắp ra</a></p>
+
+<h2>Nguồn</h2>
+<ul class="sources">
+<li>M. Planck, <i>Verh. Dtsch. Phys. Ges.</i> 2, 202 (19/10/1900) và 237 (14/12/1900); <i>Ann. Phys.</i> 4, 553 (1901).</li>
+<li>Lord Rayleigh, "Remarks upon the Law of Complete Radiation", <i>Phil. Mag.</i> 49, 539 (1900).</li>
+<li>T. S. Kuhn, <i>Black-Body Theory and the Quantum Discontinuity, 1894–1912</i> (1978).</li>
+<li>H. Kragh, "Max Planck: the reluctant revolutionary", <i>Physics World</i>, 12/2000.</li>
+</ul>
+</main></body></html>
