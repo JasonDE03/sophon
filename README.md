@@ -71,7 +71,7 @@ Found a historical or physics error? Please [open an issue](https://github.com/J
 ## License
 
 - **Code** (simulations, scripts, Worker, notebooks): [MIT](LICENSE).
-- **Content** (article text in `vi/` and `en/`, and the images in `og/`): [CC BY 4.0](LICENSE-CONTENT.md). Reuse is welcome with credit.
+- **Content** (article text in `vi/` and `en/`, and the images in `og/`): [CC BY-NC 4.0](LICENSE-CONTENT.md). Free to reuse with credit for non-commercial purposes; ask for commercial use.
 
 ## Author
 
