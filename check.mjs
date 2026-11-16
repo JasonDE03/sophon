@@ -3,6 +3,8 @@ import assert from 'node:assert/strict';
 import { planck, rayleighJeans, wien, peak, SIGMA } from './sims/blackbody.js';
 import { H_EV, C, photonEnergy, kmax, stoppingVoltage, thresholdFreq, thresholdWavelength, METALS } from './sims/photoelectric.js';
 
+import { closestApproach, deflection, impactParameter, minDistance, dsigma, fractionBeyond, thomsonMaxDeflection, trajectory, METALS as RUTHERFORD_METALS } from './sims/rutherford.js';
+
 const T = 5800;
 // Numeric argmax of Planck matches Wien's displacement law.
 let best = 0, arg = 0;
@@ -35,4 +37,22 @@ const csThreshold = thresholdWavelength(METALS.find(m => m.id === 'Cs').phi);
 assert.ok(csThreshold > 380e-9 && csThreshold < 750e-9);
 assert.ok(Math.abs(csThreshold * 1e9 - 579) < 1);
 assert.ok(thresholdWavelength(METALS.find(m => m.id === 'Pt').phi) < 250e-9);
+// Rutherford: analytic limits and independently integrated Coulomb orbits.
+assert.ok(Math.abs(closestApproach(7.7, 79) - 29.55) < .05);
+for (const degrees of [10, 45, 90, 170]) {
+  const theta = degrees * Math.PI / 180;
+  assert.ok(Math.abs(deflection(impactParameter(theta, 7.7, 79), 7.7, 79) - theta) < 1e-12);
+}
+assert.ok(Math.abs(deflection(1e-6, 7.7, 79) - Math.PI) < 1e-3);
+assert.ok(deflection(1e6, 7.7, 79) < 1e-4);
+assert.equal(minDistance(0, 7.7, 79), closestApproach(7.7, 79));
+assert.ok(Math.abs(dsigma(15 * Math.PI / 180, 7.7, 79) / dsigma(150 * Math.PI / 180, 7.7, 79) - 2999) < 1);
+assert.ok(Math.abs(fractionBeyond(Math.PI / 2, 7.7, 79, 5.90e28, 1e-6) / 4.05e-5 - 1) < .02);
+assert.ok(thomsonMaxDeflection(7.7, 79, 1.4e5) * 180 / Math.PI < .02);
+assert.deepEqual(Object.values(RUTHERFORD_METALS).map(m => m.Z), [79, 78, 47, 13]);
+for (const b of [20, 5]) {
+  const orbit = trajectory(b, 7.7, 79);
+  assert.ok(Math.abs(orbit.angle - deflection(b, 7.7, 79)) < .5 * Math.PI / 180, `orbit b=${b}: ${orbit.angle}`);
+  assert.ok(orbit.points.every(p => p.every(Number.isFinite)));
+}
 console.log('ok');

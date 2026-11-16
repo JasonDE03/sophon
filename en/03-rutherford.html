@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Episode 3: Rutherford — Sophon</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 16 16%27><circle cx=%278%27 cy=%278%27 r=%275%27 fill=%27%23f0b35a%27/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&display=swap">
+<link rel="stylesheet" href="../style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"
+  onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]})"></script>
+<script type="module" src="../learn.js"></script>
+</head><body><main>
+<nav><a class="brand" href="../">sophon</a><span class="links"><a href="./">Contents</a><a href="../vi/03-rutherford.html">Tiếng Việt</a></span></nav>
+
+<p class="year">Episode 3 · 1909–1913</p>
+<h1>Rutherford scattering: the atom is almost empty space</h1>
+<p class="lede">Fire alpha particles at a sheet of metal, and about one in eight thousand comes back towards you. To explain this, almost all the atom's mass has to be concentrated in a spot tens of thousands of times smaller than the atom itself.</p>
+<aside class="tldr"><p class="tldr-label">In 30 seconds</p><p>In 1909, Geiger and Marsden fired alpha particles at a thin sheet of metal. Almost every particle passed through, but occasionally one turned back, like a shell fired at a sheet of paper bouncing back. Rutherford explained that almost all the atom's mass and positive charge were concentrated in a tiny spot at its centre, leaving the rest almost empty. This tiny spot later came to be called the nucleus.</p></aside>
+
+<h2>The atom in 1904</h2>
+<p>In 1897, J. J. Thomson discovered the electron, a negatively charged particle a thousand times lighter than even the lightest atom. Atoms are electrically neutral, so there had to be positive charge somewhere to balance it. The question was where that positive charge lay, and how the electrons were arranged.</p>
+<p>In 1904, Thomson proposed that positive charge was spread evenly through a sphere the size of the whole atom, with electrons moving in concentric rings inside it. He used this model to try to explain why the properties of the elements repeat periodically. It was one of the most widely discussed atomic models of the following decade.</p>
+<p>Rutherford was interested in something else: <dfn tabindex="0" data-def="Positively charged particles emitted by some radioactive substances. We now know they are helium nuclei, each with 2 protons and 2 neutrons.">alpha particles</dfn> emitted by radioactive substances. In 1908, he received the Nobel Prize in Chemistry for his research on radioactivity, and together with Thomas Royds showed that alpha particles were helium ions. To Rutherford, an alpha particle was a heavy, fast-moving projectile that could probe the inside of matter.</p>
+
+<h2>Redo the experiment</h2>
+<p>The simulation has three parts: firing alpha particles at a metal foil as Geiger and Marsden did, zooming into one atom to see how each particle is deflected, and counting particles at different angles. In every part, you can switch between Thomson's and Rutherford's models of the atom.</p>
+<div class="ask predict" data-answer="1">
+<p class="ask-q">If the atom were as Thomson imagined, with positive charge spread evenly throughout it, what would you see when firing alpha particles at gold foil?</p>
+<div class="ask-options"><button type="button">Every particle would be stopped</button><button type="button">The particles would pass through with only very small deflections</button><button type="button">Some particles would turn back</button></div>
+<p class="ask-why" hidden>This is what Thomson's model predicts: the positive charge is spread thinly, so the force on an alpha particle is very weak and deflects it by only about 1°. But Geiger and Marsden saw particles turn back. Try both models in the simulation below.</p>
+</div>
+<div class="sim" id="sim"></div>
+<script type="module">import { mount } from '../sims/rutherford.js'; mount(document.getElementById('sim'));</script>
+<p>Things to notice:</p>
+<ul>
+<li>In "Fire at a metal foil", with Rutherford's model selected, almost every alpha particle goes straight through. Wait a while and you will see one turn back (an orange track). Switch to Thomson's model: no particles turn back, however long you wait.</li>
+<li>In "Zoom into one atom", adjust the <dfn tabindex="0" data-def="The distance from the nucleus to the straight line the alpha particle would follow if it were not deflected.">impact parameter</dfn> $b$. An alpha particle turns sharply only when it passes within a few tens of femtometres of the nucleus (1 fm = $10^{-15}$ m). The nucleus is so small that very few particles get that close.</li>
+<li>In "Count like Geiger and Marsden", take measurements at a few different angles. The counts fall by a factor of thousands, but the last column of the table stays almost constant. This is the very test Geiger and Marsden carried out in 1913.</li>
+<li>Increase the alpha-particle energy, or switch to aluminium: far fewer particles turn back. The less charge the nucleus has and the faster the alpha particle moves, the harder it is to turn it around.</li>
+</ul>
+
+<h2>Manchester, 1909</h2>
+<p>In 1907, Rutherford left McGill University in Canada for the University of Manchester. With his assistant Hans Geiger, he developed a way to count individual alpha particles: each particle hitting a <dfn tabindex="0" data-def="A substance that produces a tiny flash whenever an alpha particle hits it, allowing individual particles to be counted by eye.">zinc sulfide</dfn> screen produced a tiny flash, and an observer sitting in a dark room counted the flashes through a microscope.</p>
+<p>In 1909, Rutherford asked Ernest Marsden, a 20-year-old student, to find out whether any alpha particles were deflected through large angles as they passed through metal. According to the understanding of the time, the answer was almost certainly no. Geiger and Marsden found otherwise. In their 1909 paper submitted to the Royal Society, they reported that with a platinum sheet, about one in every 8000 incoming alpha particles was scattered back towards the source.</p>
+<p>Years later, Rutherford would recall: "It was quite the most incredible event that has ever happened to me in my life. It was almost as incredible as if you fired a 15-inch shell at a piece of tissue paper and it came back and hit you." The quotation is famous, but it was a recollection more than twenty years after the event, not his reaction at the time.</p>
+
+<h2>Rutherford does the sums</h2>
+<p>In Thomson's model, the positive charge is spread thinly throughout the atom, so the electric force on an alpha particle is very weak. Each atom deflects the particle only slightly, and even after it passes through thousands of atomic layers, these small deflections cannot add up to turn it around. Turning a heavy, fast alpha particle sharply in a single encounter requires an extremely strong electric force, which means concentrating the charge in a very small region.</p>
+<p>In late 1910 and early 1911, Rutherford calculated what would happen if almost all the atom's charge and mass were concentrated at its centre. The alpha particle would follow a hyperbola, like a comet sweeping past the Sun once and flying away, except that here the force is repulsive. He deduced that the number of particles deflected through an angle $\theta$ must be proportional to $1/\sin^4(\theta/2)$, to the foil thickness, and to the square of the central charge, and inversely proportional to the square of the alpha particle's kinetic energy.</p>
+<p>He presented his results to the Manchester Literary and Philosophical Society in March 1911, then published them in <i>Philosophical Magazine</i> in May 1911. In the paper, he spoke only of a "central charge", without using the word "nucleus", and wrote that his main conclusions did not depend on whether this charge was positive or negative. The paper initially attracted little attention.</p>
+
+<h2>The 1913 test</h2>
+<p>Geiger and Marsden tested the predictions one by one. They placed a metal foil at the centre of an evacuated metal box, mounted a microscope and a zinc sulfide screen on a mechanism that could rotate around the foil, and counted flashes at angles from 5° to 150°. The number of deflected particles fell extremely rapidly as the angle increased, but the product of the count and $\sin^4(\theta/2)$ stayed almost constant. They also varied the foil thickness, the metal and the alpha-particle speed. The results agreed with Rutherford's formula in every test.</p>
+<p>From the counts, they estimated that the central charge of a gold atom was roughly half gold's <dfn tabindex="0" data-def="The mass of an atom in units approximately equal to the mass of a hydrogen atom. For gold, it is about 197.">atomic weight</dfn>, or about 100 times the <dfn tabindex="0" data-def="The magnitude of an electron&#x27;s charge, about $1.6\times10^{-19}$ C.">elementary charge</dfn>. The correct value is 79, but their estimate already showed that nuclear charge was closely linked to an element's position in the periodic table.</p>
+
+<details class="deep"><summary>Just enough maths <span class="skip">(optional)</span></summary>
+<p>Let $E$ be the kinetic energy of the alpha particle (charge $2e$), and $Ze$ the nuclear charge. In a head-on approach, the alpha particle stops at a distance $d$ where its electric potential energy equals its initial kinetic energy:</p>
+$$d = \frac{2Ze^2}{4\pi\varepsilon_0 E}.$$
+<p>For a 7.7 MeV alpha particle and gold ($Z = 79$), $d \approx 30$ fm, or $3\times10^{-14}$ m, about ten thousand times smaller than a gold atom. If the particle approaches with an impact parameter $b$, its deflection angle is</p>
+$$\tan\frac{\theta}{2} = \frac{d}{2b}.$$
+<p>To be deflected by more than 90°, the alpha particle must have an impact parameter smaller than $d/2 \approx 15$ fm. In a 1 μm gold foil, the probability of this happening is only about 1 in 25,000. Backscattered particles are therefore very rare, but they do occur.</p>
+<details><summary>More: from the deflection angle to the counting formula</summary>
+<p>Particles with impact parameters in the ring from $b$ to $b + db$ are deflected into the angular interval from $\theta$ to $\theta + d\theta$. The area of the ring is $2\pi b\,db$. Changing variables using the formula above gives the scattering cross-section per unit solid angle:</p>
+$$\frac{d\sigma}{d\Omega} = \left(\frac{d}{4}\right)^2 \frac{1}{\sin^4(\theta/2)}.$$
+<p>Multiplying by the number of atoms per unit area of foil and the number of incoming particles gives the number of flashes counted at angle $\theta$. All four dependences that Geiger and Marsden tested (on angle, thickness, nuclear charge and speed) are contained in this expression. Interestingly, quantum mechanics later gave exactly the same formula for the Coulomb force, so Rutherford was "lucky" to use classical mechanics.</p>
+</details>
+<p>Want to plot alpha-particle trajectories yourself and explore Geiger and Marsden's original 1913 data in Python? <a href="https://colab.research.google.com/github/JasonDE03/sophon/blob/main/lab/03_rutherford.ipynb">Open the notebook in Google Colab</a>: it runs in the browser with nothing to install.</p>
+</details>
+<h2>Common misconceptions</h2>
+<p><b>"Thomson's plum-pudding model."</b> Thomson did not call his model that. According to historians Giora Hon and Bernard Goldstein, the name was coined by others and later popularised by textbooks. The image of stationary plums in a pudding also misrepresents the original model: Thomson's electrons moved in concentric rings, and the arrangement of those rings was what interested him most.</p>
+<p><b>"Rutherford fired alpha particles at gold foil."</b> Geiger and Marsden performed the experiment. Rutherford asked the question and provided the explanation. In 1911, he did not yet speak of a "nucleus": the paper used the term "central charge" and left its sign open.</p>
+<p><b>"Rutherford proposed a planetary model, with electrons orbiting the nucleus like the Earth around the Sun."</b> The 1911 paper said almost nothing about the motion of electrons. Rutherford wrote: "The question of the stability of the atom proposed need not be considered at this stage". According to classical electrodynamics, an electron orbiting the centre would radiate, lose energy and fall inwards, so a simple planetary model could not be stable.</p>
+
+<section class="quiz">
+<h2>Check yourself</h2>
+<div class="ask" data-answer="1">
+<p class="ask-q">Why do most alpha particles pass straight through gold foil?</p>
+<div class="ask-options"><button type="button">Because the foil is only a few atomic layers thick</button><button type="button">Because the atom is almost empty space and the nucleus is extremely small</button><button type="button">Because alpha particles have no charge</button></div>
+<p class="ask-why" hidden>The gold foil is thousands of atomic layers thick. Alpha particles pass through because most of the atom's volume is almost empty; only when a particle passes very close to the nucleus does it turn sharply.</p>
+</div>
+<div class="ask" data-answer="1">
+<p class="ask-q">Who actually performed the experiment counting backscattered alpha particles?</p>
+<div class="ask-options"><button type="button">Rutherford</button><button type="button">Geiger and Marsden</button><button type="button">Thomson</button></div>
+<p class="ask-why" hidden>Hans Geiger and the student Ernest Marsden carried out the experiment. Rutherford asked the question and explained the results.</p>
+</div>
+<div class="ask" data-answer="0">
+<p class="ask-q">What question did Rutherford's 1911 atomic model leave open?</p>
+<div class="ask-options"><button type="button">Why electrons do not fall into the nucleus</button><button type="button">Why some alpha particles turn back</button><button type="button">Where the positive charge is</button></div>
+<p class="ask-why" hidden>Rutherford wrote: "The question of the stability of the atom proposed need not be considered at this stage". According to classical physics, electrons orbiting a nucleus must radiate and fall inwards. Episode 4 tells how Bohr addressed this problem.</p>
+</div>
+</section>
+
+<h2>What came next</h2>
+<p>In 1913–1914, Henry Moseley, who had also worked in Manchester, measured the X-rays of a series of elements and showed that nuclear charge increases by exactly one unit from each element to the next: an element's position in the periodic table is the number of positive charges in its nucleus.</p>
+<p>But the nuclear model left a major problem. An electron orbiting a nucleus is an accelerating charge, and according to Maxwell's theory it must continually radiate and spiral into the nucleus in less than a billionth of a second. Atoms should not be stable. In 1912, a young Danish physicist came to Manchester to work with Rutherford for a few months. His name was Niels Bohr.</p>
+<p><a href="./">→ Episode 4: The Bohr model and hydrogen lines (1913), coming soon</a></p>
+
+<details class="deep"><summary>Sources</summary>
+<ul class="sources">
+<li>J. J. Thomson, <i>Phil. Mag.</i> 7, 237 (1904). E. Rutherford and T. Royds, <i>Phil. Mag.</i> 17, 281 (1909).</li>
+<li>H. Geiger and E. Marsden, "On a diffuse reflection of the α-particles", <i>Proc. R. Soc. A</i> 82, 495 (1909).</li>
+<li>E. Rutherford, "The scattering of α and β particles by matter and the structure of the atom", <i>Phil. Mag.</i> 21, 669 (1911).</li>
+<li>H. Geiger and E. Marsden, "The laws of deflexion of α particles through large angles", <i>Phil. Mag.</i> 25, 604 (1913).</li>
+<li>H. G. J. Moseley, <i>Phil. Mag.</i> 26, 1024 (1913).</li>
+<li>A. S. Eve, <i>Rutherford: Being the Life and Letters of the Rt Hon. Lord Rutherford, O.M.</i> (1939).</li>
+<li>J. L. Heilbron, "The scattering of α and β particles and Rutherford's atom", <i>Arch. Hist. Exact Sci.</i> 4, 247 (1968).</li>
+<li>G. Hon and B. R. Goldstein, "J. J. Thomson's plum-pudding atomic model: The making of a scientific myth", <i>Ann. Phys.</i> 525, A129 (2013).</li>
+</ul>
+</details>
+</main></body></html>

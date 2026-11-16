@@ -9,19 +9,26 @@
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"
   onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]})"></script>
+<script type="module" src="../learn.js"></script>
 </head><body><main>
 <nav><a class="brand" href="../">sophon</a><span class="links"><a href="./">Mục lục</a><a href="../en/01-blackbody.html">English</a></span></nav>
 
 <p class="year">Bài 1 · 1859–1900</p>
 <h1>Bức xạ vật đen: lỗ hổng nhỏ làm sập vật lý cổ điển</h1>
 <p class="lede">Cuối thế kỷ 19, nhiều người tin vật lý gần như đã xong. Còn sót lại một câu hỏi nghe rất tầm thường: một vật nóng phát ra ánh sáng màu gì?</p>
+<aside class="tldr"><p class="tldr-label">Trong 30 giây</p><p>Vật nóng phát sáng, và màu của ánh sáng đó chỉ phụ thuộc vào nhiệt độ. Cuối thế kỷ 19, không công thức nào mô tả đúng phổ ánh sáng ấy: công thức đúng ở bước sóng ngắn thì sai ở bước sóng dài, và ngược lại. Năm 1900, Planck tìm ra công thức đúng, nhưng để suy ra nó, ông phải chia năng lượng thành những gói nhỏ hữu hạn. Đó là hạt giống đầu tiên của vật lý lượng tử, dù chính Planck không tin những gói ấy là thật.</p></aside>
 
 <h2>Câu hỏi của Kirchhoff</h2>
-<p>Năm 1859–1860, Gustav Kirchhoff chứng minh rằng một vật hấp thụ hoàn toàn mọi bức xạ chiếu vào nó, ông gọi là <b>vật đen</b>, sẽ phát ra một phổ chỉ phụ thuộc vào <b>nhiệt độ</b>. Phổ này không phụ thuộc chất liệu hay hình dạng. Như vậy phải tồn tại một hàm phổ quát $B(\lambda, T)$. Ông không biết hàm đó trông thế nào, và câu hỏi này bỏ ngỏ suốt 40 năm.</p>
-<p>Trong khoảng thời gian đó, người ta tìm ra từng mảnh. Stefan (1879, từ thực nghiệm) và Boltzmann (1884, từ nhiệt động lực học) cho thấy tổng công suất phát tỉ lệ với $T^4$. Năm 1893, Wilhelm Wien chứng minh đỉnh phổ dịch về phía bước sóng ngắn khi vật nóng lên: $\lambda_{\max} T = \text{hằng số}$. Đó là lý do sắt nung chuyển từ đỏ sang trắng.</p>
+<p>Năm 1859–1860, Gustav Kirchhoff chứng minh rằng một vật hấp thụ hoàn toàn mọi bức xạ chiếu vào nó, ông gọi là <b><dfn tabindex="0" data-def="Vật hấp thụ hoàn toàn mọi bức xạ chiếu vào nó. Khi bị nung nóng, ánh sáng nó phát ra chỉ phụ thuộc vào nhiệt độ.">vật đen</dfn></b>, sẽ phát ra một <dfn tabindex="0" data-def="Cách năng lượng ánh sáng phân bố theo từng bước sóng, tức theo từng màu.">phổ</dfn> chỉ phụ thuộc vào <b>nhiệt độ</b>. Phổ này không phụ thuộc chất liệu hay hình dạng. Như vậy phải tồn tại một hàm phổ quát $B(\lambda, T)$. Ông không biết hàm đó trông thế nào, và câu hỏi này bỏ ngỏ suốt 40 năm.</p>
+<p>Trong khoảng thời gian đó, người ta tìm ra từng mảnh. Stefan (1879, từ thực nghiệm) và Boltzmann (1884, từ nhiệt động lực học) cho thấy tổng công suất phát tỉ lệ với $T^4$. Năm 1893, Wilhelm Wien chứng minh đỉnh phổ dịch về phía <dfn tabindex="0" data-def="Khoảng cách giữa hai đỉnh sóng liên tiếp. Ánh sáng nhìn thấy có bước sóng từ khoảng 380 nm (tím) đến 750 nm (đỏ).">bước sóng</dfn> ngắn khi vật nóng lên: $\lambda_{\max} T = \text{hằng số}$. Đó là lý do sắt nung chuyển từ đỏ sang trắng.</p>
 
 <h2>Tự làm lại thí nghiệm</h2>
-<p>Mô phỏng có ba phần: màu và phổ của vật nóng, dự đoán của vật lý cổ điển, và phép đo hồng ngoại năm 1900 mà bạn sẽ đọc ở phần sau. Kéo thanh nhiệt độ hoặc bấm các mốc có sẵn.</p>
+<p>Mô phỏng có ba phần: màu và phổ của vật nóng, dự đoán của vật lý cổ điển, và phép đo <dfn tabindex="0" data-def="Ánh sáng có bước sóng dài hơn màu đỏ. Mắt không thấy, nhưng da cảm nhận được như hơi nóng.">hồng ngoại</dfn> năm 1900 mà bạn sẽ đọc ở phần sau. Kéo thanh nhiệt độ hoặc bấm các mốc có sẵn.</p>
+<div class="ask predict" data-answer="2">
+<p class="ask-q">Theo vật lý cổ điển cuối thế kỷ 19, một vật nóng phát ra bao nhiêu năng lượng ở vùng tử ngoại?</p>
+<div class="ask-options"><button type="button">Gần như không có</button><button type="button">Một lượng vừa phải</button><button type="button">Vô hạn</button></div>
+<p class="ask-why" hidden>Công thức cổ điển (Rayleigh–Jeans) tăng mãi không dừng ở bước sóng ngắn, nên cộng lại thành vô hạn, một kết quả vô lý. Mở phần "Vật lý cổ điển" của mô phỏng bên dưới để thấy đường cong vọt khỏi khung.</p>
+</div>
 <div class="sim" id="sim"></div>
 <script type="module">import { mount } from '../sims/blackbody.js'; mount(document.getElementById('sim'));</script>
 <p>Hãy để ý ba điều:</p>
@@ -34,7 +41,7 @@
 <h2>Phòng thí nghiệm ở Berlin</h2>
 <p>Năm 1896, Wien đề xuất một công thức phân bố khớp khá tốt với dữ liệu thời đó. Tại Viện Vật lý–Kỹ thuật Đế quốc (PTR) ở Berlin, Otto Lummer, Ernst Pringsheim và Ferdinand Kurlbaum chế tạo được "vật đen" thật: một hốc kín được nung đều, chỉ khoét một lỗ nhỏ để đo. Từ năm 1899, phép đo của họ bắt đầu lệch khỏi định luật Wien ở vùng hồng ngoại.</p>
 <p>Năm 1900, Heinrich Rubens và Kurlbaum đo được ở vùng hồng ngoại rất xa, khoảng 30–50 μm. Ở đó cường độ tăng <b>tuyến tính theo $T$</b>, trong khi công thức Wien cho kết quả khác hẳn.</p>
-<p>Cũng trong năm 1900, Lord Rayleigh dùng định lý phân bố đều năng lượng của cơ học thống kê cổ điển để suy ra một định luật tỉ lệ với $T/\lambda^4$. James Jeans sửa lại hệ số vào năm 1905. Kết quả đúng ở bước sóng dài, nhưng như bạn vừa thấy ở mô phỏng, nó vô lý ở bước sóng ngắn.</p>
+<p>Cũng trong năm 1900, Lord Rayleigh dùng <dfn tabindex="0" data-def="Quy tắc của vật lý thống kê cổ điển: ở cân bằng nhiệt, mỗi kiểu chuyển động độc lập nhận trung bình cùng một lượng năng lượng.">định lý phân bố đều năng lượng</dfn> của cơ học thống kê cổ điển để suy ra một định luật tỉ lệ với $T/\lambda^4$. James Jeans sửa lại hệ số vào năm 1905. Kết quả đúng ở bước sóng dài, nhưng như bạn vừa thấy ở mô phỏng, nó vô lý ở bước sóng ngắn.</p>
 
 <h2>Tối Chủ nhật, 7/10/1900</h2>
 <p>Rubens cùng vợ ghé thăm Max Planck và kể cho ông kết quả đo mới. Ngay tối hôm đó, Planck tìm ra một công thức "nội suy" nối hai giới hạn lại với nhau, rồi gửi bưu thiếp báo cho Rubens. Ngày 19/10/1900, ông trình bày công thức trước Hội Vật lý Đức. Rubens đem so với dữ liệu và thấy nó khớp ở mọi bước sóng đã đo.</p>
@@ -42,7 +49,7 @@
 $$\varepsilon = h\nu$$
 <p>Ngày 14/12/1900, ông trình bày cách suy ra này. Ba mươi năm sau, trong một lá thư gửi Robert W. Wood (1931), ông gọi bước đi ấy là <i>"một hành động liều lĩnh"</i>.</p>
 
-<h2>Toán vừa đủ</h2>
+<details class="deep"><summary>Toán vừa đủ <span class="skip">(có thể bỏ qua)</span></summary>
 <p>Định luật Planck (cường độ phổ theo bước sóng):</p>
 $$B_\lambda(\lambda,T) = \frac{2hc^2}{\lambda^5}\,\frac{1}{e^{hc/\lambda k_B T}-1}$$
 <p>Đặt $x = hc/\lambda k_B T$. Với bước sóng dài ($x \ll 1$), $e^x - 1 \approx x$, ta được đúng Rayleigh–Jeans $B_\lambda \approx 2ck_BT/\lambda^4$. Với bước sóng ngắn ($x \gg 1$), số hạng $-1$ không còn đáng kể, ta được định luật Wien. Công thức Planck chứa cả hai làm trường hợp giới hạn.</p>
@@ -52,19 +59,39 @@ $$B_\lambda(\lambda,T) = \frac{2hc^2}{\lambda^5}\,\frac{1}{e^{hc/\lambda k_B T}-
 </details>
 <p>Muốn tự kiểm chứng các phép tính này bằng Python, và khớp định luật Planck với phổ bức xạ nền vũ trụ do vệ tinh COBE đo? <a href="https://colab.research.google.com/github/JasonDE03/sophon/blob/main/lab/01_blackbody.ipynb">Mở notebook trong Google Colab</a>: chạy ngay trên trình duyệt, không cần cài gì.</p>
 <p>Một phần thưởng bất ngờ: chỉ từ việc khớp dữ liệu, Planck tính được $h \approx 6{,}55\times10^{-34}$ J·s (giá trị ngày nay là $6{,}626\times10^{-34}$) và $k_B$, hằng số mà chính ông đặt tên theo Boltzmann. Từ đó ông suy ra cả số Avogadro và điện tích nguyên tố, chính xác hơn mọi phép đo đương thời.</p>
-
+</details>
 <h2>Một hiểu lầm phổ biến</h2>
 <p>Sách phổ thông hay kể rằng Planck đưa ra lượng tử để giải quyết "thảm hoạ tử ngoại". Thực tế thì cụm từ <b>"thảm hoạ tử ngoại"</b> do Paul Ehrenfest đặt ra năm <b>1911</b>, tức 11 năm sau. Planck năm 1900 không xuất phát từ định luật Rayleigh–Jeans. Ông bị dẫn dắt bởi <b>dữ liệu hồng ngoại</b> của Rubens và Kurlbaum. Bản thân Planck cũng không tin năng lượng thật sự bị chia nhỏ. Ông xem $h\nu$ là một thủ thuật tính toán và nhiều năm sau vẫn cố tìm cách bỏ nó đi.</p>
+
+<section class="quiz">
+<h2>Tự kiểm tra</h2>
+<div class="ask" data-answer="2">
+<p class="ask-q">Phổ ánh sáng của vật đen phụ thuộc vào điều gì?</p>
+<div class="ask-options"><button type="button">Chất liệu làm nên vật</button><button type="button">Hình dạng của vật</button><button type="button">Chỉ nhiệt độ</button></div>
+<p class="ask-why" hidden>Kirchhoff chứng minh năm 1859–1860 rằng phổ của vật đen chỉ phụ thuộc nhiệt độ, không phụ thuộc chất liệu hay hình dạng. Vì vậy phải tồn tại một công thức phổ quát.</p>
+</div>
+<div class="ask" data-answer="1">
+<p class="ask-q">Điều gì thật sự dẫn Planck tới công thức năm 1900?</p>
+<div class="ask-options"><button type="button">"Thảm hoạ tử ngoại"</button><button type="button">Dữ liệu hồng ngoại mới của Rubens và Kurlbaum</button><button type="button">Thuyết lượng tử ánh sáng của Einstein</button></div>
+<p class="ask-why" hidden>Cụm từ "thảm hoạ tử ngoại" chỉ ra đời năm 1911, còn bài báo của Einstein là năm 1905. Planck tìm ra công thức sau khi Rubens kể cho ông kết quả đo ở vùng hồng ngoại xa.</p>
+</div>
+<div class="ask" data-answer="1">
+<p class="ask-q">Planck nghĩ gì về các "gói năng lượng" $h\nu$?</p>
+<div class="ask-options"><button type="button">Ông tin chúng là thật và rất tự hào về chúng</button><button type="button">Ông xem đó là một thủ thuật tính toán và nhiều năm sau còn cố bỏ nó đi</button><button type="button">Ông không hề dùng đến chúng</button></div>
+<p class="ask-why" hidden>Planck cần các gói năng lượng để phép đếm thống kê có nghĩa, nhưng không tin năng lượng thật sự bị chia nhỏ. Người đầu tiên coi lượng tử là thật là Einstein, năm 1905.</p>
+</div>
+</section>
 
 <h2>Hệ quả</h2>
 <p>Người đầu tiên coi lượng tử là thật chính là một nhân viên phòng cấp bằng sáng chế 26 tuổi ở Bern. Năm 1905, Einstein đề xuất rằng chính <b>ánh sáng</b> được tạo thành từ các lượng tử, và dùng ý tưởng đó giải thích một hiện tượng mà lý thuyết sóng bó tay: hiệu ứng quang điện.</p>
 <p><a href="02-quang-dien.html">→ Bài 2: Hiệu ứng quang điện (1905)</a></p>
 
-<h2>Nguồn</h2>
+<details class="deep"><summary>Nguồn</summary>
 <ul class="sources">
 <li>M. Planck, <i>Verh. Dtsch. Phys. Ges.</i> 2, 202 (19/10/1900) và 237 (14/12/1900); <i>Ann. Phys.</i> 4, 553 (1901).</li>
 <li>Lord Rayleigh, "Remarks upon the Law of Complete Radiation", <i>Phil. Mag.</i> 49, 539 (1900).</li>
 <li>T. S. Kuhn, <i>Black-Body Theory and the Quantum Discontinuity, 1894–1912</i> (1978).</li>
 <li>H. Kragh, "Max Planck: the reluctant revolutionary", <i>Physics World</i>, 12/2000.</li>
 </ul>
+</details>
 </main></body></html>

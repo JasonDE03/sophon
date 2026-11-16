@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Bài 3: Rutherford — Sophon</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 16 16%27><circle cx=%278%27 cy=%278%27 r=%275%27 fill=%27%23f0b35a%27/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&display=swap">
+<link rel="stylesheet" href="../style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"
+  onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]})"></script>
+<script type="module" src="../learn.js"></script>
+</head><body><main>
+<nav><a class="brand" href="../">sophon</a><span class="links"><a href="./">Mục lục</a><a href="../en/03-rutherford.html">English</a></span></nav>
+
+<p class="year">Bài 3 · 1909–1913</p>
+<h1>Thí nghiệm Rutherford: nguyên tử gần như trống rỗng</h1>
+<p class="lede">Bắn hạt alpha vào một tấm kim loại, và cứ chừng tám nghìn hạt lại có một hạt bật ngược trở lại. Muốn giải thích điều đó, phải dồn gần như toàn bộ khối lượng của nguyên tử vào một chấm nhỏ hơn nó hàng chục nghìn lần.</p>
+<aside class="tldr"><p class="tldr-label">Trong 30 giây</p><p>Năm 1909, Geiger và Marsden bắn hạt alpha vào một tấm kim loại mỏng. Gần như mọi hạt xuyên qua, nhưng thỉnh thoảng có hạt bật ngược trở lại, như đạn bắn vào tờ giấy mà nảy về. Rutherford giải thích rằng gần như toàn bộ khối lượng và điện tích dương của nguyên tử dồn vào một chấm cực nhỏ ở tâm, phần còn lại gần như trống rỗng. Chấm nhỏ ấy về sau được gọi là hạt nhân.</p></aside>
+
+<h2>Nguyên tử năm 1904</h2>
+<p>Năm 1897, J. J. Thomson phát hiện electron, một hạt mang điện âm nhẹ hơn nguyên tử nhẹ nhất cả nghìn lần. Nguyên tử trung hoà về điện, nên phải có điện tích dương ở đâu đó bù lại. Câu hỏi là điện tích dương nằm ở đâu, và các electron sắp xếp ra sao.</p>
+<p>Năm 1904, Thomson đề xuất rằng điện tích dương trải đều trong một quả cầu to bằng cả nguyên tử, còn các electron chuyển động thành những vòng đồng tâm bên trong quả cầu đó. Ông dùng mô hình này để thử giải thích vì sao tính chất các nguyên tố lặp lại theo chu kỳ. Đây là một trong những mô hình nguyên tử được bàn đến nhiều nhất trong thập niên sau đó.</p>
+<p>Rutherford thì quan tâm đến một thứ khác: <dfn tabindex="0" data-def="Hạt mang điện dương do một số chất phóng xạ phát ra. Ngày nay ta biết đó là hạt nhân heli, gồm 2 proton và 2 neutron.">hạt alpha</dfn> phát ra từ các chất phóng xạ. Năm 1908, ông nhận giải Nobel Hoá học cho các nghiên cứu về phóng xạ, và cùng Thomas Royds chứng minh rằng hạt alpha là ion heli. Với Rutherford, hạt alpha là một viên đạn nặng và nhanh, có thể dùng để thăm dò bên trong vật chất.</p>
+
+<h2>Tự làm lại thí nghiệm</h2>
+<p>Mô phỏng có ba phần: bắn hạt alpha vào lá kim loại như Geiger và Marsden, phóng to một nguyên tử để xem từng hạt bị lệch thế nào, và đếm số hạt ở các góc khác nhau. Ở phần nào bạn cũng có thể đổi qua lại giữa mô hình nguyên tử của Thomson và của Rutherford.</p>
+<div class="ask predict" data-answer="1">
+<p class="ask-q">Nếu nguyên tử đúng như Thomson nghĩ, với điện tích dương trải đều khắp nguyên tử, thì bắn hạt alpha vào lá vàng sẽ thấy gì?</p>
+<div class="ask-options"><button type="button">Mọi hạt đều bị chặn lại</button><button type="button">Các hạt đi qua, chỉ lệch rất ít</button><button type="button">Một số hạt bật ngược trở lại</button></div>
+<p class="ask-why" hidden>Đúng là mô hình Thomson dự đoán như vậy: điện tích dương trải loãng nên lực lên hạt alpha rất yếu, hạt chỉ lệch chừng 1°. Nhưng Geiger và Marsden lại thấy có hạt bật ngược. Thử cả hai mô hình trong mô phỏng bên dưới.</p>
+</div>
+<div class="sim" id="sim"></div>
+<script type="module">import { mount } from '../sims/rutherford.js'; mount(document.getElementById('sim'));</script>
+<p>Hãy để ý:</p>
+<ul>
+<li>Ở "Bắn vào lá kim loại", với mô hình Rutherford, gần như mọi hạt alpha đi thẳng. Chờ một lúc sẽ thấy một hạt bật ngược lại (vệt màu cam). Đổi sang mô hình Thomson: không hạt nào bật ngược, dù chờ bao lâu.</li>
+<li>Ở "Phóng to một nguyên tử", kéo <dfn tabindex="0" data-def="Khoảng cách từ hạt nhân tới đường thẳng mà hạt alpha sẽ đi nếu không bị lệch.">khoảng nhắm lệch</dfn> $b$. Hạt alpha chỉ bị bẻ ngoặt mạnh khi bay qua cách hạt nhân vài chục femtomet (1 fm = $10^{-15}$ m). Hạt nhân nhỏ đến mức rất hiếm hạt bay gần được như thế.</li>
+<li>Ở "Đếm như Geiger–Marsden", đo ở vài góc khác nhau. Số đếm giảm hàng nghìn lần, nhưng cột cuối của bảng gần như không đổi. Đây chính là phép thử Geiger và Marsden thực hiện năm 1913.</li>
+<li>Tăng năng lượng hạt alpha, hoặc đổi sang nhôm: số hạt bật ngược giảm mạnh. Hạt nhân càng ít điện tích và hạt alpha càng nhanh thì càng khó bị bẻ ngoặt.</li>
+</ul>
+
+<h2>Manchester, 1909</h2>
+<p>Năm 1907, Rutherford rời Đại học McGill ở Canada về Đại học Manchester. Cùng trợ lý Hans Geiger, ông phát triển cách đếm từng hạt alpha: mỗi hạt đập vào một màn <dfn tabindex="0" data-def="Chất lóe lên một chớp sáng nhỏ mỗi khi có hạt alpha đập vào, nhờ vậy có thể đếm từng hạt bằng mắt.">kẽm sunfua</dfn> tạo ra một chớp sáng rất nhỏ, và người quan sát ngồi trong phòng tối đếm các chớp sáng đó qua kính hiển vi.</p>
+<p>Năm 1909, Rutherford giao cho Ernest Marsden, một sinh viên 20 tuổi, việc xem thử có hạt alpha nào bị lệch một góc lớn khi đi qua kim loại không. Theo hiểu biết lúc đó, câu trả lời gần như chắc chắn là không. Geiger và Marsden lại tìm thấy có. Trong bài báo gửi Hội Hoàng gia năm 1909, họ ghi nhận rằng với một tấm bạch kim, cứ khoảng 8000 hạt alpha bắn tới thì có một hạt bị hắt ngược về phía nguồn.</p>
+<p>Nhiều năm sau, Rutherford hay kể rằng đó là "sự kiện khó tin nhất" trong đời ông, khó tin "gần như việc bạn bắn một quả đạn pháo 15 inch vào một tờ giấy lụa và nó bật ngược lại trúng bạn". Câu nói này rất nổi tiếng, nhưng đó là hồi ức kể lại sau hơn hai mươi năm, không phải phản ứng tại chỗ.</p>
+
+<h2>Rutherford làm phép tính</h2>
+<p>Trong mô hình Thomson, điện tích dương trải loãng khắp nguyên tử, nên lực điện lên hạt alpha rất yếu. Mỗi nguyên tử chỉ làm hạt lệch đi một chút, và ngay cả khi đi qua hàng nghìn lớp nguyên tử, những độ lệch nhỏ đó cộng lại cũng không thể khiến hạt quay đầu. Muốn bẻ ngoặt một hạt alpha nặng và nhanh chỉ trong một lần va chạm, cần một lực điện cực mạnh, tức là điện tích phải dồn vào một vùng cực nhỏ.</p>
+<p>Khoảng cuối năm 1910, đầu năm 1911, Rutherford tính xem chuyện gì xảy ra nếu gần như toàn bộ điện tích và khối lượng của nguyên tử tập trung ở tâm. Khi đó hạt alpha đi theo một đường hypebol, giống sao chổi vút qua Mặt Trời một lần rồi bay đi, chỉ khác là lực ở đây là lực đẩy. Từ đó ông suy ra số hạt bị lệch một góc $\theta$ phải tỉ lệ với $1/\sin^4(\theta/2)$, với độ dày lá kim loại, với bình phương điện tích ở tâm, và tỉ lệ nghịch với bình phương động năng của hạt alpha.</p>
+<p>Ông trình bày kết quả tại Hội Văn học và Triết học Manchester tháng 3/1911, rồi công bố trên tạp chí <i>Philosophical Magazine</i> tháng 5/1911. Trong bài báo, ông chỉ nói về một "điện tích trung tâm", không dùng chữ "hạt nhân", và viết rằng các kết luận chính không phụ thuộc vào việc điện tích đó dương hay âm. Bài báo ban đầu không gây nhiều chú ý.</p>
+
+<h2>Kiểm chứng năm 1913</h2>
+<p>Geiger và Marsden kiểm tra từng dự đoán một. Họ đặt lá kim loại ở tâm một hộp kim loại đã hút chân không, gắn kính hiển vi và màn kẽm sunfua lên một bộ phận xoay được quanh lá, rồi đếm số chớp sáng ở các góc từ 5° đến 150°. Số hạt bị lệch giảm cực nhanh khi góc tăng, nhưng tích của số đếm với $\sin^4(\theta/2)$ gần như không đổi. Họ còn thay đổi độ dày lá, loại kim loại và vận tốc hạt alpha. Kết quả khớp với công thức của Rutherford ở mọi phép thử.</p>
+<p>Từ số đếm, họ ước tính điện tích ở tâm nguyên tử vàng vào cỡ một nửa <dfn tabindex="0" data-def="Khối lượng của một nguyên tử, tính theo đơn vị xấp xỉ khối lượng nguyên tử hydro. Vàng khoảng 197.">nguyên tử khối</dfn> của vàng, tức khoảng 100 lần <dfn tabindex="0" data-def="Độ lớn điện tích của một electron, khoảng $1{,}6\times10^{-19}$ C.">điện tích nguyên tố</dfn>. Giá trị đúng là 79, nhưng con số này đã cho thấy điện tích hạt nhân gắn chặt với vị trí của nguyên tố trong bảng tuần hoàn.</p>
+
+<details class="deep"><summary>Toán vừa đủ <span class="skip">(có thể bỏ qua)</span></summary>
+<p>Gọi $E$ là động năng của hạt alpha (điện tích $2e$) và $Ze$ là điện tích hạt nhân. Khi bắn thẳng vào tâm, hạt alpha dừng lại ở khoảng cách $d$ mà tại đó thế năng điện bằng động năng ban đầu:</p>
+$$d = \frac{2Ze^2}{4\pi\varepsilon_0 E}.$$
+<p>Với hạt alpha 7,7 MeV và vàng ($Z = 79$), $d \approx 30$ fm, tức $3\times10^{-14}$ m, nhỏ hơn nguyên tử vàng khoảng mười nghìn lần. Nếu nhắm lệch tâm một khoảng $b$, góc lệch là</p>
+$$\tan\frac{\theta}{2} = \frac{d}{2b}.$$
+<p>Muốn bị lệch quá 90°, hạt alpha phải nhắm lệch ít hơn $d/2 \approx 15$ fm. Khi đi qua một lá vàng dày 1 μm, xác suất điều đó xảy ra chỉ cỡ 1 trên 25 000. Vì vậy hạt bật ngược rất hiếm, nhưng không phải không có.</p>
+<details><summary>Thêm: từ góc lệch đến công thức đếm</summary>
+<p>Các hạt có khoảng nhắm lệch nằm trong vành từ $b$ đến $b + db$ bị lệch vào khoảng góc từ $\theta$ đến $\theta + d\theta$. Diện tích của vành là $2\pi b\,db$. Đổi biến theo công thức trên, ta được tiết diện tán xạ trên một đơn vị góc khối:</p>
+$$\frac{d\sigma}{d\Omega} = \left(\frac{d}{4}\right)^2 \frac{1}{\sin^4(\theta/2)}.$$
+<p>Nhân với số nguyên tử trên một đơn vị diện tích lá kim loại và số hạt bắn tới, ta được số chớp sáng đếm được ở góc $\theta$. Cả bốn sự phụ thuộc mà Geiger và Marsden kiểm tra (theo góc, độ dày, điện tích hạt nhân và vận tốc) đều nằm trong biểu thức này. Điều thú vị là cơ học lượng tử về sau cho ra đúng công thức này với lực Coulomb, nên Rutherford đã "gặp may" khi dùng cơ học cổ điển.</p>
+</details>
+<p>Muốn tự vẽ quỹ đạo hạt alpha và xem số liệu gốc năm 1913 của Geiger và Marsden bằng Python? <a href="https://colab.research.google.com/github/JasonDE03/sophon/blob/main/lab/03_rutherford.ipynb">Mở notebook trong Google Colab</a>: chạy ngay trên trình duyệt, không cần cài gì.</p>
+</details>
+<h2>Những hiểu lầm phổ biến</h2>
+<p><b>"Mô hình bánh pudding mận của Thomson."</b> Thomson không gọi mô hình của mình như vậy. Theo hai nhà sử học Giora Hon và Bernard Goldstein, cái tên này do người khác đặt và về sau được sách giáo khoa phổ biến. Hình ảnh những quả mận nằm yên trong bánh cũng sai với mô hình gốc: electron của Thomson chuyển động thành các vòng đồng tâm, và cách sắp xếp các vòng ấy mới là phần ông quan tâm nhất.</p>
+<p><b>"Rutherford bắn hạt alpha vào lá vàng."</b> Người làm thí nghiệm là Geiger và Marsden. Rutherford đặt câu hỏi và đưa ra lời giải thích. Năm 1911, ông cũng chưa nói đến "hạt nhân": bài báo dùng chữ "điện tích trung tâm" và để ngỏ dấu của nó.</p>
+<p><b>"Rutherford đưa ra mô hình hành tinh, electron quay quanh hạt nhân như Trái Đất quanh Mặt Trời."</b> Bài báo năm 1911 gần như không nói gì về chuyển động của electron. Rutherford viết rằng câu hỏi về độ bền của nguyên tử "chưa cần xét ở giai đoạn này". Theo điện động lực học cổ điển, một electron quay quanh tâm sẽ phát bức xạ, mất năng lượng và rơi vào trong, nên một mô hình hành tinh đơn giản không thể đứng vững.</p>
+
+<section class="quiz">
+<h2>Tự kiểm tra</h2>
+<div class="ask" data-answer="1">
+<p class="ask-q">Vì sao phần lớn hạt alpha đi thẳng qua lá vàng?</p>
+<div class="ask-options"><button type="button">Vì lá vàng chỉ dày vài lớp nguyên tử</button><button type="button">Vì nguyên tử gần như trống rỗng, còn hạt nhân thì cực nhỏ</button><button type="button">Vì hạt alpha không mang điện</button></div>
+<p class="ask-why" hidden>Lá vàng dày cả nghìn lớp nguyên tử. Hạt alpha đi qua được vì phần lớn thể tích nguyên tử gần như trống; chỉ khi bay rất gần hạt nhân nó mới bị bẻ ngoặt.</p>
+</div>
+<div class="ask" data-answer="1">
+<p class="ask-q">Ai trực tiếp làm thí nghiệm đếm những hạt alpha bật ngược?</p>
+<div class="ask-options"><button type="button">Rutherford</button><button type="button">Geiger và Marsden</button><button type="button">Thomson</button></div>
+<p class="ask-why" hidden>Hans Geiger và sinh viên Ernest Marsden làm thí nghiệm. Rutherford đặt câu hỏi và giải thích kết quả.</p>
+</div>
+<div class="ask" data-answer="0">
+<p class="ask-q">Mô hình nguyên tử năm 1911 của Rutherford còn bỏ ngỏ điều gì?</p>
+<div class="ask-options"><button type="button">Vì sao electron không rơi vào hạt nhân</button><button type="button">Vì sao có hạt alpha bật ngược</button><button type="button">Điện tích dương nằm ở đâu</button></div>
+<p class="ask-why" hidden>Rutherford viết rằng câu hỏi về độ bền của nguyên tử "chưa cần xét ở giai đoạn này". Theo vật lý cổ điển, electron quay quanh hạt nhân phải phát bức xạ và rơi vào trong. Bài 4 kể Bohr xử lý chuyện này thế nào.</p>
+</div>
+</section>
+
+<h2>Hệ quả</h2>
+<p>Năm 1913–1914, Henry Moseley, cũng từng làm việc ở Manchester, đo tia X của hàng loạt nguyên tố và cho thấy điện tích hạt nhân tăng đúng một đơn vị từ nguyên tố này sang nguyên tố kế tiếp: số thứ tự của một nguyên tố trong bảng tuần hoàn chính là số điện tích dương trong hạt nhân của nó.</p>
+<p>Nhưng mô hình hạt nhân để lại một vấn đề lớn. Electron quay quanh hạt nhân là một điện tích chuyển động có gia tốc, và theo lý thuyết của Maxwell, nó phải liên tục phát bức xạ rồi rơi xoắn vào hạt nhân trong chưa đầy một phần tỉ giây. Nguyên tử lẽ ra không thể bền. Năm 1912, một nhà vật lý trẻ người Đan Mạch đến Manchester làm việc với Rutherford vài tháng. Tên anh là Niels Bohr.</p>
+<p><a href="./">→ Bài 4: Mô hình Bohr và vạch phổ hydro (1913), sắp ra</a></p>
+
+<details class="deep"><summary>Nguồn</summary>
+<ul class="sources">
+<li>J. J. Thomson, <i>Phil. Mag.</i> 7, 237 (1904). E. Rutherford và T. Royds, <i>Phil. Mag.</i> 17, 281 (1909).</li>
+<li>H. Geiger và E. Marsden, "On a diffuse reflection of the α-particles", <i>Proc. R. Soc. A</i> 82, 495 (1909).</li>
+<li>E. Rutherford, "The scattering of α and β particles by matter and the structure of the atom", <i>Phil. Mag.</i> 21, 669 (1911).</li>
+<li>H. Geiger và E. Marsden, "The laws of deflexion of α particles through large angles", <i>Phil. Mag.</i> 25, 604 (1913).</li>
+<li>H. G. J. Moseley, <i>Phil. Mag.</i> 26, 1024 (1913).</li>
+<li>A. S. Eve, <i>Rutherford: Being the Life and Letters of the Rt Hon. Lord Rutherford, O.M.</i> (1939).</li>
+<li>J. L. Heilbron, "The scattering of α and β particles and Rutherford's atom", <i>Arch. Hist. Exact Sci.</i> 4, 247 (1968).</li>
+<li>G. Hon và B. R. Goldstein, "J. J. Thomson's plum-pudding atomic model: The making of a scientific myth", <i>Ann. Phys.</i> 525, A129 (2013).</li>
+</ul>
+</details>
+</main></body></html>

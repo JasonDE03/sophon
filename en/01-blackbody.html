@@ -9,19 +9,26 @@
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"
   onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]})"></script>
+<script type="module" src="../learn.js"></script>
 </head><body><main>
 <nav><a class="brand" href="../">sophon</a><span class="links"><a href="./">Contents</a><a href="../vi/01-vat-den.html">Tiếng Việt</a></span></nav>
 
 <p class="year">Episode 1 · 1859–1900</p>
 <h1>Blackbody radiation: the small crack that broke classical physics</h1>
 <p class="lede">By the late 19th century, many believed physics was nearly finished. One question remained, and it sounded trivial: what colour does a hot object glow?</p>
+<aside class="tldr"><p class="tldr-label">In 30 seconds</p><p>Hot objects glow, and the colour of their light depends only on temperature. By the late 19th century, no formula correctly described this spectrum: a formula that worked at short wavelengths failed at long ones, and vice versa. In 1900, Planck found the right formula, but to derive it he had to divide energy into small, finite packets. This was the first seed of quantum physics, even though Planck himself did not believe the packets were real.</p></aside>
 
 <h2>Kirchhoff's question</h2>
-<p>In 1859–1860, Gustav Kirchhoff showed that a body which absorbs all radiation falling on it, which he called a <b>black body</b>, emits a spectrum that depends <b>only on temperature</b>. Material and shape do not matter. So a universal function $B(\lambda, T)$ had to exist. Nobody knew what it looked like, and the question stayed open for 40 years.</p>
+<p>In 1859–1860, Gustav Kirchhoff showed that a body which absorbs all radiation falling on it, which he called a <b><dfn tabindex="0" data-def="An object that absorbs all radiation falling on it. When heated, the light it emits depends only on its temperature.">black body</dfn></b>, emits a <dfn tabindex="0" data-def="How the energy of light is distributed across wavelengths, or colours.">spectrum</dfn> that depends <b>only on temperature</b>. Material and shape do not matter. So a universal function $B(\lambda, T)$ had to exist. Nobody knew what it looked like, and the question stayed open for 40 years.</p>
 <p>The pieces arrived one at a time. Stefan (1879, empirically) and Boltzmann (1884, from thermodynamics) showed that total emitted power scales as $T^4$. In 1893 Wilhelm Wien proved that the peak shifts to shorter wavelengths as the body heats up: $\lambda_{\max} T = \text{const}$. That is why heated iron goes from red to white.</p>
 
 <h2>Redo the experiment</h2>
-<p>The simulation has three parts: the colour and spectrum of hot objects, the classical prediction, and the 1900 infrared measurements described further down. Drag the temperature slider or click one of the presets.</p>
+<p>The simulation has three parts: the colour and spectrum of hot objects, the classical prediction, and the 1900 <dfn tabindex="0" data-def="Light with wavelengths longer than red light. The eye cannot see it, but the skin can feel it as heat.">infrared</dfn> measurements described further down. Drag the temperature slider or click one of the presets.</p>
+<div class="ask predict" data-answer="2">
+<p class="ask-q">According to late 19th-century classical physics, how much energy does a hot object emit in the ultraviolet?</p>
+<div class="ask-options"><button type="button">Almost none</button><button type="button">A moderate amount</button><button type="button">An infinite amount</button></div>
+<p class="ask-why" hidden>The classical formula (Rayleigh–Jeans) keeps rising without limit at short wavelengths, so the total is infinite, an absurd result. Open "Classical physics" in the simulation below to see the curve shoot out of the frame.</p>
+</div>
 <div class="sim" id="sim"></div>
 <script type="module">import { mount } from '../sims/blackbody.js'; mount(document.getElementById('sim'));</script>
 <p>Watch for three things:</p>
@@ -34,15 +41,15 @@
 <h2>The lab in Berlin</h2>
 <p>In 1896 Wien proposed a distribution law that fit the data of the time well. At the Imperial Physical-Technical Institute (PTR) in Berlin, Otto Lummer, Ernst Pringsheim and Ferdinand Kurlbaum built real black bodies: uniformly heated cavities with a small hole to measure from. From 1899 on, their measurements began to depart from Wien's law in the infrared.</p>
 <p>In 1900 Heinrich Rubens and Kurlbaum reached the far infrared, around 30–50 μm. There, intensity grew <b>linearly with $T$</b>, which is not what Wien's law predicts.</p>
-<p>Also in 1900, Lord Rayleigh applied the equipartition theorem of classical statistical mechanics and derived a law proportional to $T/\lambda^4$. James Jeans corrected the prefactor in 1905. It is right at long wavelengths and, as the simulation shows, absurd at short ones.</p>
+<p>Also in 1900, Lord Rayleigh applied the <dfn tabindex="0" data-def="A rule of classical statistical physics: at thermal equilibrium, each independent mode of motion receives the same average amount of energy.">equipartition theorem</dfn> of classical statistical mechanics and derived a law proportional to $T/\lambda^4$. James Jeans corrected the prefactor in 1905. It is right at long wavelengths and, as the simulation shows, absurd at short ones.</p>
 
 <h2>Sunday evening, 7 October 1900</h2>
-<p>Rubens and his wife visited Max Planck and told him about the new data. That same evening Planck found an "interpolation" formula joining the two limits and sent Rubens a postcard. On 19 October 1900 he presented it to the German Physical Society. Rubens checked it against his data and found it matched at every wavelength measured.</p>
+<p>Rubens and his wife visited Max Planck and told him about the new data. That same evening Planck found an "interpolation" formula joining the two limits and sent Rubens a postcard. On 19 October 1900 he presented it to the German Physical Society. Rubens checked it against his data and found it matched at every <dfn tabindex="0" data-def="The distance between two successive wave crests. Visible light has wavelengths from about 380 nm (violet) to 750 nm (red).">wavelength</dfn> measured.</p>
 <p>Planck was not satisfied, because a lucky guess is not a theory. It took him eight weeks to find a derivation, and he had to use Boltzmann's combinatorial statistics, an approach he had long resisted. To make the counting work, he had to split the energy of his oscillators into finite "elements":</p>
 $$\varepsilon = h\nu$$
 <p>He presented the derivation on 14 December 1900. Thirty years later, in a 1931 letter to Robert W. Wood, he called it <i>"an act of desperation"</i>.</p>
 
-<h2>Just enough maths</h2>
+<details class="deep"><summary>Just enough maths <span class="skip">(optional)</span></summary>
 <p>Planck's law (spectral radiance per wavelength):</p>
 $$B_\lambda(\lambda,T) = \frac{2hc^2}{\lambda^5}\,\frac{1}{e^{hc/\lambda k_B T}-1}$$
 <p>Let $x = hc/\lambda k_B T$. For long wavelengths ($x \ll 1$), $e^x - 1 \approx x$, which gives exactly Rayleigh–Jeans: $B_\lambda \approx 2ck_BT/\lambda^4$. For short wavelengths ($x \gg 1$) the $-1$ becomes negligible and you get Wien's law. Planck's formula contains both as limiting cases.</p>
@@ -52,19 +59,39 @@ $$B_\lambda(\lambda,T) = \frac{2hc^2}{\lambda^5}\,\frac{1}{e^{hc/\lambda k_B T}-
 </details>
 <p>Want to check these calculations in Python, and fit Planck's law to the cosmic microwave background spectrum measured by the COBE satellite? <a href="https://colab.research.google.com/github/JasonDE03/sophon/blob/main/lab/01_blackbody.ipynb">Open the notebook in Google Colab</a>: it runs in the browser with nothing to install.</p>
 <p>An unexpected bonus: just by fitting the data, Planck obtained $h \approx 6.55\times10^{-34}$ J·s (today: $6.626\times10^{-34}$) and $k_B$, a constant he himself named after Boltzmann. From these he derived Avogadro's number and the elementary charge, more precisely than any measurement of the day.</p>
-
+</details>
 <h2>A common myth</h2>
 <p>Textbooks often say Planck introduced quanta to solve the "ultraviolet catastrophe". In fact the phrase <b>"ultraviolet catastrophe"</b> was coined by Paul Ehrenfest in <b>1911</b>, eleven years later. Planck in 1900 was not starting from Rayleigh–Jeans. He was driven by Rubens and Kurlbaum's <b>infrared data</b>. He did not believe energy was really chopped up, either. He treated $h\nu$ as a calculational device and spent years trying to get rid of it.</p>
+
+<section class="quiz">
+<h2>Check yourself</h2>
+<div class="ask" data-answer="2">
+<p class="ask-q">What determines the spectrum of light emitted by a black body?</p>
+<div class="ask-options"><button type="button">The material it is made of</button><button type="button">Its shape</button><button type="button">Only its temperature</button></div>
+<p class="ask-why" hidden>In 1859–1860, Kirchhoff showed that a black body's spectrum depends only on temperature, not on material or shape. There must therefore be a universal formula.</p>
+</div>
+<div class="ask" data-answer="1">
+<p class="ask-q">What actually led Planck to his formula in 1900?</p>
+<div class="ask-options"><button type="button">The "ultraviolet catastrophe"</button><button type="button">Rubens and Kurlbaum's new infrared data</button><button type="button">Einstein's light quantum theory</button></div>
+<p class="ask-why" hidden>The phrase "ultraviolet catastrophe" was not coined until 1911, and Einstein's paper appeared in 1905. Planck found his formula after Rubens told him about the far-infrared measurements.</p>
+</div>
+<div class="ask" data-answer="1">
+<p class="ask-q">What did Planck think of the "energy packets" $h\nu$?</p>
+<div class="ask-options"><button type="button">He believed they were real and was very proud of them</button><button type="button">He saw them as a calculational device and spent years trying to get rid of them</button><button type="button">He never used them</button></div>
+<p class="ask-why" hidden>Planck needed energy packets to make statistical counting work, but did not believe energy was really divided up. The first person to treat quanta as real was Einstein, in 1905.</p>
+</div>
+</section>
 
 <h2>What came next</h2>
 <p>The first person to take quanta seriously was a 26-year-old patent clerk in Bern. In 1905 Einstein proposed that <b>light itself</b> comes in quanta, and used the idea to explain something wave theory could not: the photoelectric effect.</p>
 <p><a href="02-photoelectric.html">→ Episode 2: The photoelectric effect (1905)</a></p>
 
-<h2>Sources</h2>
+<details class="deep"><summary>Sources</summary>
 <ul class="sources">
 <li>M. Planck, <i>Verh. Dtsch. Phys. Ges.</i> 2, 202 (19 Oct 1900) and 237 (14 Dec 1900); <i>Ann. Phys.</i> 4, 553 (1901).</li>
 <li>Lord Rayleigh, "Remarks upon the Law of Complete Radiation", <i>Phil. Mag.</i> 49, 539 (1900).</li>
 <li>T. S. Kuhn, <i>Black-Body Theory and the Quantum Discontinuity, 1894–1912</i> (1978).</li>
 <li>H. Kragh, "Max Planck: the reluctant revolutionary", <i>Physics World</i>, Dec 2000.</li>
 </ul>
+</details>
 </main></body></html>
