@@ -93,7 +93,10 @@ dfn[data-def]::after { content:attr(data-def); display:none; position:absolute; 
   padding:12px 14px; border:1px solid var(--line); border-radius:8px; background:var(--card);
   color:var(--fg); font:400 14px/1.6 var(--sans); text-align:left; overflow-wrap:anywhere;
   box-shadow:0 8px 24px #0005; }
-dfn[data-def]:hover::after, dfn[data-def]:focus::after { display:block; }
+dfn[data-def].open::after, dfn[data-def]:focus-visible::after { display:block; }
+@media (hover: hover) and (pointer: fine) {
+  dfn[data-def]:not(.dismissed):hover::after { display:block; }
+}
 
 .deep { margin:2.8em 0 1.5em; }
 .deep > summary { display:flex; align-items:baseline; flex-wrap:wrap; gap:4px 10px;
@@ -116,6 +119,23 @@ ol.episodes .n, ol.episodes .y { font:500 13px var(--sans); color:var(--muted); 
 ol.episodes .soon { opacity:.42; }
 .soon { color:var(--muted); }
 .sources { font:14px/1.6 var(--sans); color:var(--muted); }
+
+/* Previous and next episodes */
+.episode-nav { display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); gap:16px;
+  align-items:stretch; margin:32px 0 0; padding:0; border:0; }
+.episode-nav > a, .episode-nav > span { display:block; padding:18px 20px;
+  background:var(--card); border:1px solid var(--line); border-radius:12px;
+  color:var(--fg); font:600 1.2rem/1.4 var(--serif); text-decoration:none;
+  transition:border-color .15s; }
+.episode-nav > a:hover { border-color:var(--accent); }
+.episode-nav > a:focus-visible { outline:2px solid var(--blue); outline-offset:4px; }
+.episode-nav > .next { text-align:right; }
+.episode-nav > .soon { opacity:.5; }
+.episode-nav > * > span { display:block; margin-bottom:8px; color:var(--muted);
+  font:500 12px/1.5 var(--sans); }
+@media (max-width:599px) {
+  .episode-nav { grid-template-columns:1fr; }
+}
 
 /* landing */
 .hero { min-height:70vh; display:flex; flex-direction:column; justify-content:center; }

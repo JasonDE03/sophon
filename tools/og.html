@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="vi"><head><meta charset="utf-8">
+<meta name="viewport" content="width=1200,initial-scale=1">
+<title>Sophon share card</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&display=swap">
+<link rel="stylesheet" href="../style.css">
+<style>
+  html, body { width:1200px; height:630px; overflow:hidden; }
+  body { padding:58px 76px; background:radial-gradient(ellipse at 100% 100%, #f0b35a09, transparent 60%), var(--bg); }
+  .brand { font:600 26px/1.4 var(--sans); letter-spacing:.04em; }
+  .dot { color:var(--accent); }
+  .copy { margin-top:80px; max-width:1048px; }
+  .year { font-size:18px; }
+  h1 { font:600 76px/1.12 var(--serif); letter-spacing:-.02em; margin:24px 0 0; text-wrap:balance; }
+  .rule { position:absolute; bottom:55px; left:76px; width:1048px; height:1px;
+    background:linear-gradient(90deg, #f0b35a80, #f0b35a08); }
+  .tagline { display:none; }
+  .home .copy { margin-top:54px; }
+  .home .year { display:none; }
+  .home h1 { font-size:126px; margin:0 0 22px; }
+  .home .tagline { display:block; color:var(--muted); font:400 29px/1.55 var(--serif); margin:0; }
+</style>
+</head><body>
+<div class="brand">sophon<span class="dot">.</span></div>
+<div class="copy">
+  <p class="year" id="kicker"></p>
+  <h1 id="title"></h1>
+  <p class="tagline">Những thí nghiệm làm nên vật lý.<br>The experiments that shaped physics.</p>
+</div>
+<div class="rule"></div>
+<script>
+  const params = new URLSearchParams(location.search);
+  const language = params.get('l') || 'vi';
+  document.documentElement.lang = language === 'en' ? 'en' : 'vi';
+  document.getElementById('kicker').textContent = params.get('k') || '';
+  const title = document.getElementById('title');
+  title.textContent = params.get('t') || 'Sophon';
+  if (language === 'home') {
+    document.body.classList.add('home');
+    title.replaceChildren('sophon');
+    const dot = document.createElement('span');
+    dot.className = 'dot';
+    dot.textContent = '.';
+    title.append(dot);
+  }
+  document.fonts.ready.then(() => {
+    // Keep longer future titles within three lines without clipping them.
+    let size = parseFloat(getComputedStyle(title).fontSize);
+    while (title.offsetHeight > size * 1.12 * 3 + 2 && size > 36) {
+      size -= 2;
+      title.style.fontSize = `${size}px`;
+    }
+    document.documentElement.dataset.ready = 'true';
+  });
+</script>
+</body></html>

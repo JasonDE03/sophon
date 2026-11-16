@@ -3,6 +3,56 @@ const labels = {
   en: { predict: 'Question', right: 'Correct.', wrong: 'Not quite.' },
 };
 const language = () => labels[document.documentElement.lang.toLowerCase().split('-')[0]] || labels.en;
+
+const definitions = [...document.querySelectorAll('dfn[data-def]')];
+const canHover = matchMedia('(hover: hover) and (pointer: fine)');
+const updateExpanded = term => {
+  term.setAttribute('aria-expanded', String(term.classList.contains('open') ||
+    term.matches(':focus-visible') || (canHover.matches && term.matches(':hover') &&
+      !term.classList.contains('dismissed'))));
+};
+const closeDefinitions = (except = null) => {
+  definitions.forEach(term => {
+    if (term === except) return;
+    term.classList.remove('open');
+    // Keep hover from immediately reopening a definition dismissed under the pointer.
+    term.classList.toggle('dismissed', canHover.matches && term.matches(':hover'));
+    if (document.activeElement === term) term.blur();
+    updateExpanded(term);
+  });
+};
+definitions.forEach(term => {
+  updateExpanded(term);
+  ['focus', 'blur'].forEach(event => {
+    term.addEventListener(event, () => updateExpanded(term));
+  });
+  ['mouseenter', 'mouseleave'].forEach(event => {
+    term.addEventListener(event, () => {
+      term.classList.remove('dismissed');
+      updateExpanded(term);
+    });
+  });
+  term.addEventListener('keydown', event => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      term.click();
+    }
+  });
+});
+document.addEventListener('click', event => {
+  const term = event.target.closest('dfn[data-def]');
+  const wasOpen = term?.classList.contains('open');
+  closeDefinitions(wasOpen ? null : term);
+  if (term && !wasOpen) {
+    term.classList.remove('dismissed');
+    term.classList.add('open');
+    updateExpanded(term);
+  }
+});
+document.addEventListener('keydown', event => {
+  if (event.key === 'Escape') closeDefinitions();
+});
+
 document.querySelectorAll('.ask').forEach(ask => {
   if (ask.classList.contains('predict')) ask.dataset.label = language().predict;
   const buttons = [...ask.querySelectorAll('.ask-options > button')];
