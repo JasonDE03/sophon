@@ -147,3 +147,30 @@ ol.episodes .soon { opacity:.42; }
 .btn:hover { border-color:var(--accent); }
 .btn.primary { background:var(--fg); color:var(--bg); border-color:var(--fg); }
 .btn.primary:hover { background:var(--accent); border-color:var(--accent); }
+
+/* Public comments and the unlinked moderation page */
+.comments { margin:3em 0 2em; }
+.comment, .comment-form { margin:16px 0; padding:20px; background:var(--card);
+  border:1px solid var(--line); border-radius:16px; min-width:0; }
+.comment-meta { display:flex; flex-wrap:wrap; align-items:baseline; gap:8px 16px;
+  font:400 13px/1.6 var(--sans); overflow-wrap:anywhere; }
+.comment-meta strong { font-weight:600; color:var(--fg); }
+.comment-meta time, .comment-note, .comment-status, .comment-count { color:var(--muted); }
+.comment-body { margin:12px 0 0; white-space:pre-wrap; overflow-wrap:anywhere; font-family:var(--serif); }
+.comment-note, .comment-status { font:400 14px/1.6 var(--sans); }
+.comment-status { min-height:1.6em; }
+.comment-form { font:400 14px/1.6 var(--sans); }
+.comment-form label { display:block; margin-bottom:16px; }
+.comment-form input, .comment-form textarea { display:block; width:100%; margin-top:6px; padding:10px 12px;
+  border:1px solid var(--line); border-radius:8px; background:var(--bg); color:var(--fg); font:inherit; }
+.comment-form textarea { resize:vertical; min-height:120px; }
+.comment-count { display:block; text-align:right; margin-top:-10px; font-size:12px; font-variant-numeric:tabular-nums; }
+.comment-verification { margin:16px 0; }
+.comment-form button, .comment button { padding:10px 16px; border:1px solid var(--line); border-radius:10px;
+  background:var(--bg); color:var(--fg); font:500 14px/1.5 var(--sans); cursor:pointer; }
+.comment-form button:hover:enabled, .comment button:hover:enabled { border-color:var(--accent); }
+.comment-form button:disabled, .comment button:disabled { opacity:.5; cursor:default; }
+.comment-form :is(input, textarea, button):focus-visible, .comment button:focus-visible {
+  outline:2px solid var(--blue); outline-offset:3px; }
+.comment button { margin-top:16px; }
+.admin-page { padding-top:40px; }

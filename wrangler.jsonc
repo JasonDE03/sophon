@@ -1,0 +1,12 @@
+{
+  "$schema": "https://raw.githubusercontent.com/cloudflare/workers-sdk/main/packages/wrangler/config-schema.json",
+  "name": "sophon",
+  "main": "worker.js",
+  "compatibility_date": "2026-10-01",
+  "assets": { "directory": ".", "binding": "ASSETS" },
+  "d1_databases": [
+    { "binding": "DB", "database_name": "sophon-comments", "database_id": "91875355-ef99-4663-99e8-1e988a84a7b3" }
+  ],
+  "vars": { "TURNSTILE_SITE_KEY": "0x4AAAAAAGDGAdEq4SlHf60N" },
+  "observability": { "enabled": true }
+}

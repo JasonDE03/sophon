@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="vi"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Quản lý bình luận — Sophon</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,600&display=swap">
+<link rel="stylesheet" href="style.css">
+</head><body><main class="admin-page">
+<h1>Quản lý bình luận</h1>
+<form class="comment-form" id="login">
+  <label>Admin token<input id="token" type="password" required autocomplete="off"></label>
+  <button type="submit">Tải bình luận</button>
+</form>
+<p class="comment-status" id="status" role="status"></p>
+<div id="list"></div>
+<script type="module">
+const form = document.getElementById('login'), input = document.getElementById('token');
+const status = document.getElementById('status'), list = document.getElementById('list');
+try { input.value = sessionStorage.getItem('sophon-admin-token') || ''; } catch {}
+const make = (tag, className, text) => {
+  const el = document.createElement(tag); el.className = className; el.textContent = text; return el;
+};
+let activeToken = '';
+async function request(path, method = 'GET') {
+  const response = await fetch(path, { method, headers: { Authorization: `Bearer ${activeToken}` }, cache: 'no-store' });
+  if (!response.ok) throw new Error(response.status === 401 ? 'Admin token không đúng.' : 'Không thể kết nối. Vui lòng thử lại.');
+  return response.json();
+}
+async function load() {
+  activeToken = input.value; status.textContent = 'Đang tải…'; list.replaceChildren();
+  try {
+    const comments = await request('/api/admin/comments');
+    try { sessionStorage.setItem('sophon-admin-token', activeToken); } catch {}
+    for (const comment of comments) {
+      const card = make('article', 'comment', ''), meta = make('div', 'comment-meta', '');
+      const date = new Date(comment.created_at * 1000);
+      const time = make('time', '', date.toLocaleString('vi-VN')); time.dateTime = date.toISOString();
+      meta.append(make('strong', '', comment.name), make('span', '', `Bài ${comment.episode} · ${comment.lang || '—'}`), time);
+      const remove = make('button', '', 'Xoá'); remove.type = 'button';
+      remove.addEventListener('click', async () => {
+        if (!confirm('Xoá bình luận này?')) return;
+        remove.disabled = true;
+        try { await request(`/api/admin/comments/${comment.id}`, 'DELETE'); card.remove(); status.textContent = 'Đã xoá bình luận.'; }
+        catch (error) { status.textContent = error.message; remove.disabled = false; }
+      });
+      card.append(meta, make('p', 'comment-body', comment.body), remove); list.append(card);
+    }
+    status.textContent = comments.length ? `${comments.length} bình luận mới nhất.` : 'Chưa có bình luận nào.';
+  } catch (error) { status.textContent = error.message; }
+}
+form.addEventListener('submit', event => { event.preventDefault(); load(); });
+if (input.value) load();
+</script>
+</main></body></html>

@@ -1,0 +1,9 @@
+/worker.js
+/wrangler.jsonc
+/schema.sql
+/.wrangler/
+/node_modules/
+/tools/
+/lab/.venv/
+**/*.md
+/.dev.vars*
