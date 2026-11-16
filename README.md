@@ -2,7 +2,7 @@
 
 **Read it here: https://sophon.jasonng-1407.workers.dev** ([Tiếng Việt](https://sophon.jasonng-1407.workers.dev/vi/) · [English](https://sophon.jasonng-1407.workers.dev/en/))
 
-Physics history, rebuilt by hand (Lịch sử vật lý, tự tay làm lại). A bilingual (Vietnamese/English) site that retells the history of physics as interactive episodes. Each episode covers one experiment or discovery and has three parts: the historical context, the people involved, and a simulation the reader drives to redo the experiment.
+The experiments that shaped physics (Những thí nghiệm làm nên vật lý). A bilingual (Vietnamese/English) site that retells the history of physics as interactive episodes. Each episode covers one experiment or discovery and has three parts: the historical context, the people involved, and a simulation the reader drives to redo the experiment.
 
 Plain static HTML with no build step, no backend and no dependencies to install. KaTeX loads from a CDN.
 
