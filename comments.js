@@ -6,6 +6,7 @@ const t = {
     authorNote: 'Bạn đang bình luận với tư cách tác giả.',
     authorExpired: 'Token tác giả không còn hợp lệ. Vui lòng xác minh để gửi bình luận.',
     rate_limited: 'Bạn đã gửi 5 bình luận trong 10 phút. Vui lòng thử lại sau.',
+    reserved_name: 'Tên này dành cho tác giả. Vui lòng chọn tên khác.',
     invalid: 'Vui lòng nhập tên (1–40 ký tự) và bình luận (1–2000 ký tự) hợp lệ.',
     verification_failed: 'Xác minh thất bại. Vui lòng thử lại.', network: 'Không thể kết nối. Vui lòng thử lại.' },
   en: { empty: 'No comments yet. Be the first.', name: 'Name', body: 'Comment', post: 'Post comment',
@@ -14,6 +15,7 @@ const t = {
     authorNote: 'You are commenting as the author.',
     authorExpired: 'The author token is no longer valid. Please verify to post your comment.',
     rate_limited: 'You have posted 5 comments in 10 minutes. Please try again later.',
+    reserved_name: 'This name is reserved for the author. Please choose another.',
     invalid: 'Please enter a valid name (1–40 characters) and comment (1–2000 characters).',
     verification_failed: 'Verification failed. Please try again.', network: 'Unable to connect. Please try again.' },
 }[lang];
@@ -87,6 +89,7 @@ async function mount(section) {
     comments.filter(comment => comment.parent_id != null).forEach(append); form.hidden = false;
   } catch { empty.textContent = t.offline; return; }
   try { name.value = localStorage.getItem('sophon-comment-name') || ''; } catch {}
+  if (authorToken) { name.value = 'Sophon'; name.readOnly = true; }
   body.addEventListener('input', () => { counter.textContent = `${body.value.length} / 2000`; });
   const reset = () => {
     token = ''; submit.disabled = !authorToken;
@@ -136,11 +139,12 @@ async function mount(section) {
       if (response.status === 401 && authorToken) {
         authorToken = ''; try { localStorage.removeItem('sophon-author'); } catch {}
         authorNote.hidden = true; widgetBox.hidden = false; status.textContent = t.authorExpired;
+        name.readOnly = false; name.value = '';
         loadWidget(); return;
       }
       if (!response.ok) { status.textContent = t[result.error] || t.network; return; }
       append(result); cancelReply(); body.value = ''; counter.textContent = '0 / 2000'; status.textContent = t.posted;
-      try { localStorage.setItem('sophon-comment-name', result.name); } catch {}
+      if (!authorToken) try { localStorage.setItem('sophon-comment-name', result.name); } catch {}
     } catch { status.textContent = t.network; }
     finally { posting = false; reset(); }
   });

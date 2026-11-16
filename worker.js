@@ -4,6 +4,7 @@ const json = (value, status = 200) => Response.json(value, {
 const error = (code, status) => json({ error: code }, status);
 const digest = async value => new Uint8Array(await crypto.subtle.digest('SHA-256', new TextEncoder().encode(value)));
 const validEpisode = value => typeof value === 'string' && /^\d{2}$/.test(value);
+const AUTHOR_NAME = 'Sophon';
 const controls = /[\x00-\x1f\x7f-\x9f]/;
 
 async function authorized(request, env) {
@@ -51,7 +52,10 @@ async function api(request, env, url) {
     if (!validEpisode(episode) || typeof input.name !== 'string' || typeof input.body !== 'string' ||
         controls.test(input.name) || controls.test(input.body.replace(/[\r\n]/g, '')) ||
         (lang != null && !['vi', 'en'].includes(lang))) return error('invalid', 400);
-    const name = input.name.trim().replace(/\s+/g, ' ');
+    let name = input.name.trim().replace(/\s+/g, ' ');
+    // Author comments always carry the site name; nobody else may use it.
+    if (isAuthor) name = AUTHOR_NAME;
+    else if (name.replace(/[\s._-]/g, '').toLowerCase() === AUTHOR_NAME.toLowerCase()) return error('reserved_name', 400);
     const body = input.body.replace(/\r\n?/g, '\n').trim();
     if (!name || name.length > 40 || !body || body.length > 2000) return error('invalid', 400);
     let parentId = null;
