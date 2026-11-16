@@ -2,8 +2,8 @@
 Usage: python3 learnify.py <content.md> <EP-key> <page.html> <lang>"""
 import html, re, sys
 
-LABELS = {'vi': ('Trong 30 giây', 'Tự kiểm tra', '(có thể bỏ qua)', 'Toán vừa đủ', 'Nguồn', 'Hệ quả'),
-          'en': ('In 30 seconds', 'Check yourself', '(optional)', 'Just enough maths', 'Sources', 'What came next')}
+LABELS = {'vi': ('Tóm tắt', 'Trắc nghiệm', '(có thể bỏ qua)', 'Toán vừa đủ', 'Nguồn', 'Hệ quả'),
+          'en': ('Summary', 'Quiz', '(optional)', 'Just enough maths', 'Sources', 'What came next')}
 
 
 def parse(md, key):

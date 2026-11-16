@@ -1,6 +1,6 @@
 const labels = {
-  vi: { predict: 'Đoán trước', right: 'Đúng rồi.', wrong: 'Chưa đúng.' },
-  en: { predict: 'Predict first', right: 'Correct.', wrong: 'Not quite.' },
+  vi: { predict: 'Câu hỏi', right: 'Đúng rồi.', wrong: 'Chưa đúng.' },
+  en: { predict: 'Question', right: 'Correct.', wrong: 'Not quite.' },
 };
 const language = () => labels[document.documentElement.lang.toLowerCase().split('-')[0]] || labels.en;
 document.querySelectorAll('.ask').forEach(ask => {
