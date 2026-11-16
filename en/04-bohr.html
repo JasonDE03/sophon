@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Episode 4: The Bohr model and hydrogen lines — Sophon</title>
+<meta name="description" content="Why hot hydrogen glows in a few sharp colours, and how Bohr explained them in 1913. With a simulation where you make the electron jump.">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Sophon">
+<meta property="og:title" content="Episode 4: The Bohr model and hydrogen lines">
+<meta property="og:description" content="Why hot hydrogen glows in a few sharp colours, and how Bohr explained them in 1913. With a simulation where you make the electron jump.">
+<meta property="og:url" content="https://sophon.jasonng-1407.workers.dev/en/04-bohr">
+<meta property="og:image" content="https://sophon.jasonng-1407.workers.dev/og/en-04.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="en_GB">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 16 16%27><circle cx=%278%27 cy=%278%27 r=%275%27 fill=%27%23f0b35a%27/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&display=swap">
+<link rel="stylesheet" href="../style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"
+  onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]})"></script>
+<script type="module" src="../learn.js"></script>
+</head><body><main>
+<nav><a class="brand" href="../">sophon</a><span class="links"><a href="./">Contents</a><a href="../vi/04-bohr.html">Tiếng Việt</a></span></nav>
+
+<p class="year">Episode 4 · 1885–1913</p>
+<h1>The Bohr model: hydrogen’s atomic barcode</h1>
+
+<p class="lede">Hot hydrogen emits a few separate lines of colour rather than a rainbow, at precisely the wavelengths a maths teacher had found a formula for in 1885. Nearly thirty years later, a 27-year-old physicist explained why.</p>
+<aside class="tldr"><p class="tldr-label">Summary</p><p>Each element emits light at its own distinctive colours, like a barcode. In 1913, Niels Bohr explained hydrogen’s barcode: electrons can occupy only certain energy levels, and when one jumps from a higher to a lower level, it emits a light quantum carrying exactly the energy difference. His theory calculated spectral wavelengths from fundamental constants alone, but did not explain why those levels exist.</p></aside>
+
+<h2>The elements’ barcodes</h2>
+<p>In 1859–1860, Kirchhoff and Bunsen in Heidelberg discovered that, when heated, each element emits light at just a few very narrow colours, known as <dfn tabindex="0" data-def="Very narrow colours of light emitted or absorbed by a substance. Each element has its own set of lines.">spectral lines</dfn>. Each element has its own unique set of lines, like a barcode. This allowed them to discover two new elements, caesium and rubidium. Later, scientists also learnt to read the composition of the Sun and other stars from their light.</p>
+<p>Hydrogen, the simplest atom, has four visible lines: one red, one blue and two violet. Anders Ångström measured their wavelengths very accurately. In 1885, Johann Balmer, a maths teacher at a girls’ school in Basel, then about sixty years old, found a simple formula that fitted all four wavelengths. In the late 1880s, Johannes Rydberg rewrote it in a more general form. These formulae were astonishingly accurate, but nobody knew why they worked.</p>
+<p>By 1911, Rutherford’s nuclear model had raised an even more serious problem. In classical physics, an electron orbiting the nucleus must continuously radiate, lose energy and spiral into the nucleus in about a hundredth of a billionth of a second. As it falls, it emits a continuous band of colours rather than separate lines. Real atoms are stable, and their spectra consist of separate lines.</p>
+
+<h2>Try the experiment yourself</h2>
+<p>The simulation has two parts: make an electron in a hydrogen atom jump between energy levels and see the light it emits, then examine the spectrum of a whole vessel of hot hydrogen gas. In both parts, you can switch between classical physics and Bohr’s model.</p>
+
+<div class="ask predict" data-answer="1">
+<p class="ask-q">Hydrogen gas is heated until it glows. What does its light spectrum look like?</p>
+<div class="ask-options"><button type="button">A continuous rainbow</button><button type="button">A few separate lines of colour</button><button type="button">Just one colour</button></div>
+<p class="ask-why" hidden>Hot hydrogen gas emits separate lines. Four are visible: one red, one blue and two violet. Classical physics predicts a continuous band instead. Switch between the two models in the simulation to compare.</p>
+</div>
+<div class="sim" id="sim"></div>
+<script type="module">import { mount } from '../sims/bohr.js'; mount(document.getElementById('sim'));</script>
+<p>Watch for these things:</p>
+<ul>
+<li>In “One jump”, make the electron jump from level 3 down to level 2: it emits red light at 656 nm. Jump from level 4 down to level 2: blue light. The larger the jump, the further towards violet the light shifts.</li>
+<li>Every jump down to level 1 produces ultraviolet light, while jumps down to level 3 produce infrared light. Only jumps down to level 2 fall within the range our eyes can see.</li>
+<li>In “Hydrogen gas spectrum”, lines gradually appear at fixed positions, matching the lines measured in the laboratory.</li>
+<li>Switch to classical physics: the electron spirals into the nucleus, and the spectrum becomes a continuous band of colours instead of lines.</li>
+</ul>
+
+<h2>Bohr arrives in Manchester</h2>
+<p>Niels Bohr defended his doctoral thesis in Copenhagen in 1911, then went to England to work with J. J. Thomson in Cambridge. In the spring of 1912, he moved to Manchester, where Rutherford had just published his nuclear model. Bohr believed the model was right, and also saw clearly that classical physics alone could not sustain it. He thought the answer had to involve Planck’s constant $h$.</p>
+<p>Back in Copenhagen, Bohr continued working on atomic structure without yet thinking about spectral lines. Early in 1913, his colleague Hans Hansen asked what the theory said about spectra, and showed him Balmer’s formula. Bohr later recalled: “As soon as I saw Balmer's formula, the whole thing was immediately clear to me.”</p>
+
+<h2>Three papers in 1913</h2>
+<p>On 6 March 1913, Bohr sent the first part of his paper to Rutherford. In it, he made two assumptions that contradicted classical physics. First, an electron can exist only in certain <dfn tabindex="0" data-def="In Bohr’s model, states in which an electron has a definite energy and does not radiate.">stationary states</dfn> with definite energies, and does not radiate while in them. Second, an atom emits light only when the electron passes from one stationary state to another, and the energy difference becomes exactly one quantum $h\nu$.</p>
+<p>From these assumptions, Bohr calculated the energies of the stationary states and derived Balmer’s formula. The <dfn tabindex="0" data-def="The constant in the formula for hydrogen’s spectral wavelengths, about 1.097 × 10⁷ m⁻¹.">Rydberg constant</dfn>, previously known only from experiment, could now be calculated from the electron’s charge and mass and Planck’s constant. Bohr wrote: “The agreement between the theoretical and observed values is inside the uncertainty due to experimental errors in the constants entering in the expression for the theoretical value.”</p>
+<p>Rutherford replied on 20 March with a sharp question: how does the electron choose the frequency of the light it will emit as it changes state? “it seems to me that you would have to assume that the electron knows beforehand where it is going to stop.” Bohr had no answer, and only with the arrival of quantum mechanics was the question answered in a completely different way. The paper nevertheless appeared in three parts in <i>Philosophical Magazine</i> in July, September and November 1913.</p>
+<p>The most convincing test came from a constellation. In 1896, Edward Pickering observed an unfamiliar series of lines in the spectrum of the star Zeta Puppis, and they were attributed to hydrogen. Bohr showed that they belonged to a <dfn tabindex="0" data-def="A helium atom that has lost one of its two electrons, leaving one electron around a nucleus with charge +2.">helium ion</dfn>: a helium atom with just one electron left. Also in 1913, Evans in Manchester obtained these lines from pure helium in the laboratory. The spectroscopist Alfred Fowler objected that Bohr’s calculated wavelengths still differed slightly from the measurements. Bohr replied that the nucleus also moves and cannot be treated as fixed. With that correction, theory and measurement agreed very closely.</p>
+
+<details class="deep"><summary>Just enough maths <span class="skip">(optional)</span></summary>
+<p>In Bohr’s model, the energy of the electron in the $n$th stationary state of hydrogen is</p>
+$$E_n = -\frac{13.6\ \text{eV}}{n^2}, \qquad n = 1, 2, 3, \dots$$
+<p>When the electron jumps from level $m$ down to level $n$, it emits a quantum of light with energy $h\nu = E_m - E_n$. Expressing this in terms of wavelength gives the Rydberg formula:</p>
+$$\frac{1}{\lambda} = R\left(\frac{1}{n^2} - \frac{1}{m^2}\right), \qquad R = \frac{m_e e^4}{8\varepsilon_0^2 h^3 c} \approx 1.097\times10^{7}\ \text{m}^{-1}.$$
+<p>Setting $n = 2$ gives the <dfn tabindex="0" data-def="The family of hydrogen spectral lines produced by jumps down to the second level. Its first four lines are visible.">Balmer series</dfn>. The red line corresponds to $m = 3$: $1/\lambda = R(1/4 - 1/9) = 5R/36$, giving $\lambda \approx 656$ nm. For $n = 1$ we have the Lyman series in the ultraviolet, and for $n = 3$ the Paschen series in the infrared. Orbital radii grow as $n^2$: in the lowest state, the radius is $a_0 \approx 0.053$ nm, known as the Bohr radius.</p>
+<details><summary>More: a quick derivation and how Bohr actually did it</summary>
+<p>Textbooks usually derive $E_n$ by assuming that the electron’s angular momentum can take only the values $L = n\hbar$, where $\hbar = h/2\pi$. Combining this with the Coulomb attraction for a circular orbit, $m_e v^2/r = e^2/(4\pi\varepsilon_0 r^2)$, gives $r_n = n^2 a_0$ and $E_n = -m_e e^4/(8\varepsilon_0^2 h^2 n^2)$.</p>
+<p>Bohr did not start this way. In the first part of his paper, he assumed that the energy released when the nucleus captures an electron equals $n h$ times half its orbital frequency, then checked that the result agrees with classical physics for large $n$. The angular momentum condition appears only later, as “a very simple interpretation” of the result he had already calculated.</p>
+</details>
+
+<p>Want to calculate the Rydberg constant and compare spectral lines with real measurements in Python? <a href="https://colab.research.google.com/github/JasonDE03/sophon/blob/main/lab/04_bohr.ipynb">Open the notebook in Google Colab</a>: run it in your browser, with nothing to install.</p>
+</details>
+<h2>Common misconceptions</h2>
+<p><b>“Bohr postulated quantised angular momentum, $L = n\hbar$.”</b> This is the concise textbook presentation. In the 1913 paper, the angular momentum condition appears only as a reinterpretation of a result Bohr had derived by another route, using energy and orbital frequency.</p>
+<p><b>“Electrons orbit the nucleus like planets around the Sun.”</b> Bohr used orbits to make calculations, but stressed that stationary states do not obey ordinary mechanics: an electron in an orbit does not radiate, and the transition between two states cannot be described by ordinary mechanics. Quantum mechanics in 1925–1926 replaced orbits with wavefunctions, while retaining Bohr’s energy levels.</p>
+<p><b>“Bohr’s model explains the spectra of all atoms.”</b> It works only for hydrogen and ions with a single electron. It fails for neutral helium, an atom with two electrons. Nor does it explain why some lines are bright and others faint, or why lines split in a magnetic field.</p>
+
+<section class="quiz">
+<h2>Quiz</h2>
+<div class="ask" data-answer="1">
+<p class="ask-q">In Bohr’s model, when does a hydrogen atom emit light?</p>
+<div class="ask-options"><button type="button">Continuously, as the electron orbits the nucleus</button><button type="button">When the electron jumps from a higher to a lower energy level</button><button type="button">When the nucleus vibrates</button></div>
+<p class="ask-why" hidden>In a stationary state, the electron does not radiate. Light is emitted only when the electron moves to a lower state, and the energy difference becomes a quantum $h\nu$.</p>
+</div>
+<div class="ask" data-answer="0">
+<p class="ask-q">Why is H-alpha (the jump from level 3 down to level 2) red rather than violet?</p>
+<div class="ask-options"><button type="button">The energy difference is small, so the wavelength is long</button><button type="button">The hydrogen atom is very light</button><button type="button">An electron at level 3 orbits slowly</button></div>
+<p class="ask-why" hidden>The smaller the energy difference, the less energy the light quantum carries, the longer its wavelength and the further towards red its colour shifts. The jump from level 3 down to level 2 releases only about 1.9 eV, so the light is red.</p>
+</div>
+<div class="ask" data-answer="1">
+<p class="ask-q">Which atoms’ spectra does Bohr’s model calculate correctly?</p>
+<div class="ask-options"><button type="button">All atoms</button><button type="button">Hydrogen and ions with just one electron, such as a helium ion</button><button type="button">Only heavy atoms</button></div>
+<p class="ask-why" hidden>The model works for systems with a single electron. It fails for neutral helium, which has two electrons. Calculating the properties of atoms with several electrons had to wait for quantum mechanics in 1925–1926.</p>
+</div>
+</section>
+
+<h2>What came next</h2>
+<p>In 1914, James Franck and Gustav Hertz fired electrons through mercury vapour and found that the electrons lost energy only in fixed amounts of 4.9 eV, direct evidence that atoms have discrete energy levels. In 1916, Arnold Sommerfeld extended the model to elliptical orbits and explained the fine splitting of hydrogen lines. Bohr received the Nobel Prize in Physics in 1922.</p>
+<p>The Bohr–Sommerfeld model also made a strange prediction: an electron’s orbit could tilt in only a few particular directions in a magnetic field. Many physicists doubted this was real. In Frankfurt in 1922, Otto Stern and Walther Gerlach decided to test it with a beam of silver atoms.</p>
+<p><a href="./">→ Episode 5: The Stern–Gerlach experiment (1922), coming soon</a></p>
+
+<details class="deep"><summary>Sources</summary>
+<ul class="sources">
+<li>J. J. Balmer, “Notiz über die Spectrallinien des Wasserstoffs”, <i>Ann. Phys. Chem.</i> 25, 80 (1885).</li>
+<li>N. Bohr, “On the constitution of atoms and molecules”, <i>Phil. Mag.</i> 26, 1, 476, 857 (1913); “The spectra of helium and hydrogen”, <i>Nature</i> 92, 231 (1913).</li>
+<li>E. J. Evans, “The spectra of helium and hydrogen”, <i>Nature</i> 92, 5 (1913). A. Fowler, <i>Nature</i> 92, 95 (1913).</li>
+<li>J. Franck and G. Hertz, <i>Verh. Dtsch. Phys. Ges.</i> 16, 457 (1914).</li>
+<li>J. L. Heilbron and T. S. Kuhn, “The genesis of the Bohr atom”, <i>Hist. Stud. Phys. Sci.</i> 1, 211 (1969).</li>
+<li>A. Pais, <i>Niels Bohr's Times, in Physics, Philosophy, and Polity</i> (1991).</li>
+<li>H. Kragh, <i>Niels Bohr and the Quantum Atom</i> (2012).</li>
+</ul>
+</details>
+<nav class="episode-nav" aria-label="Episodes">
+  <a class="prev" href="03-rutherford.html"><span>← Previous</span>The Rutherford experiment</a>
+  <span class="next soon"><span>Next →</span>The Stern–Gerlach experiment · coming soon</span>
+</nav>
+</main></body></html>

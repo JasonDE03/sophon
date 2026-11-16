@@ -5,6 +5,8 @@ import { H_EV, C, photonEnergy, kmax, stoppingVoltage, thresholdFreq, thresholdW
 
 import { closestApproach, deflection, impactParameter, minDistance, dsigma, fractionBeyond, thomsonMaxDeflection, trajectory, METALS as RUTHERFORD_METALS } from './sims/rutherford.js';
 
+import { energyLevel, transitionEnergy, wavelength, orbitRadius, A0_NM, balmerFormula, classicalCollapseTime, MEASURED_BALMER, seriesOf } from './sims/bohr.js';
+
 const T = 5800;
 // Numeric argmax of Planck matches Wien's displacement law.
 let best = 0, arg = 0;
@@ -55,4 +57,18 @@ for (const b of [20, 5]) {
   assert.ok(Math.abs(orbit.angle - deflection(b, 7.7, 79)) < .5 * Math.PI / 180, `orbit b=${b}: ${orbit.angle}`);
   assert.ok(orbit.points.every(p => p.every(Number.isFinite)));
 }
+// Bohr: reduced-mass hydrogen, vacuum wavelengths and the Ritz combination rule.
+assert.ok(Math.abs(energyLevel(1) + 13.598) < .001);
+assert.equal(energyLevel(Infinity), 0);
+assert.ok(Math.abs(wavelength(3, 2) - 656.47) < .02);
+assert.ok(Math.abs(wavelength(2, 1) - 121.57) < .02);
+assert.ok(Math.abs(wavelength(Infinity, 2) - 364.71) < .05);
+assert.ok(Math.abs((transitionEnergy(3, 2) + transitionEnergy(2, 1)) / transitionEnergy(3, 1) - 1) < 1e-12);
+for (const { m, nm } of MEASURED_BALMER) assert.ok(Math.abs(nm / wavelength(m, 2) - 1) < .00005);
+assert.ok(Math.abs(balmerFormula(3) - 656.21) < .01);
+// Balmer used air wavelengths; Bohr here predicts vacuum wavelengths.
+assert.ok(Math.abs(balmerFormula(3) / wavelength(3, 2) - 1) < .0005);
+assert.equal(orbitRadius(2), 4 * A0_NM);
+assert.ok(classicalCollapseTime() > 1.5e-11 && classicalCollapseTime() < 1.6e-11);
+assert.deepEqual([1, 2, 3, 4].map(seriesOf), ['Lyman', 'Balmer', 'Paschen', 'Brackett']);
 console.log('ok');

@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Bài 4: Mô hình Bohr và vạch phổ hydro — Sophon</title>
+<meta name="description" content="Vì sao khí hydro nóng chỉ phát ra vài vạch màu, và cách Bohr giải thích chúng năm 1913. Kèm mô phỏng để bạn cho electron tự nhảy mức.">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Sophon">
+<meta property="og:title" content="Bài 4: Mô hình Bohr và vạch phổ hydro">
+<meta property="og:description" content="Vì sao khí hydro nóng chỉ phát ra vài vạch màu, và cách Bohr giải thích chúng năm 1913. Kèm mô phỏng để bạn cho electron tự nhảy mức.">
+<meta property="og:url" content="https://sophon.jasonng-1407.workers.dev/vi/04-bohr">
+<meta property="og:image" content="https://sophon.jasonng-1407.workers.dev/og/vi-04.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="vi_VN">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 16 16%27><circle cx=%278%27 cy=%278%27 r=%275%27 fill=%27%23f0b35a%27/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&display=swap">
+<link rel="stylesheet" href="../style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"
+  onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]})"></script>
+<script type="module" src="../learn.js"></script>
+</head><body><main>
+<nav><a class="brand" href="../">sophon</a><span class="links"><a href="./">Mục lục</a><a href="../en/04-bohr.html">English</a></span></nav>
+
+<p class="year">Bài 4 · 1885–1913</p>
+<h1>Mô hình Bohr: mã vạch của nguyên tử hydro</h1>
+
+<p class="lede">Khí hydro nóng không phát ra cầu vồng mà chỉ phát ra vài vạch màu rời rạc, ở đúng những bước sóng mà một thầy giáo dạy toán đã đoán ra công thức từ năm 1885. Gần ba mươi năm sau, một nhà vật lý 27 tuổi giải thích được vì sao.</p>
+<aside class="tldr"><p class="tldr-label">Tóm tắt</p><p>Mỗi nguyên tố phát ra ánh sáng ở những màu rất riêng, như một mã vạch. Năm 1913, Niels Bohr giải thích mã vạch của hydro: electron chỉ được ở một số mức năng lượng nhất định, và khi nhảy từ mức cao xuống mức thấp, nó phát ra một hạt ánh sáng mang đúng phần năng lượng chênh lệch. Lý thuyết của ông tính được bước sóng các vạch phổ chỉ từ các hằng số cơ bản, nhưng không giải thích được vì sao lại có những mức ấy.</p></aside>
+
+<h2>Mã vạch của các nguyên tố</h2>
+<p>Năm 1859–1860, Kirchhoff và Bunsen ở Heidelberg phát hiện rằng khi bị nung nóng, mỗi nguyên tố phát ra ánh sáng chỉ ở một số màu rất hẹp, gọi là các <dfn tabindex="0" data-def="Một màu ánh sáng rất hẹp mà một chất phát ra hoặc hấp thụ. Mỗi nguyên tố có một bộ vạch riêng.">vạch quang phổ</dfn>. Bộ vạch của mỗi nguyên tố là duy nhất, như một mã vạch. Nhờ đó, họ tìm ra hai nguyên tố mới là xesi và rubiđi. Về sau, người ta còn đọc được thành phần của Mặt Trời và các ngôi sao từ ánh sáng của chúng.</p>
+<p>Hydro, nguyên tử đơn giản nhất, có bốn vạch trong vùng nhìn thấy: một vạch đỏ, một vạch lam và hai vạch tím. Anders Ångström đo bước sóng của chúng rất chính xác. Năm 1885, Johann Balmer, một thầy giáo dạy toán ở một trường nữ sinh tại Basel, khi ấy khoảng sáu mươi tuổi, tìm ra một công thức đơn giản khớp cả bốn bước sóng ấy. Cuối thập niên 1880, Johannes Rydberg viết lại công thức dưới dạng tổng quát hơn. Các công thức này đúng đến kinh ngạc, nhưng không ai biết vì sao chúng đúng.</p>
+<p>Đến năm 1911, mô hình hạt nhân của Rutherford lại đặt ra một vấn đề nghiêm trọng hơn. Theo vật lý cổ điển, electron quay quanh hạt nhân phải liên tục phát bức xạ, mất năng lượng và rơi xoắn vào hạt nhân trong khoảng một phần trăm tỉ giây. Trong lúc rơi, nó phát ra một dải màu liên tục chứ không phải các vạch rời rạc. Nguyên tử thật thì bền, và phổ của nó là những vạch rời rạc.</p>
+
+<h2>Tự làm lại thí nghiệm</h2>
+<p>Mô phỏng có hai phần: cho electron trong nguyên tử hydro nhảy giữa các mức năng lượng và xem ánh sáng nó phát ra, rồi xem phổ của cả một bình khí hydro nóng. Ở cả hai phần, bạn có thể đổi giữa vật lý cổ điển và mô hình của Bohr.</p>
+
+<div class="ask predict" data-answer="1">
+<p class="ask-q">Khí hydro bị nung nóng và phát sáng. Phổ ánh sáng của nó trông thế nào?</p>
+<div class="ask-options"><button type="button">Một dải cầu vồng liên tục</button><button type="button">Vài vạch màu tách rời nhau</button><button type="button">Chỉ một màu duy nhất</button></div>
+<p class="ask-why" hidden>Khí hydro nóng phát ra những vạch rời rạc. Trong vùng nhìn thấy có bốn vạch: một đỏ, một lam và hai tím. Theo vật lý cổ điển, lẽ ra phải là một dải liên tục. Đổi qua lại giữa hai mô hình trong mô phỏng để so sánh.</p>
+</div>
+<div class="sim" id="sim"></div>
+<script type="module">import { mount } from '../sims/bohr.js'; mount(document.getElementById('sim'));</script>
+<p>Hãy để ý:</p>
+<ul>
+<li>Ở "Một bước nhảy", cho electron nhảy từ mức 3 xuống mức 2: nó phát ra ánh sáng đỏ 656 nm. Nhảy từ mức 4 xuống mức 2: ánh sáng lam. Bước nhảy càng lớn thì ánh sáng càng ngả về tím.</li>
+<li>Mọi bước nhảy xuống mức 1 đều cho ánh sáng tử ngoại, còn các bước nhảy xuống mức 3 cho ánh sáng hồng ngoại. Chỉ các bước nhảy xuống mức 2 mới rơi vào vùng mắt ta nhìn thấy được.</li>
+<li>Ở "Phổ của khí hydro", các vạch hiện dần lên ở đúng những vị trí cố định, và trùng với các vạch đo được trong phòng thí nghiệm.</li>
+<li>Chuyển sang vật lý cổ điển: electron rơi xoắn vào hạt nhân, và thay vì các vạch, phổ là một dải màu liên tục.</li>
+</ul>
+
+<h2>Bohr đến Manchester</h2>
+<p>Niels Bohr bảo vệ luận án tiến sĩ ở Copenhagen năm 1911, rồi sang Anh làm việc với J. J. Thomson ở Cambridge. Mùa xuân năm 1912, ông chuyển đến Manchester, nơi Rutherford vừa công bố mô hình hạt nhân. Bohr tin mô hình đó đúng, và cũng thấy rõ nó không thể đứng vững nếu chỉ dùng vật lý cổ điển. Ông cho rằng lời giải phải đến từ hằng số $h$ của Planck.</p>
+<p>Về Copenhagen, Bohr tiếp tục làm việc với cấu trúc nguyên tử nhưng chưa nghĩ tới các vạch quang phổ. Đầu năm 1913, đồng nghiệp Hans Hansen hỏi ông lý thuyết ấy nói gì về phổ, và chỉ cho ông công thức của Balmer. Về sau Bohr kể lại: "Ngay khi nhìn thấy công thức của Balmer, tôi hiểu ra toàn bộ vấn đề."</p>
+
+<h2>Ba bài báo năm 1913</h2>
+<p>Ngày 6/3/1913, Bohr gửi phần đầu bài báo cho Rutherford. Trong đó ông đưa ra hai giả thiết đi ngược vật lý cổ điển. Thứ nhất, electron chỉ được tồn tại ở một số <dfn tabindex="0" data-def="Theo Bohr, trạng thái electron có năng lượng xác định và không phát bức xạ.">trạng thái dừng</dfn> có năng lượng xác định, và ở đó nó không phát bức xạ. Thứ hai, nguyên tử chỉ phát ra ánh sáng khi electron chuyển từ trạng thái dừng này sang trạng thái dừng khác, và năng lượng chênh lệch biến thành đúng một lượng tử $h\nu$.</p>
+<p>Từ đó Bohr tính ra năng lượng của các trạng thái dừng và suy ra công thức Balmer. <dfn tabindex="0" data-def="Hằng số trong công thức bước sóng các vạch phổ của hydro, khoảng 1,097 × 10⁷ m⁻¹.">Hằng số Rydberg</dfn>, trước đó chỉ đo được bằng thực nghiệm, giờ được tính từ điện tích và khối lượng electron cùng hằng số Planck. Bohr viết rằng sự khớp giữa giá trị lý thuyết và giá trị đo "nằm trong độ bất định do sai số thực nghiệm của các hằng số" dùng trong phép tính.</p>
+<p>Rutherford hồi âm ngày 20/3 với một câu hỏi sắc bén: làm sao electron chọn được tần số ánh sáng sẽ phát ra khi nó chuyển trạng thái? "Với tôi, có vẻ như anh phải giả định rằng electron biết trước nó sẽ dừng lại ở đâu." Bohr không có câu trả lời, và mãi đến khi cơ học lượng tử ra đời, câu hỏi này mới được trả lời theo một cách hoàn toàn khác. Bài báo vẫn được đăng thành ba phần trên <i>Philosophical Magazine</i> vào tháng 7, tháng 9 và tháng 11/1913.</p>
+<p>Phép thử thuyết phục nhất đến từ một chòm sao. Năm 1896, Edward Pickering quan sát thấy một dãy vạch lạ trong phổ của ngôi sao Zeta Puppis, và người ta cho rằng chúng thuộc về hydro. Bohr chỉ ra rằng đó là vạch của <dfn tabindex="0" data-def="Nguyên tử heli đã mất một trong hai electron, nên chỉ còn một electron quanh hạt nhân mang điện tích +2.">ion heli</dfn>, tức nguyên tử heli chỉ còn một electron. Cùng năm 1913, Evans ở Manchester thu được các vạch này từ heli tinh khiết trong phòng thí nghiệm. Nhà quang phổ học Alfred Fowler phản biện rằng bước sóng tính theo Bohr vẫn lệch một chút so với đo đạc. Bohr đáp rằng phải tính đến việc hạt nhân cũng chuyển động chứ không đứng yên. Sau khi sửa, lý thuyết khớp với số đo rất chính xác.</p>
+
+<details class="deep"><summary>Toán vừa đủ <span class="skip">(có thể bỏ qua)</span></summary>
+<p>Theo Bohr, năng lượng của electron ở trạng thái dừng thứ $n$ của nguyên tử hydro là</p>
+$$E_n = -\frac{13{,}6\ \text{eV}}{n^2}, \qquad n = 1, 2, 3, \dots$$
+<p>Khi electron nhảy từ mức $m$ xuống mức $n$, nó phát ra một lượng tử ánh sáng mang năng lượng $h\nu = E_m - E_n$. Đổi sang bước sóng, ta được công thức Rydberg:</p>
+$$\frac{1}{\lambda} = R\left(\frac{1}{n^2} - \frac{1}{m^2}\right), \qquad R = \frac{m_e e^4}{8\varepsilon_0^2 h^3 c} \approx 1{,}097\times10^{7}\ \text{m}^{-1}.$$
+<p>Với $n = 2$ ta có <dfn tabindex="0" data-def="Họ các vạch phổ của hydro ứng với bước nhảy xuống mức thứ hai. Bốn vạch đầu nằm trong vùng nhìn thấy.">dãy Balmer</dfn>. Vạch đỏ ứng với $m = 3$: $1/\lambda = R(1/4 - 1/9) = 5R/36$, cho $\lambda \approx 656$ nm. Với $n = 1$ là dãy Lyman trong vùng tử ngoại, $n = 3$ là dãy Paschen trong vùng hồng ngoại. Bán kính quỹ đạo tăng theo $n^2$: ở trạng thái thấp nhất, nó bằng $a_0 \approx 0{,}053$ nm, gọi là bán kính Bohr.</p>
+<details><summary>Thêm: cách suy ra nhanh và cách Bohr thực sự làm</summary>
+<p>Sách giáo khoa thường suy ra $E_n$ bằng cách giả định mômen động lượng của electron chỉ nhận các giá trị $L = n\hbar$, với $\hbar = h/2\pi$. Kết hợp với lực hút Coulomb cho quỹ đạo tròn, $m_e v^2/r = e^2/(4\pi\varepsilon_0 r^2)$, ta được $r_n = n^2 a_0$ và $E_n = -m_e e^4/(8\varepsilon_0^2 h^2 n^2)$.</p>
+<p>Bohr không bắt đầu như vậy. Trong phần đầu bài báo, ông giả định năng lượng tỏa ra khi electron bị hạt nhân bắt giữ bằng $n h$ nhân một nửa tần số quay của nó, rồi kiểm tra rằng với $n$ lớn, kết quả khớp với vật lý cổ điển. Điều kiện mômen động lượng chỉ được nhắc tới ở phần sau, như một "cách diễn giải đơn giản" cho kết quả đã tính.</p>
+</details>
+
+<p>Muốn tự tính hằng số Rydberg và so các vạch phổ với số đo thật bằng Python? <a href="https://colab.research.google.com/github/JasonDE03/sophon/blob/main/lab/04_bohr.ipynb">Mở notebook trong Google Colab</a>: chạy ngay trên trình duyệt, không cần cài gì.</p>
+</details>
+<h2>Những hiểu lầm phổ biến</h2>
+<p><b>"Bohr tiên đề hoá mômen động lượng $L = n\hbar$."</b> Đây là cách sách giáo khoa trình bày cho gọn. Trong bài báo năm 1913, điều kiện mômen động lượng chỉ xuất hiện như một cách diễn giải lại kết quả mà Bohr đã suy ra bằng con đường khác, dựa trên năng lượng và tần số quay.</p>
+<p><b>"Electron quay quanh hạt nhân như hành tinh quanh Mặt Trời."</b> Bohr dùng hình ảnh quỹ đạo để tính toán, nhưng chính ông nhấn mạnh rằng các trạng thái dừng không tuân theo cơ học thông thường: electron trên quỹ đạo không phát bức xạ, và quá trình chuyển giữa hai trạng thái không thể mô tả bằng cơ học thông thường. Cơ học lượng tử năm 1925–1926 thay quỹ đạo bằng hàm sóng, nhưng giữ lại các mức năng lượng của Bohr.</p>
+<p><b>"Mô hình Bohr giải thích được phổ của mọi nguyên tử."</b> Nó chỉ đúng cho hydro và các ion chỉ còn một electron. Với heli trung hoà, nguyên tử có hai electron, mô hình thất bại. Nó cũng không giải thích được vì sao có vạch sáng, vạch mờ, hay vì sao các vạch tách ra trong từ trường.</p>
+
+<section class="quiz">
+<h2>Trắc nghiệm</h2>
+<div class="ask" data-answer="1">
+<p class="ask-q">Theo Bohr, khi nào nguyên tử hydro phát ra ánh sáng?</p>
+<div class="ask-options"><button type="button">Liên tục, trong lúc electron quay quanh hạt nhân</button><button type="button">Khi electron nhảy từ mức năng lượng cao xuống mức thấp hơn</button><button type="button">Khi hạt nhân rung động</button></div>
+<p class="ask-why" hidden>Ở trạng thái dừng, electron không phát bức xạ. Ánh sáng chỉ được phát ra khi electron chuyển xuống mức thấp hơn, và năng lượng chênh lệch biến thành một lượng tử $h\nu$.</p>
+</div>
+<div class="ask" data-answer="0">
+<p class="ask-q">Vì sao vạch H-alpha (từ mức 3 xuống mức 2) có màu đỏ chứ không phải tím?</p>
+<div class="ask-options"><button type="button">Vì chênh lệch năng lượng giữa hai mức đó nhỏ, nên bước sóng dài</button><button type="button">Vì nguyên tử hydro rất nhẹ</button><button type="button">Vì electron ở mức 3 quay chậm</button></div>
+<p class="ask-why" hidden>Năng lượng chênh lệch càng nhỏ thì hạt ánh sáng mang càng ít năng lượng, bước sóng càng dài và màu càng ngả về đỏ. Bước nhảy từ mức 3 xuống mức 2 chỉ khoảng 1,9 eV, nên ánh sáng có màu đỏ.</p>
+</div>
+<div class="ask" data-answer="1">
+<p class="ask-q">Mô hình Bohr tính đúng phổ của những nguyên tử nào?</p>
+<div class="ask-options"><button type="button">Mọi nguyên tử</button><button type="button">Hydro và các ion chỉ còn một electron, như ion heli</button><button type="button">Chỉ các nguyên tử nặng</button></div>
+<p class="ask-why" hidden>Mô hình đúng cho hệ chỉ có một electron. Với heli trung hoà, có hai electron, nó thất bại. Phải đến cơ học lượng tử năm 1925–1926 mới tính được các nguyên tử nhiều electron.</p>
+</div>
+</section>
+
+<h2>Hệ quả</h2>
+<p>Năm 1914, James Franck và Gustav Hertz bắn electron qua hơi thuỷ ngân và thấy electron chỉ mất năng lượng theo từng phần cố định 4,9 eV, một bằng chứng trực tiếp rằng nguyên tử có các mức năng lượng rời rạc. Năm 1916, Arnold Sommerfeld mở rộng mô hình với các quỹ đạo elip và giải thích được sự tách nhỏ của vạch hydro. Bohr nhận giải Nobel Vật lý năm 1922.</p>
+<p>Mô hình Bohr–Sommerfeld còn đưa ra một dự đoán lạ: quỹ đạo của electron chỉ được nghiêng theo một vài hướng nhất định trong từ trường. Nhiều nhà vật lý nghi ngờ điều này là thật. Năm 1922, ở Frankfurt, Otto Stern và Walther Gerlach quyết định kiểm tra nó bằng một chùm nguyên tử bạc.</p>
+<p><a href="./">→ Bài 5: Thí nghiệm Stern–Gerlach (1922), sắp ra</a></p>
+
+<details class="deep"><summary>Nguồn</summary>
+<ul class="sources">
+<li>J. J. Balmer, "Notiz über die Spectrallinien des Wasserstoffs", <i>Ann. Phys. Chem.</i> 25, 80 (1885).</li>
+<li>N. Bohr, "On the constitution of atoms and molecules", <i>Phil. Mag.</i> 26, 1, 476, 857 (1913); "The spectra of helium and hydrogen", <i>Nature</i> 92, 231 (1913).</li>
+<li>E. J. Evans, "The spectra of helium and hydrogen", <i>Nature</i> 92, 5 (1913). A. Fowler, <i>Nature</i> 92, 95 (1913).</li>
+<li>J. Franck và G. Hertz, <i>Verh. Dtsch. Phys. Ges.</i> 16, 457 (1914).</li>
+<li>J. L. Heilbron và T. S. Kuhn, "The genesis of the Bohr atom", <i>Hist. Stud. Phys. Sci.</i> 1, 211 (1969).</li>
+<li>A. Pais, <i>Niels Bohr's Times, in Physics, Philosophy, and Polity</i> (1991).</li>
+<li>H. Kragh, <i>Niels Bohr and the Quantum Atom</i> (2012).</li>
+</ul>
+</details>
+<nav class="episode-nav" aria-label="Các bài">
+  <a class="prev" href="03-rutherford.html"><span>← Bài trước</span>Thí nghiệm Rutherford</a>
+  <span class="next soon"><span>Bài sau →</span>Thí nghiệm Stern–Gerlach · sắp ra</span>
+</nav>
+</main></body></html>
