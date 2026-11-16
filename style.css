@@ -155,12 +155,19 @@ ol.episodes .soon { opacity:.42; }
 .comment-meta { display:flex; flex-wrap:wrap; align-items:baseline; gap:8px 16px;
   font:400 13px/1.6 var(--sans); overflow-wrap:anywhere; }
 .comment-meta strong { font-weight:600; color:var(--fg); }
+.comment-author { color:var(--accent); border:1px solid var(--accent); border-radius:999px;
+  padding:1px 8px; font:500 12px/1.6 var(--sans); white-space:nowrap; }
+.comment-replies { margin-left:24px; }
+.admin-page .comment-reply { margin-left:24px; }
 .comment-meta time, .comment-note, .comment-status, .comment-count { color:var(--muted); }
 .comment-body { margin:12px 0 0; white-space:pre-wrap; overflow-wrap:anywhere; font-family:var(--serif); }
 .comment-note, .comment-status { font:400 14px/1.6 var(--sans); }
 .comment-status { min-height:1.6em; }
 .comment-form { font:400 14px/1.6 var(--sans); }
 .comment-form label { display:block; margin-bottom:16px; }
+.comment-form .comment-remember { display:flex; align-items:baseline; gap:10px; }
+.comment-form .comment-remember input { width:auto; flex:none; }
+.comment-reply-context { margin-bottom:16px; color:var(--muted); overflow-wrap:anywhere; }
 .comment-form input, .comment-form textarea { display:block; width:100%; margin-top:6px; padding:10px 12px;
   border:1px solid var(--line); border-radius:8px; background:var(--bg); color:var(--fg); font:inherit; }
 .comment-form textarea { resize:vertical; min-height:120px; }
@@ -173,4 +180,6 @@ ol.episodes .soon { opacity:.42; }
 .comment-form :is(input, textarea, button):focus-visible, .comment button:focus-visible {
   outline:2px solid var(--blue); outline-offset:3px; }
 .comment button { margin-top:16px; }
+.comment .comment-reply-button, .comment-form .comment-cancel { padding:3px 8px; font-size:12px; }
+.comment-form .comment-cancel { border:0; color:var(--accent); }
 .admin-page { padding-top:40px; }

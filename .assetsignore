@@ -1,6 +1,7 @@
 /worker.js
 /wrangler.jsonc
 /schema.sql
+/migrations/
 /.wrangler/
 /node_modules/
 /tools/

@@ -21,13 +21,13 @@ async function api(request, env, url) {
   if (pathname.startsWith('/api/admin/')) {
     if (!await authorized(request, env)) return error('unauthorized', 401);
     if (request.method === 'GET' && pathname === '/api/admin/comments') {
-      const { results } = await env.DB.prepare(`SELECT id, episode, lang, name, body, created_at
+      const { results } = await env.DB.prepare(`SELECT id, episode, lang, name, body, created_at, parent_id, is_author
         FROM comments ORDER BY created_at DESC, id DESC LIMIT 200`).all();
       return json(results);
     }
     const match = pathname.match(/^\/api\/admin\/comments\/([1-9]\d*)$/);
     if (request.method === 'DELETE' && match) {
-      await env.DB.prepare('DELETE FROM comments WHERE id = ?').bind(match[1]).run();
+      await env.DB.prepare('DELETE FROM comments WHERE id = ? OR parent_id = ?').bind(match[1], match[1]).run();
       return json({ ok: true });
     }
   }
@@ -37,11 +37,13 @@ async function api(request, env, url) {
   if (request.method === 'GET' && pathname === '/api/comments') {
     const episode = url.searchParams.get('episode');
     if (!validEpisode(episode)) return error('invalid', 400);
-    const { results } = await env.DB.prepare(`SELECT id, name, body, created_at FROM comments
+    const { results } = await env.DB.prepare(`SELECT id, name, body, created_at, parent_id, is_author FROM comments
       WHERE episode = ? ORDER BY created_at, id LIMIT 500`).bind(episode).all();
     return json(results);
   }
   if (request.method === 'POST' && pathname === '/api/comments') {
+    const isAuthor = request.headers.has('Authorization') && await authorized(request, env);
+    if (request.headers.has('Authorization') && !isAuthor) return error('unauthorized', 401);
     let input;
     try { input = await request.json(); } catch { return error('invalid', 400); }
     if (!input || typeof input !== 'object') return error('invalid', 400);
@@ -52,24 +54,36 @@ async function api(request, env, url) {
     const name = input.name.trim().replace(/\s+/g, ' ');
     const body = input.body.replace(/\r\n?/g, '\n').trim();
     if (!name || name.length > 40 || !body || body.length > 2000) return error('invalid', 400);
-    if (typeof token !== 'string' || !token || token.length > 2048) return error('verification_failed', 403);
-    if (!env.TURNSTILE_SECRET || !env.IP_SALT) return error('network', 500);
-    const ip = request.headers.get('CF-Connecting-IP') || '127.0.0.1';
-    let verification;
-    try {
-      const response = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
-        method: 'POST', body: new URLSearchParams({ secret: env.TURNSTILE_SECRET, response: token, remoteip: ip }),
-        signal: AbortSignal.timeout(10000),
-      });
-      verification = await response.json();
-    } catch { return error('verification_failed', 403); }
-    if (!verification.success) return error('verification_failed', 403);
-    const ipHash = Array.from(await digest(ip + env.IP_SALT), byte => byte.toString(16).padStart(2, '0')).join('');
+    let parentId = null;
+    if (input.parent_id != null) {
+      if (!Number.isSafeInteger(input.parent_id) || input.parent_id < 1) return error('invalid', 400);
+      const parent = await env.DB.prepare('SELECT id, parent_id FROM comments WHERE id = ? AND episode = ?')
+        .bind(input.parent_id, episode).first();
+      if (!parent) return error('invalid', 400);
+      parentId = parent.parent_id ?? parent.id;
+    }
+    let ipHash = '';
+    if (!isAuthor) {
+      if (typeof token !== 'string' || !token || token.length > 2048) return error('verification_failed', 403);
+      if (!env.TURNSTILE_SECRET || !env.IP_SALT) return error('network', 500);
+      const ip = request.headers.get('CF-Connecting-IP') || '127.0.0.1';
+      let verification;
+      try {
+        const response = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
+          method: 'POST', body: new URLSearchParams({ secret: env.TURNSTILE_SECRET, response: token, remoteip: ip }),
+          signal: AbortSignal.timeout(10000),
+        });
+        verification = await response.json();
+      } catch { return error('verification_failed', 403); }
+      if (!verification.success) return error('verification_failed', 403);
+      ipHash = Array.from(await digest(ip + env.IP_SALT), byte => byte.toString(16).padStart(2, '0')).join('');
+    }
     const now = Math.floor(Date.now() / 1000);
     // Count and insert in one statement so concurrent requests cannot bypass the limit.
-    const comment = await env.DB.prepare(`INSERT INTO comments (episode, name, body, lang, created_at, ip_hash)
-      SELECT ?, ?, ?, ?, ?, ? WHERE (SELECT COUNT(*) FROM comments WHERE ip_hash = ? AND created_at > ?) < 5
-      RETURNING id, name, body, created_at`).bind(episode, name, body, lang ?? null, now, ipHash, ipHash, now - 600).first();
+    const comment = await env.DB.prepare(`INSERT INTO comments (episode, name, body, lang, created_at, ip_hash, parent_id, is_author)
+      SELECT ?, ?, ?, ?, ?, ?, ?, ? WHERE ? = 1 OR (SELECT COUNT(*) FROM comments WHERE ip_hash = ? AND created_at > ?) < 5
+      RETURNING id, name, body, created_at, parent_id, is_author`)
+      .bind(episode, name, body, lang ?? null, now, ipHash, parentId, isAuthor ? 1 : 0, isAuthor ? 1 : 0, ipHash, now - 600).first();
     return comment ? json(comment, 201) : error('rate_limited', 429);
   }
   return env.ASSETS.fetch(request);

@@ -5,7 +5,10 @@ CREATE TABLE IF NOT EXISTS comments (
   body TEXT NOT NULL,
   lang TEXT,
   created_at INTEGER NOT NULL,
-  ip_hash TEXT NOT NULL
+  ip_hash TEXT NOT NULL,
+  parent_id INTEGER REFERENCES comments(id),
+  is_author INTEGER NOT NULL DEFAULT 0
 );
 CREATE INDEX IF NOT EXISTS comments_episode_created ON comments (episode, created_at);
 CREATE INDEX IF NOT EXISTS comments_ip_created ON comments (ip_hash, created_at);
+CREATE INDEX IF NOT EXISTS comments_parent ON comments (parent_id);

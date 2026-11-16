@@ -9,14 +9,21 @@
 <h1>Quản lý bình luận</h1>
 <form class="comment-form" id="login">
   <label>Admin token<input id="token" type="password" required autocomplete="off"></label>
+  <label class="comment-remember"><input id="remember" type="checkbox">Ghi nhớ trên trình duyệt này để bình luận với tư cách tác giả</label>
   <button type="submit">Tải bình luận</button>
+  <button type="button" id="forget">Quên trên trình duyệt này</button>
 </form>
 <p class="comment-status" id="status" role="status"></p>
 <div id="list"></div>
 <script type="module">
 const form = document.getElementById('login'), input = document.getElementById('token');
+const remember = document.getElementById('remember');
 const status = document.getElementById('status'), list = document.getElementById('list');
 try { input.value = sessionStorage.getItem('sophon-admin-token') || ''; } catch {}
+try {
+  const saved = localStorage.getItem('sophon-author');
+  input.value ||= saved || ''; remember.checked = !!saved && saved === input.value;
+} catch {}
 const make = (tag, className, text) => {
   const el = document.createElement(tag); el.className = className; el.textContent = text; return el;
 };
@@ -27,20 +34,34 @@ async function request(path, method = 'GET') {
   return response.json();
 }
 async function load() {
-  activeToken = input.value; status.textContent = 'Đang tải…'; list.replaceChildren();
+  const requestedToken = input.value;
+  activeToken = requestedToken; status.textContent = 'Đang tải…'; list.replaceChildren();
   try {
     const comments = await request('/api/admin/comments');
+    if (activeToken !== requestedToken || input.value !== requestedToken) return;
     try { sessionStorage.setItem('sophon-admin-token', activeToken); } catch {}
+    if (remember.checked) { try { localStorage.setItem('sophon-author', activeToken); } catch {} }
     for (const comment of comments) {
       const card = make('article', 'comment', ''), meta = make('div', 'comment-meta', '');
+      card.dataset.id = comment.id; card.dataset.parentId = comment.parent_id ?? '';
+      if (comment.parent_id != null) card.classList.add('comment-reply');
       const date = new Date(comment.created_at * 1000);
       const time = make('time', '', date.toLocaleString('vi-VN')); time.dateTime = date.toISOString();
-      meta.append(make('strong', '', comment.name), make('span', '', `Bài ${comment.episode} · ${comment.lang || '—'}`), time);
+      meta.append(make('strong', '', comment.name));
+      if (comment.is_author === 1) meta.append(make('span', 'comment-author', '✓ Tác giả'));
+      meta.append(make('span', '', `Bài ${comment.episode} · ${comment.lang || '—'}`), time);
+      if (comment.parent_id != null) meta.append(make('span', '', `↳ trả lời #${comment.parent_id}`));
       const remove = make('button', '', 'Xoá'); remove.type = 'button';
       remove.addEventListener('click', async () => {
-        if (!confirm('Xoá bình luận này?')) return;
+        if (!confirm(comment.parent_id == null ? 'Xoá bình luận này và tất cả câu trả lời?' : 'Xoá bình luận này?')) return;
         remove.disabled = true;
-        try { await request(`/api/admin/comments/${comment.id}`, 'DELETE'); card.remove(); status.textContent = 'Đã xoá bình luận.'; }
+        try {
+          await request(`/api/admin/comments/${comment.id}`, 'DELETE');
+          for (const item of [...list.children]) {
+            if (item.dataset.id === String(comment.id) || item.dataset.parentId === String(comment.id)) item.remove();
+          }
+          status.textContent = 'Đã xoá bình luận.';
+        }
         catch (error) { status.textContent = error.message; remove.disabled = false; }
       });
       card.append(meta, make('p', 'comment-body', comment.body), remove); list.append(card);
@@ -49,6 +70,12 @@ async function load() {
   } catch (error) { status.textContent = error.message; }
 }
 form.addEventListener('submit', event => { event.preventDefault(); load(); });
+const forget = () => {
+  try { localStorage.removeItem('sophon-author'); } catch {}
+  remember.checked = false;
+};
+remember.addEventListener('change', () => { if (remember.checked) load(); else forget(); });
+document.getElementById('forget').addEventListener('click', forget);
 if (input.value) load();
 </script>
 </main></body></html>
