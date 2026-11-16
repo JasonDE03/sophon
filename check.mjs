@@ -71,4 +71,19 @@ assert.ok(Math.abs(balmerFormula(3) / wavelength(3, 2) - 1) < .0005);
 assert.equal(orbitRadius(2), 4 * A0_NM);
 assert.ok(classicalCollapseTime() > 1.5e-11 && classicalCollapseTime() < 1.6e-11);
 assert.deepEqual([1, 2, 3, 4].map(seriesOf), ['Lyman', 'Balmer', 'Paschen', 'Brackett']);
+// Stern–Gerlach: SI deflection, random orientations and spin-1/2 filters.
+const { MU_B, beamSpeedSq, deflection: sgDeflection, classicalMuZ, quantumMuZ, probUp, gradientProfile } = await import('./sims/sterngerlach.js');
+assert.ok(Math.abs(sgDeflection(MU_B, 1000, .035, beamSpeedSq(1300)) / 7.9e-5 - 1) < .05);
+const orientations = Array.from({ length: 1001 }, (_, i) => classicalMuZ(2 * i / 1000 - 1));
+assert.ok(Math.abs(orientations.reduce((a, b) => a + b, 0) / orientations.length / MU_B) < 1e-12);
+assert.equal(classicalMuZ(-1), -MU_B);
+assert.equal(classicalMuZ(1), MU_B);
+assert.equal(quantumMuZ(true), MU_B);
+assert.equal(quantumMuZ(false), -MU_B);
+for (const [angle, expected] of [[0, 1], [Math.PI / 2, .5], [Math.PI, 0]]) assert.ok(Math.abs(probUp(angle) - expected) < 1e-12);
+// Start with a prepared z-up beam: half survive x-up, half of those exit z-down.
+assert.ok(Math.abs(probUp(Math.PI / 2) * (1 - probUp(Math.PI / 2)) - .25) < 1e-12);
+assert.equal(gradientProfile(0), 1);
+assert.equal(gradientProfile(-1), 0);
+assert.equal(gradientProfile(1), 0);
 console.log('ok');

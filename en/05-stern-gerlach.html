@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Episode 5: The Stern–Gerlach experiment — Sophon</title>
+<meta name="description" content="Why a beam of silver atoms passing a magnet split into exactly two, and why it took five years to understand. With a simulation of Gerlach's plate.">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Sophon">
+<meta property="og:title" content="Episode 5: The Stern–Gerlach experiment">
+<meta property="og:description" content="Why a beam of silver atoms passing a magnet split into exactly two, and why it took five years to understand. With a simulation of Gerlach's plate.">
+<meta property="og:url" content="https://sophon.jasonng-1407.workers.dev/en/05-stern-gerlach">
+<meta property="og:image" content="https://sophon.jasonng-1407.workers.dev/og/en-05.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="en_GB">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 16 16%27><circle cx=%278%27 cy=%278%27 r=%275%27 fill=%27%23f0b35a%27/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&display=swap">
+<link rel="stylesheet" href="../style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"
+  onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]})"></script>
+<script type="module" src="../learn.js"></script>
+<script type="module" src="../comments.js"></script>
+<!-- Cloudflare Web Analytics (cookieless) --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "1c73ba8208884aa18a21e8f30432ae9f"}'></script>
+<script defer src="../site.js"></script>
+</head><body class="episode-page">
+<header class="site-header"><nav aria-label="Main navigation"><a class="brand" href="/en/">sophon</a><span class="links"><a href="/en/">Contents</a><span class="lang-switch" aria-label="Language"><a href="/vi/05-stern-gerlach.html" data-lang="vi" lang="vi">VI</a> <span aria-hidden="true">|</span> <strong aria-current="true">EN</strong></span></span></nav></header>
+<div class="episode-layout">
+<aside class="page-toc"></aside>
+<main>
+
+<p class="year">Episode 5 · 1921–1927</p>
+<h1>The Stern–Gerlach experiment: an atomic beam splits in two</h1>
+<p class="lede">Send a beam of silver atoms through a magnet. If the atoms are tiny magnets pointing in random directions, the silver deposited on a glass plate should spread into a band. In 1922, it split into exactly two traces.</p>
+<aside class="tldr"><p class="tldr-label">Summary</p><p>Each silver atom behaves like a tiny magnet. In classical physics, these magnets point in random directions, so passing them through a magnet should broaden the atomic beam into a continuous band. In 1922, Stern and Gerlach saw the beam split into exactly two traces: atomic magnetism took only two values. They thought they had confirmed Bohr’s model, but only a few years later was it understood that the two traces came from electron spin.</p></aside>
+
+<h2>Can atoms tilt in only a few directions?</h2>
+<p>Bohr’s 1913 model had electrons moving in flat, circular orbits. In 1916, Arnold Sommerfeld and Peter Debye extended it and drew a strange conclusion: in a magnetic field, the plane of an electron’s orbit could not tilt at any angle, but could take only a few particular orientations. This became known as <dfn tabindex="0" data-def="The Bohr–Sommerfeld model’s idea that, in a magnetic field, an electron’s orbit can tilt in only a few particular directions.">space quantisation</dfn>.</p>
+<p>Many physicists regarded this as merely a mathematical trick. If atoms in a gas pointed in random directions, how could they all “choose” a few orientations as soon as they encountered a magnetic field? One of the strongest sceptics was Otto Stern. According to later recollections, back in 1913 he and Max von Laue had vowed: “If this nonsense of Bohr should in the end prove to be right, we will quit physics!”</p>
+<p>A silver atom has a single outermost electron, so each atom behaves like a tiny compass needle. In a uniform magnetic field, a compass needle turns but is not pulled away. In a field that grows stronger towards one side, however, it is pulled one way or the other, more or less strongly depending on its orientation. Measuring how far the atoms are deflected reveals how they are oriented.</p>
+
+<h2>Try the experiment yourself</h2>
+<p>The simulation has two parts. The first recreates the 1922 experiment: a silver oven, narrow slits, a magnet and a collecting glass plate. The second is a thought experiment devised later: sending an atomic beam through two or three magnets in series.</p>
+<div class="ask predict" data-answer="2">
+<p class="ask-q">Send a beam of silver atoms through a magnet whose field grows stronger towards one side. What will the silver deposited on the glass plate look like?</p>
+<div class="ask-options"><button type="button">A thin line, unchanged</button><button type="button">A continuously broadened band</button><button type="button">Two separate traces</button></div>
+<p class="ask-why" hidden>Classical physics predicts a continuous band because the atoms point in random directions. In reality, Gerlach saw exactly two traces with an empty gap between them. Try both models in the simulation below.</p>
+</div>
+<div class="sim" id="sim"></div>
+<script type="module">import { mount } from '../sims/sterngerlach.js'; mount(document.getElementById('sim'));</script>
+<p>Notice:</p>
+<ul>
+<li>In “The 1922 experiment”, switch the magnet off: the silver forms just a thin line. Switch it on with the classical model: the line broadens into a continuous band. Switch to the observed result: the line splits into two traces with an empty gap between them.</li>
+<li>The traces are furthest apart in the middle and meet at the ends, because the magnetic field grows most rapidly just beneath the pointed pole. This shape matches the photograph Gerlach sent to Bohr.</li>
+<li>The silver layer is almost invisible at first. Press “Breathe cigar smoke” to reveal it.</li>
+<li>In “Magnets in series”, atoms that went “up” through a vertical magnet still go “up” through a second vertical magnet. Turn the second magnet horizontally, however, and they split equally. Add a third, vertical magnet: half go “down” again, as though the atoms have forgotten the first result.</li>
+</ul>
+
+<h2>Frankfurt, 1921</h2>
+<p>In 1921, Stern was Max Born’s assistant at the Institute for Theoretical Physics in Frankfurt. He proposed a direct test: heat silver in a small oven until it evaporates, pass the atoms through two narrow slits to form a thin beam, send it between the poles of a magnet with one pole sharpened like a knife edge, and collect the atoms on a glass plate. If space quantisation was real, the silver deposit would split into separate traces. Otherwise, it would simply broaden.</p>
+<p>Stern enlisted Walther Gerlach, a skilled experimentalist at the neighbouring institute. The experiment was extremely difficult: the predicted deflection was only about a tenth of a millimetre, the atoms had to travel through a high vacuum for hours, and the silver oven had to stay above a thousand degrees. Post-war Germany was also suffering severe inflation. To raise money, Born organised public lectures on Einstein’s relativity and sold tickets. A New York financier, Henry Goldman, also sent financial support.</p>
+<p>The silver deposited on the glass was so thin that it was almost invisible. According to Stern’s recollections many years later, his low assistant’s salary meant that he could afford only cheap cigars, rich in sulphur. When he bent down to inspect the glass, his cigar-laden breath turned the silver layer into black <dfn tabindex="0" data-def="A black compound formed when silver encounters sulphur; it made the thin silver deposit visible.">silver sulphide</dfn>, revealing the trace. In 2002, the story was recreated and shown to be possible.</p>
+
+<h2>The postcard of February 1922</h2>
+<p>Late in 1921, Stern moved to Rostock, Born went to Göttingen, and Gerlach stayed in Frankfurt to continue the work. On 4 November 1921, he saw the silver trace broaden when he switched the magnet on: silver atoms really were magnetic. But the trace had not yet split.</p>
+<p>After months of improvements to the apparatus, Gerlach ran the experiment through the night of 7 February 1922. By the following morning, the silver had split into two clear traces, with nothing between them. He photographed the glass, printed the picture on a postcard to Bohr in Copenhagen, and added: “We congratulate you on the confirmation of your theory.”</p>
+<p>The result caused a sensation. Einstein and Paul Ehrenfest promptly wrote a paper in 1922 pointing out that, according to everything then known, there was no way the atoms could turn into exactly two orientations in the brief time they took to enter the magnetic field. The result was clear, but nobody could explain the mechanism.</p>
+
+<h2>Right result, wrong reason</h2>
+<p>Stern and Gerlach believed they had confirmed the space quantisation of electron orbits in the Bohr–Sommerfeld model. In fact, they had the right result for the wrong reason. In the quantum mechanics developed later, the outermost electron in a silver atom has no orbital angular momentum. If orbits were all that mattered, the silver beam would not have split at all.</p>
+<p>In 1925, two postgraduate students in Leiden, George Uhlenbeck and Samuel Goudsmit, proposed that the electron itself has an intrinsic angular momentum, later called <dfn tabindex="0" data-def="An electron’s intrinsic angular momentum, independent of orbital motion. Measuring it along any axis gives only two possible results.">spin</dfn>, with just two orientations relative to a magnetic field. This was the true cause of the two silver traces. Curiously, their paper did not mention the Stern–Gerlach experiment at all. Only in 1927, when Thomas Phipps and John Taylor repeated the experiment with hydrogen atoms and also found the beam split in two, did physicists realise that the 1922 experiment had in fact measured electron spin.</p>
+
+<details class="deep"><summary>Just enough maths <span class="skip">(optional)</span></summary>
+<p>A tiny magnet with <dfn tabindex="0" data-def="A quantity describing how strongly something behaves like a tiny magnet and which way it points.">magnetic moment</dfn> $\vec\mu$ in a magnetic field $\vec B$ experiences a force only if the field is non-uniform. If the field varies along $z$, the force is</p>
+$$F_z = \mu_z \frac{\partial B_z}{\partial z}.$$
+<p>In classical physics, $\mu_z = \mu\cos\theta$, with $\theta$ taking any value, so the deflection covers a continuous range. For the electron, $\mu_z$ takes only the two values $\pm\mu_B$, where $\mu_B = e\hbar/2m_e \approx 9.27\times10^{-24}$ J/T is called the <dfn tabindex="0" data-def="The electron’s natural unit of magnetic moment, about 9.27 × 10⁻²⁴ J/T.">Bohr magneton</dfn>. Hence there are only two traces.</p>
+<p>An atom crosses a magnet of length $L$ at speed $v$ in a time $L/v$, giving a deflection</p>
+$$z = \frac{1}{2}\,\frac{F_z}{m}\left(\frac{L}{v}\right)^2 = \frac{\mu_B}{2m v^2}\,\frac{\partial B}{\partial z}\,L^2.$$
+<p>For silver atoms emerging from an oven at about 1300 K, a magnet a few centimetres long and a field gradient of around $10^3$ T/m, the deflection is only about a tenth of a millimetre. That is why the experiment was so difficult.</p>
+<details><summary>More: why magnets in series give one half</summary>
+<p>Quantum mechanics describes the “up” state along $z$ as $|{\uparrow_z}\rangle$. Along an axis at angle $\alpha$ to $z$, this state is a combination of “up” and “down”, with a probability of measuring “up” given by</p>
+$$P = \cos^2\frac{\alpha}{2}.$$
+<p>For $\alpha = 90^\circ$ (a horizontal magnet), $P = 1/2$. After a horizontal measurement, the atom is in the horizontally “up” state, and measuring along $z$ again gives a probability of $1/2$. The later measurement erases the information from the earlier one. This is one of the simplest examples of how measurement in quantum mechanics differs from measurement in everyday life.</p>
+</details>
+
+<p>Want to simulate Gerlach’s glass plate and magnets in series in Python? <a href="https://colab.research.google.com/github/JasonDE03/sophon/blob/main/lab/05_stern_gerlach.ipynb">Open the notebook in Google Colab</a>: run it in your browser, with nothing to install.</p>
+</details>
+<h2>Common misconceptions</h2>
+<p><b>“Stern and Gerlach discovered spin.”</b> They knew nothing of spin, because the concept did not appear until 1925. They believed they had demonstrated space quantisation of electron orbits. Their experiment was correctly understood as a spin measurement only a few years later.</p>
+<p><b>“The 1922 experiment confirmed the Bohr–Sommerfeld model.”</b> That was what Gerlach himself wrote on the postcard, and how most physicists understood the result at the time. For silver atoms, however, the Bohr–Sommerfeld model gave the right number of traces only through an argument that later proved wrong. The correct result came from spin, which the model did not include.</p>
+
+<section class="quiz">
+<h2>Quiz</h2>
+<div class="ask" data-answer="1">
+<p class="ask-q">Why did Stern and Gerlach need a NON-UNIFORM magnetic field?</p>
+<div class="ask-options"><button type="button">Because a uniform field is too weak</button><button type="button">Because a uniform field turns a tiny magnet but does not deflect it</button><button type="button">Because a uniform field melts silver</button></div>
+<p class="ask-why" hidden>A force on a tiny magnet appears only when the magnetic field grows stronger towards one side. A uniform field only turns it, so the atomic beam is not deflected and nothing can be measured.</p>
+</div>
+<div class="ask" data-answer="1">
+<p class="ask-q">What made the silver deposit on the glass visible?</p>
+<div class="ask-options"><button type="button">Ultraviolet light</button><button type="button">Sulphur-rich cigar smoke turning silver into black silver sulphide</button><button type="button">Dyeing it with ink</button></div>
+<p class="ask-why" hidden>According to Stern’s recollections, his cheap cigars contained plenty of sulphur. His cigar-laden breath turned the almost invisible silver layer into black silver sulphide.</p>
+</div>
+<div class="ask" data-answer="1">
+<p class="ask-q">What were the two silver traces actually evidence for?</p>
+<div class="ask-options"><button type="button">Electron orbits taking a few orientations, as Bohr–Sommerfeld proposed</button><button type="button">Electron spin, with only two orientations in a magnetic field</button><button type="button">Silver atoms having two nuclei</button></div>
+<p class="ask-why" hidden>Silver’s outermost electron has no orbital angular momentum. The two traces come from electron spin, a concept proposed only in 1925 and understood as the explanation of this experiment in 1927.</p>
+</div>
+</section>
+
+<h2>What came next</h2>
+<p>The Stern–Gerlach experiment opened up the molecular-beam method, a foundation for atomic clocks, nuclear magnetic resonance and many later precision measurement techniques. Stern received the 1943 Nobel Prize in Physics for this method and for measuring the magnetic moment of the proton.</p>
+<p>By 1922, quantum physics had accumulated a collection of results that nobody could fully explain: light behaved sometimes as a wave, sometimes as a particle; electrons occupied only certain energy levels; atoms took only a few orientations. In 1924, a French postgraduate student reversed the question: if light was both a wave and a particle, could electrons be both particles and waves? His name was Louis de Broglie.</p>
+<p><a href="./">→ Episode 6: de Broglie and matter waves (1924), coming soon</a></p>
+
+<details class="deep"><summary>Sources</summary>
+<ul class="sources">
+<li>O. Stern, “Ein Weg zur experimentellen Prüfung der Richtungsquantelung im Magnetfeld”, <i>Z. Phys.</i> 7, 249 (1921).</li>
+<li>W. Gerlach and O. Stern, “Der experimentelle Nachweis der Richtungsquantelung im Magnetfeld”, <i>Z. Phys.</i> 9, 349 (1922).</li>
+<li>A. Einstein and P. Ehrenfest, “Quantentheoretische Bemerkungen zum Experiment von Stern und Gerlach”, <i>Z. Phys.</i> 11, 31 (1922).</li>
+<li>G. E. Uhlenbeck and S. Goudsmit, <i>Naturwissenschaften</i> 13, 953 (1925). T. E. Phipps and J. B. Taylor, <i>Phys. Rev.</i> 29, 309 (1927).</li>
+<li>B. Friedrich and D. Herschbach, “Stern and Gerlach: How a bad cigar helped reorient atomic physics”, <i>Physics Today</i> 56(12), 53 (2003).</li>
+<li>H. Schmidt-Böcking et al., “The Stern–Gerlach experiment revisited”, <i>Eur. Phys. J. H</i> 41, 327 (2016).</li>
+</ul>
+</details>
+<section class="comments" data-episode="05"><h2>Comments</h2></section>
+<nav class="episode-nav" aria-label="Episodes">
+  <a class="prev" href="04-bohr.html"><span>← Previous</span>The Bohr model and hydrogen lines</a>
+  <span class="next soon"><span>Next →</span>de Broglie and matter waves · coming soon</span>
+</nav>
+</main>
+</div>
+<footer class="author-footer">
+  <div class="social-links">
+    <a href="https://www.facebook.com/nam.son.178624/" aria-label="Facebook" rel="me noopener" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 21v-8h3l.5-4H14V6.5c0-1 .4-1.5 1.5-1.5H18V2h-3c-3 0-5 1.8-5 5v2H7v4h3v8"/></svg></a>
+    <a href="https://www.instagram.com/fet.sofn/" aria-label="Instagram" rel="me noopener" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".8" fill="currentColor" stroke="none"/></svg></a>
+    <a href="https://github.com/JasonDE03/sophon" aria-label="GitHub" rel="me noopener" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 21v-3c-3 .8-3-1.5-4-2m10 5v-4c0-1-.3-1.6-.8-2 2.7-.3 5.3-1.3 5.3-6A4.7 4.7 0 0 0 18.2 6c.2-1 .1-2-.3-3-1.5 0-2.8.8-3.5 1.3a12 12 0 0 0-4.8 0C8.9 3.8 7.6 3 6.1 3c-.4 1-.5 2-.3 3A4.7 4.7 0 0 0 4.5 9c0 4.7 2.6 5.7 5.3 6-.5.4-.8 1-.8 2"/></svg></a>
+  </div>
+  <p>© 2026 Nguyen Phan Nam Son</p>
+</footer>
+</body></html>

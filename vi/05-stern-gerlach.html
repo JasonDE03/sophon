@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Bài 5: Thí nghiệm Stern–Gerlach — Sophon</title>
+<meta name="description" content="Vì sao một chùm nguyên tử bạc bay qua nam châm lại tách thành đúng hai vệt, và vì sao phải mất năm năm mới hiểu được. Kèm mô phỏng tấm kính của Gerlach.">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Sophon">
+<meta property="og:title" content="Bài 5: Thí nghiệm Stern–Gerlach">
+<meta property="og:description" content="Vì sao một chùm nguyên tử bạc bay qua nam châm lại tách thành đúng hai vệt, và vì sao phải mất năm năm mới hiểu được. Kèm mô phỏng tấm kính của Gerlach.">
+<meta property="og:url" content="https://sophon.jasonng-1407.workers.dev/vi/05-stern-gerlach">
+<meta property="og:image" content="https://sophon.jasonng-1407.workers.dev/og/vi-05.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="vi_VN">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 16 16%27><circle cx=%278%27 cy=%278%27 r=%275%27 fill=%27%23f0b35a%27/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&display=swap">
+<link rel="stylesheet" href="../style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"
+  onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]})"></script>
+<script type="module" src="../learn.js"></script>
+<script type="module" src="../comments.js"></script>
+<!-- Cloudflare Web Analytics (cookieless) --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "1c73ba8208884aa18a21e8f30432ae9f"}'></script>
+<script defer src="../site.js"></script>
+</head><body class="episode-page">
+<header class="site-header"><nav aria-label="Điều hướng chính"><a class="brand" href="/vi/">sophon</a><span class="links"><a href="/vi/">Mục lục</a><span class="lang-switch" aria-label="Ngôn ngữ"><strong aria-current="true">VI</strong> <span aria-hidden="true">|</span> <a href="/en/05-stern-gerlach.html" data-lang="en" lang="en">EN</a></span></span></nav></header>
+<div class="episode-layout">
+<aside class="page-toc"></aside>
+<main>
+
+<p class="year">Bài 5 · 1921–1927</p>
+<h1>Thí nghiệm Stern–Gerlach: chùm nguyên tử tách đôi</h1>
+<p class="lede">Bắn một chùm nguyên tử bạc qua một nam châm. Nếu các nguyên tử là những kim nam châm nhỏ hướng ngẫu nhiên, vết bạc trên tấm kính phải kéo thành một dải. Năm 1922, nó tách thành đúng hai vệt.</p>
+<aside class="tldr"><p class="tldr-label">Tóm tắt</p><p>Mỗi nguyên tử bạc là một kim nam châm rất nhỏ. Theo vật lý cổ điển, các kim ấy hướng ngẫu nhiên, nên khi bay qua một nam châm, chùm nguyên tử phải nở ra thành một dải liên tục. Năm 1922, Stern và Gerlach thấy chùm tách thành đúng hai vệt: từ tính của nguyên tử chỉ nhận hai giá trị. Họ tưởng đã xác nhận mô hình Bohr, nhưng phải vài năm sau người ta mới hiểu rằng hai vệt ấy đến từ spin của electron.</p></aside>
+
+<h2>Nguyên tử chỉ được nghiêng theo vài hướng?</h2>
+<p>Mô hình Bohr năm 1913 cho electron quay trên những quỹ đạo tròn phẳng. Năm 1916, Arnold Sommerfeld và Peter Debye mở rộng nó và rút ra một hệ quả lạ: trong từ trường, mặt phẳng quỹ đạo của electron không thể nghiêng tuỳ ý mà chỉ được nằm theo một vài hướng nhất định. Hiện tượng này được gọi là <dfn tabindex="0" data-def="Ý tưởng của mô hình Bohr–Sommerfeld: trong từ trường, quỹ đạo của electron chỉ được nghiêng theo một vài hướng nhất định.">lượng tử hoá không gian</dfn>.</p>
+<p>Nhiều nhà vật lý coi đó chỉ là một thủ thuật tính toán. Nếu các nguyên tử trong một chất khí hướng ngẫu nhiên, làm sao chúng có thể đồng loạt "chọn" vài hướng ngay khi gặp từ trường? Một trong những người hoài nghi nhất là Otto Stern. Theo lời kể lại, từ năm 1913, ông và Max von Laue từng thề sẽ bỏ vật lý nếu mô hình của Bohr hoá ra là đúng.</p>
+<p>Nguyên tử bạc có một electron ngoài cùng, nên mỗi nguyên tử hành xử như một kim nam châm rất nhỏ. Trong một từ trường đều, kim nam châm chỉ xoay chứ không bị kéo đi. Nhưng trong một từ trường mạnh lên theo một phía, nó bị kéo về phía này hay phía kia, mạnh hay yếu tuỳ theo nó đang nghiêng thế nào. Đo xem các nguyên tử bị kéo lệch ra sao là biết chúng nghiêng thế nào.</p>
+
+<h2>Tự làm lại thí nghiệm</h2>
+<p>Mô phỏng có hai phần. Phần đầu dựng lại thí nghiệm năm 1922: lò nung bạc, khe hẹp, nam châm và tấm kính hứng. Phần sau là một thí nghiệm tưởng tượng về sau mới được nghĩ ra: cho chùm nguyên tử đi qua hai, ba nam châm nối tiếp nhau.</p>
+<div class="ask predict" data-answer="2">
+<p class="ask-q">Bắn một chùm nguyên tử bạc qua một nam châm mà từ trường mạnh dần về một phía. Vết bạc đọng trên tấm kính sẽ trông thế nào?</p>
+<div class="ask-options"><button type="button">Một vạch mảnh, không đổi gì</button><button type="button">Một dải nở rộng liên tục</button><button type="button">Hai vệt tách rời nhau</button></div>
+<p class="ask-why" hidden>Vật lý cổ điển dự đoán một dải liên tục, vì các nguyên tử hướng ngẫu nhiên. Thực tế, Gerlach thấy đúng hai vệt, giữa hai vệt trống trơn. Thử cả hai mô hình trong mô phỏng bên dưới.</p>
+</div>
+<div class="sim" id="sim"></div>
+<script type="module">import { mount } from '../sims/sterngerlach.js'; mount(document.getElementById('sim'));</script>
+<p>Hãy để ý:</p>
+<ul>
+<li>Ở "Thí nghiệm 1922", tắt nam châm: vết bạc chỉ là một vạch mảnh. Bật nam châm lên với mô hình cổ điển: vạch nở ra thành một dải liên tục. Chuyển sang kết quả thật: vạch tách thành hai vệt, ở giữa trống trơn.</li>
+<li>Hai vệt cách nhau rộng nhất ở giữa và khép lại ở hai đầu, vì từ trường mạnh lên nhanh nhất ngay dưới mũi nhọn của nam châm. Hình dạng ấy giống hệt tấm ảnh Gerlach gửi cho Bohr.</li>
+<li>Lớp bạc lúc đầu gần như không nhìn thấy. Bấm "Thổi khói xì gà" để vết hiện lên.</li>
+<li>Ở "Nam châm nối tiếp", nguyên tử đã đi "lên" ở nam châm đứng thì qua nam châm đứng thứ hai vẫn đi "lên". Nhưng xoay nam châm thứ hai nằm ngang, chúng chia đôi. Thêm nam châm đứng thứ ba: một nửa lại đi "xuống", như thể nguyên tử đã quên mất kết quả đầu tiên.</li>
+</ul>
+
+<h2>Frankfurt, 1921</h2>
+<p>Năm 1921, Stern làm trợ lý cho Max Born tại Viện Vật lý lý thuyết ở Frankfurt. Ông đề xuất một cách kiểm tra trực tiếp: nung bạc trong một lò nhỏ cho bay hơi, cho các nguyên tử bay qua hai khe hẹp thành một chùm mảnh, đi qua giữa hai cực của một nam châm có một cực nhọn như lưỡi dao, rồi đọng lại trên một tấm kính. Nếu lượng tử hoá không gian là thật, vết bạc sẽ tách thành các vệt rời nhau. Nếu không, nó chỉ nở rộng ra.</p>
+<p>Stern rủ Walther Gerlach, một nhà thực nghiệm giỏi ở viện bên cạnh. Thí nghiệm rất khó: độ lệch dự đoán chỉ cỡ một phần mười milimét, chùm nguyên tử phải bay trong chân không cao suốt nhiều giờ, và lò bạc phải giữ ở nhiệt độ trên một nghìn độ. Nước Đức sau chiến tranh lại đang lạm phát nặng. Để có tiền, Born tổ chức các buổi giảng công khai về thuyết tương đối của Einstein và bán vé vào cửa. Một nhà tài chính ở New York, Henry Goldman, cũng gửi tiền ủng hộ.</p>
+<p>Lớp bạc đọng trên kính mỏng đến mức gần như vô hình. Theo lời Stern kể lại nhiều năm sau, lương trợ lý thấp nên ông chỉ hút được loại xì gà rẻ, nhiều lưu huỳnh. Khi ông cúi sát xem tấm kính, hơi thở mang khói xì gà biến lớp bạc thành <dfn tabindex="0" data-def="Hợp chất màu đen tạo ra khi bạc gặp lưu huỳnh; chính nó làm vết bạc mỏng hiện lên.">bạc sunfua</dfn> màu đen, và vết hiện lên. Năm 2002, câu chuyện được làm lại và kiểm chứng là có thể xảy ra.</p>
+
+<h2>Tấm bưu thiếp tháng 2/1922</h2>
+<p>Cuối năm 1921, Stern chuyển đến Rostock, Born đi Göttingen, còn Gerlach ở lại Frankfurt làm tiếp. Ngày 4/11/1921, ông thấy vết bạc nở rộng ra khi bật nam châm: các nguyên tử bạc đúng là có từ tính. Nhưng vết vẫn chưa tách.</p>
+<p>Sau nhiều tháng cải tiến thiết bị, Gerlach chạy thí nghiệm suốt đêm 7/2/1922. Sáng hôm sau, vết bạc đã tách thành hai vệt rõ ràng, giữa hai vệt không có gì. Ông chụp ảnh tấm kính, in lên một tấm bưu thiếp gửi cho Bohr ở Copenhagen, kèm dòng chữ: "Chúng tôi xin chúc mừng ông vì lý thuyết của ông đã được xác nhận."</p>
+<p>Kết quả gây chấn động. Einstein và Paul Ehrenfest viết ngay một bài báo trong năm 1922, chỉ ra rằng theo mọi hiểu biết lúc đó, không có cách nào để các nguyên tử kịp xoay về đúng hai hướng trong thời gian ngắn ngủi bay vào từ trường. Kết quả rõ ràng, nhưng không ai giải thích được cơ chế.</p>
+
+<h2>Đúng kết quả, sai lý do</h2>
+<p>Stern và Gerlach tin rằng mình đã xác nhận lượng tử hoá không gian của quỹ đạo electron theo mô hình Bohr–Sommerfeld. Thật ra họ đúng kết quả nhưng sai lý do. Theo cơ học lượng tử về sau, electron ngoài cùng của nguyên tử bạc không có mômen động lượng quỹ đạo. Nếu chỉ có quỹ đạo, chùm bạc đã không hề tách.</p>
+<p>Năm 1925, hai nghiên cứu sinh ở Leiden là George Uhlenbeck và Samuel Goudsmit đề xuất rằng bản thân electron có một mômen động lượng riêng, về sau gọi là <dfn tabindex="0" data-def="Mômen động lượng riêng của electron, không do chuyển động quỹ đạo. Đo theo một phương bất kỳ, nó chỉ cho hai kết quả.">spin</dfn>, và mômen ấy chỉ có hai hướng so với từ trường. Đó mới là nguyên nhân thật của hai vệt bạc. Điều lạ là bài báo của họ không hề nhắc tới thí nghiệm Stern–Gerlach. Phải đến năm 1927, khi Thomas Phipps và John Taylor làm lại thí nghiệm với nguyên tử hydro và cũng thấy chùm tách đôi, mọi người mới hiểu rằng thí nghiệm năm 1922 thực ra đã đo spin của electron.</p>
+
+<details class="deep"><summary>Toán vừa đủ <span class="skip">(có thể bỏ qua)</span></summary>
+<p>Một kim nam châm có <dfn tabindex="0" data-def="Đại lượng cho biết một vật mạnh như một kim nam châm cỡ nào, và nó hướng về đâu.">mômen từ</dfn> $\vec\mu$ nằm trong từ trường $\vec B$ chịu một lực chỉ khi từ trường không đều. Nếu từ trường thay đổi theo phương $z$, lực là</p>
+$$F_z = \mu_z \frac{\partial B_z}{\partial z}.$$
+<p>Theo vật lý cổ điển, $\mu_z = \mu\cos\theta$ với $\theta$ nhận mọi giá trị, nên độ lệch trải đều trong một khoảng liên tục. Với electron, $\mu_z$ chỉ nhận hai giá trị $\pm\mu_B$, trong đó $\mu_B = e\hbar/2m_e \approx 9{,}27\times10^{-24}$ J/T gọi là <dfn tabindex="0" data-def="Đơn vị mômen từ tự nhiên của electron, khoảng 9,27 × 10⁻²⁴ J/T.">magneton Bohr</dfn>. Vì thế chỉ có hai vệt.</p>
+<p>Nguyên tử bay qua nam châm dài $L$ với vận tốc $v$ trong thời gian $L/v$, nên lệch đi một đoạn</p>
+$$z = \frac{1}{2}\,\frac{F_z}{m}\left(\frac{L}{v}\right)^2 = \frac{\mu_B}{2m v^2}\,\frac{\partial B}{\partial z}\,L^2.$$
+<p>Với nguyên tử bạc bay ra từ lò khoảng 1300 K, một nam châm dài vài centimét và gradient từ trường cỡ $10^3$ T/m, độ lệch chỉ cỡ một phần mười milimét. Đó là lý do thí nghiệm khó đến vậy.</p>
+<details><summary>Thêm: vì sao nam châm nối tiếp cho ra một nửa</summary>
+<p>Cơ học lượng tử mô tả trạng thái "lên" theo phương $z$ là $|{\uparrow_z}\rangle$. Theo một phương nghiêng góc $\alpha$ so với $z$, trạng thái này là tổ hợp của "lên" và "xuống", với xác suất đo được "lên" là</p>
+$$P = \cos^2\frac{\alpha}{2}.$$
+<p>Với $\alpha = 90^\circ$ (nam châm nằm ngang), $P = 1/2$. Sau khi đo theo phương ngang, nguyên tử ở trạng thái "lên" theo phương ngang, và đo lại theo phương $z$ lại cho xác suất $1/2$. Phép đo sau xoá mất thông tin của phép đo trước. Đây là một trong những ví dụ đơn giản nhất cho thấy phép đo trong cơ học lượng tử khác hẳn phép đo trong đời thường.</p>
+</details>
+
+<p>Muốn tự mô phỏng tấm kính của Gerlach và các nam châm nối tiếp bằng Python? <a href="https://colab.research.google.com/github/JasonDE03/sophon/blob/main/lab/05_stern_gerlach.ipynb">Mở notebook trong Google Colab</a>: chạy ngay trên trình duyệt, không cần cài gì.</p>
+</details>
+<h2>Những hiểu lầm phổ biến</h2>
+<p><b>"Stern và Gerlach phát hiện ra spin."</b> Họ không biết đến spin, vì khái niệm này mãi tới năm 1925 mới ra đời. Họ tin rằng mình đã chứng minh lượng tử hoá không gian của quỹ đạo electron. Thí nghiệm của họ chỉ được hiểu đúng là phép đo spin vài năm sau đó.</p>
+<p><b>"Thí nghiệm năm 1922 xác nhận mô hình Bohr–Sommerfeld."</b> Đó là điều chính Gerlach viết trên tấm bưu thiếp, và cũng là cách hầu hết các nhà vật lý hiểu lúc đó. Nhưng với nguyên tử bạc, mô hình Bohr–Sommerfeld cho đúng số vệt chỉ nhờ một lập luận về sau hoá ra sai. Kết quả đúng là nhờ spin, thứ mô hình ấy không có.</p>
+
+<section class="quiz">
+<h2>Trắc nghiệm</h2>
+<div class="ask" data-answer="1">
+<p class="ask-q">Vì sao Stern và Gerlach cần một nam châm có từ trường KHÔNG đều?</p>
+<div class="ask-options"><button type="button">Vì từ trường đều quá yếu</button><button type="button">Vì trong từ trường đều, kim nam châm chỉ xoay chứ không bị kéo lệch đi</button><button type="button">Vì từ trường đều làm nóng chảy bạc</button></div>
+<p class="ask-why" hidden>Lực lên một kim nam châm chỉ xuất hiện khi từ trường mạnh lên theo một phía. Từ trường đều chỉ làm nó xoay, nên chùm nguyên tử không bị lệch và không đo được gì.</p>
+</div>
+<div class="ask" data-answer="1">
+<p class="ask-q">Vết bạc trên tấm kính hiện lên nhờ đâu?</p>
+<div class="ask-options"><button type="button">Nhờ chiếu tia tử ngoại</button><button type="button">Nhờ khói xì gà nhiều lưu huỳnh biến bạc thành bạc sunfua màu đen</button><button type="button">Nhờ nhuộm bằng mực</button></div>
+<p class="ask-why" hidden>Theo lời Stern kể lại, xì gà rẻ của ông chứa nhiều lưu huỳnh. Hơi thở mang khói ấy biến lớp bạc mỏng gần như vô hình thành bạc sunfua màu đen.</p>
+</div>
+<div class="ask" data-answer="1">
+<p class="ask-q">Hai vệt bạc thực ra là bằng chứng cho điều gì?</p>
+<div class="ask-options"><button type="button">Quỹ đạo electron nghiêng theo vài hướng, như Bohr–Sommerfeld nói</button><button type="button">Electron có spin, chỉ nhận hai hướng trong từ trường</button><button type="button">Nguyên tử bạc có hai hạt nhân</button></div>
+<p class="ask-why" hidden>Electron ngoài cùng của bạc không có mômen động lượng quỹ đạo. Hai vệt đến từ spin của electron, khái niệm mãi đến năm 1925 mới được đề xuất và năm 1927 mới được hiểu là lời giải của thí nghiệm này.</p>
+</div>
+</section>
+
+<h2>Hệ quả</h2>
+<p>Thí nghiệm Stern–Gerlach mở ra phương pháp chùm phân tử, nền tảng cho đồng hồ nguyên tử, cộng hưởng từ hạt nhân và nhiều kỹ thuật đo chính xác về sau. Stern nhận giải Nobel Vật lý năm 1943 cho phương pháp này và cho phép đo mômen từ của proton.</p>
+<p>Đến năm 1922, vật lý lượng tử đã tích lũy một bộ sưu tập kết quả không ai giải thích trọn vẹn: ánh sáng lúc là sóng lúc là hạt, electron chỉ ở một số mức năng lượng, nguyên tử chỉ nghiêng theo vài hướng. Năm 1924, một nghiên cứu sinh người Pháp đặt ra câu hỏi ngược lại: nếu ánh sáng là sóng mà cũng là hạt, thì liệu electron có phải là hạt mà cũng là sóng không? Tên anh là Louis de Broglie.</p>
+<p><a href="./">→ Bài 6: de Broglie và sóng vật chất (1924), sắp ra</a></p>
+
+<details class="deep"><summary>Nguồn</summary>
+<ul class="sources">
+<li>O. Stern, "Ein Weg zur experimentellen Prüfung der Richtungsquantelung im Magnetfeld", <i>Z. Phys.</i> 7, 249 (1921).</li>
+<li>W. Gerlach và O. Stern, "Der experimentelle Nachweis der Richtungsquantelung im Magnetfeld", <i>Z. Phys.</i> 9, 349 (1922).</li>
+<li>A. Einstein và P. Ehrenfest, "Quantentheoretische Bemerkungen zum Experiment von Stern und Gerlach", <i>Z. Phys.</i> 11, 31 (1922).</li>
+<li>G. E. Uhlenbeck và S. Goudsmit, <i>Naturwissenschaften</i> 13, 953 (1925). T. E. Phipps và J. B. Taylor, <i>Phys. Rev.</i> 29, 309 (1927).</li>
+<li>B. Friedrich và D. Herschbach, "Stern and Gerlach: How a bad cigar helped reorient atomic physics", <i>Physics Today</i> 56(12), 53 (2003).</li>
+<li>H. Schmidt-Böcking và cộng sự, "The Stern–Gerlach experiment revisited", <i>Eur. Phys. J. H</i> 41, 327 (2016).</li>
+</ul>
+</details>
+<section class="comments" data-episode="05"><h2>Bình luận</h2></section>
+<nav class="episode-nav" aria-label="Các bài">
+  <a class="prev" href="04-bohr.html"><span>← Bài trước</span>Mô hình Bohr và vạch phổ hydro</a>
+  <span class="next soon"><span>Bài sau →</span>de Broglie và sóng vật chất · sắp ra</span>
+</nav>
+</main>
+</div>
+<footer class="author-footer">
+  <div class="social-links">
+    <a href="https://www.facebook.com/nam.son.178624/" aria-label="Facebook" rel="me noopener" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 21v-8h3l.5-4H14V6.5c0-1 .4-1.5 1.5-1.5H18V2h-3c-3 0-5 1.8-5 5v2H7v4h3v8"/></svg></a>
+    <a href="https://www.instagram.com/fet.sofn/" aria-label="Instagram" rel="me noopener" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".8" fill="currentColor" stroke="none"/></svg></a>
+    <a href="https://github.com/JasonDE03/sophon" aria-label="GitHub" rel="me noopener" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 21v-3c-3 .8-3-1.5-4-2m10 5v-4c0-1-.3-1.6-.8-2 2.7-.3 5.3-1.3 5.3-6A4.7 4.7 0 0 0 18.2 6c.2-1 .1-2-.3-3-1.5 0-2.8.8-3.5 1.3a12 12 0 0 0-4.8 0C8.9 3.8 7.6 3 6.1 3c-.4 1-.5 2-.3 3A4.7 4.7 0 0 0 4.5 9c0 4.7 2.6 5.7 5.3 6-.5.4-.8 1-.8 2"/></svg></a>
+  </div>
+  <p>© 2026 Nguyen Phan Nam Son</p>
+</footer>
+</body></html>
