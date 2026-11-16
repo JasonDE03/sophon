@@ -41,11 +41,11 @@ const TXT = {
 };
 
 // Visible spectrum approximation; UV is a muted, violet-tinted schematic colour.
-function beamColour(nm, muted) {
-  if (nm < 380) return `color-mix(in srgb, ${muted} 75%, hsl(270, 90%, 60%))`;
+function beamColour(nm, muted, lightness = 60) {
+  if (nm < 380) return `color-mix(in srgb, ${muted} 75%, hsl(270, 90%, ${lightness}%))`;
   const stops = [[380, 270], [440, 240], [490, 180], [510, 120], [580, 60], [645, 0], [750, 0]];
   const i = stops.findIndex(([w]) => w >= nm), [a, b] = stops[Math.max(0, i - 1)], [c, d] = stops[i];
-  return `hsl(${b + (d - b) * (nm - a) / (c - a || 1)}, 90%, 60%)`;
+  return `hsl(${b + (d - b) * (nm - a) / (c - a || 1)}, 90%, ${lightness}%)`;
 }
 
 export function mount(el) {
@@ -55,12 +55,12 @@ export function mount(el) {
   el.innerHTML = `<style>
     .photoelectric .modes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));border:1px solid var(--faint);border-radius:12px;overflow:hidden;margin-bottom:12px}
     .photoelectric button{cursor:pointer;font:inherit;line-height:1.4;background:transparent;color:var(--muted)}
-    .photoelectric .modes button{border:0;padding:10px 8px;font-size:13px}.photoelectric button[aria-pressed=true]{color:var(--fg);background:var(--faint);box-shadow:inset 0 -2px var(--accent)}
+    .photoelectric .modes button{border:0;padding:10px 8px;font-size:13px}.photoelectric button[aria-pressed=true]{color:var(--fg);background:var(--control-bg);box-shadow:inset 0 -2px var(--accent)}
     .photoelectric button:disabled{opacity:.45;cursor:default}.photoelectric .controls{display:grid;gap:16px}.photoelectric label{flex-wrap:wrap;min-width:0}
     .photoelectric input[type=range]{appearance:none;width:100%;height:8px;border-radius:8px;background:var(--faint);margin:8px 0}
     .photoelectric input[type=range]::-webkit-slider-thumb{appearance:none;width:18px;height:18px;border-radius:50%;background:var(--fg);border:3px solid var(--accent)}
     .photoelectric input[type=range]::-moz-range-thumb{width:12px;height:12px;border-radius:50%;background:var(--fg);border:3px solid var(--accent)}
-    .photoelectric :focus-visible{outline:2px solid var(--blue);outline-offset:4px}.photoelectric select{font:inherit;color:var(--fg);background:var(--faint);max-width:100%;padding:6px;border-radius:6px}
+    .photoelectric :focus-visible{outline:2px solid var(--blue);outline-offset:4px}.photoelectric select{font:inherit;color:var(--fg);background:var(--control-bg);max-width:100%;padding:6px;border-radius:6px}
     .photoelectric .explanation{font-size:14px;line-height:1.7;color:var(--fg);margin:0}.photoelectric .lab{font-size:12px;line-height:1.6;padding:12px;margin:20px 0 0}
     .photoelectric .lab summary{font-size:13px}.photoelectric .lab .btn{font-size:12px;padding:7px 10px;margin:12px 4px 0 0}.photoelectric svg{display:block;width:100%}
     </style><div class="modes" role="group" aria-label="${t.modes.join(' / ')}">
@@ -105,7 +105,7 @@ export function mount(el) {
   }
   function draw() {
     if (!colours || !metal || !W) return;
-    const { fg, muted, faint, accent, blue, green } = colours, beam = beamColour(nm, muted), plate = W * .68;
+    const { fg, muted, faint, accent, blue, green } = colours, beam = beamColour(nm, muted, document.documentElement.dataset.theme === 'light' ? 30 : 60), plate = W * .68;
     ctx.clearRect(0, 0, W, H); ctx.font = '12px Inter, system-ui'; ctx.textAlign = 'center';
     ctx.fillStyle = muted; ctx.fillText(nm < 380 ? t.uv : wave ? t.wave : t.photons, W / 2, 24);
     ctx.fillStyle = beam; ctx.globalAlpha = brightness; ctx.beginPath(); ctx.arc(W * .1, 104, 15, 0, Math.PI * 2); ctx.fill(); ctx.globalAlpha = 1;
@@ -121,7 +121,7 @@ export function mount(el) {
     if (electrons.length) { ctx.textAlign = 'right'; ctx.fillText('electron', W - 4, 54); }
     ctx.textAlign = 'left'; ctx.strokeStyle = faint; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(0, 192); ctx.lineTo(W, 192); ctx.stroke();
     ctx.fillStyle = fg; ctx.fillText(wave ? t.bucket : t.quantum, 8, 218);
-    ctx.fillStyle = wave ? blue : beam; ctx.fillText(wave ? `${fmt(bucket)} / ${fmt(metal.phi)} eV` : `hν = ${fmt(light)} eV`, 8, 242);
+    ctx.fillStyle = wave ? blue : fg; ctx.fillText(wave ? `${fmt(bucket)} / ${fmt(metal.phi)} eV` : `hν = ${fmt(light)} eV`, 8, 242);
     const X = v => 8 + Math.min(8, v) / 8 * (W - 24), value = wave ? bucket : light, y = 254;
     ctx.strokeStyle = faint; ctx.strokeRect(8, y, W - 24, 24);
     ctx.fillStyle = wave ? blue : beam; ctx.fillRect(8, y, X(wave ? value : Math.min(value, metal.phi)) - 8, 24);
@@ -171,6 +171,7 @@ export function mount(el) {
   $('.record').addEventListener('click', () => { if (wave || !brightness) return;
     if (!points.some(p => p.f === nu / 1e14)) points.push({ f: nu / 1e14, v: stoppingVoltage(nu, metal.phi) }); measurements(); });
   $('.clear').addEventListener('click', () => { points = []; measurements(); });
+  window.addEventListener('sophon:themechange', resize);
   new ResizeObserver(resize).observe(cv); addEventListener('resize', resize);
   new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; cancelAnimationFrame(frame); previous = 0; if (visible) frame = requestAnimationFrame(tick); }).observe(el);
   resize(); update(); document.fonts?.ready.then(resize);

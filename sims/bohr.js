@@ -50,7 +50,7 @@ export function mount(el) {
   el.innerHTML = `<style>
     .bohr .segments{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));border:1px solid var(--faint);border-radius:10px;overflow:hidden;margin-bottom:12px}
     .bohr button{font:inherit;line-height:1.4;color:var(--muted);background:transparent;border:1px solid var(--faint);border-radius:8px;padding:9px 10px;cursor:pointer}
-    .bohr .segments button{font-size:13px;border:0;border-radius:0;padding:10px 6px}.bohr button[aria-pressed=true]{color:var(--fg);background:var(--faint);box-shadow:inset 0 -2px var(--accent)}
+    .bohr .segments button{font-size:13px;border:0;border-radius:0;padding:10px 6px}.bohr button[aria-pressed=true]{color:var(--fg);background:var(--control-bg);box-shadow:inset 0 -2px var(--accent)}
     .bohr button:disabled{opacity:.3;cursor:default}.bohr :focus-visible{outline:2px solid var(--blue);outline-offset:3px}.bohr [hidden]{display:none!important}
     .bohr .model-label{display:block;margin:16px 0 8px;color:var(--fg)}.bohr .explanation{font-size:14px;line-height:1.7;color:var(--fg);margin:8px 0 0}
     .bohr .controls{display:grid;gap:12px}.bohr .level-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.bohr .levels{display:flex;gap:5px}.bohr .levels button{min-width:35px;padding:7px}
@@ -68,7 +68,8 @@ export function mount(el) {
     const at = Math.max(0, i), f = (nm - stops[at]) / (stops[at + 1] - stops[at]);
     const rgb = hex => hex.match(/\w\w/g).map(v => parseInt(v, 16));
     const a = rgb(PALETTE[Math.min(6, at)].slice(1)), b = rgb(PALETTE[Math.min(6, at + 1)].slice(1));
-    return `rgb(${a.map((v, k) => Math.round(v + (b[k] - v) * f)).join(',')})`;
+    const shade = document.documentElement.dataset.theme === 'light' ? .5 : 1;
+    return `rgb(${a.map((v, k) => Math.round((v + (b[k] - v) * f) * shade)).join(',')})`;
   };
   function explain() {
     const nm = wavelength(m, n), names = n === 2 && m <= 6 ? ['H-alpha', 'H-beta', 'H-gamma', 'H-delta'][m - 3] : m === 2 && n === 1 ? 'Lyman-alpha' : '';
@@ -122,7 +123,7 @@ export function mount(el) {
         }
         ctx.globalAlpha = Math.min(1, .3 + Math.log1p(p.count) / 4);
         line(X(nm), y, X(nm), y + height, colour(nm), 2); ctx.globalAlpha = 1;
-        if (!tab) label(`${fmt(nm)} nm`, Math.max(left + 35, Math.min(right - 35, X(nm))), y - 33, colour(nm), 'center');
+        if (!tab) label(`${fmt(nm)} nm`, Math.max(left + 35, Math.min(right - 35, X(nm))), y - 33, colours.fg, 'center');
       }
       if (tab && $('.measured input').checked) MEASURED_BALMER.forEach((p, i) => {
         const x = X(p.nm), ly = y - 34 - (i % 2) * 17, tx = x + (W < 520 ? [0, 10, 0, -10][i] : 0);
@@ -166,7 +167,8 @@ export function mount(el) {
     ctx.clearRect(0, 0, W, H); ctx.font = '12px Inter, system-ui';
     if (tab) {
       label(t.tube, W / 2, 24, colours.fg, 'center');
-      ctx.shadowBlur = 14 + flash * 10; ctx.shadowColor = '#ff4fa3'; line(35, 56, W - 35, 56, '#ff6fb5', 8); // hydrogen discharge glows pink-magenta (Hα + blue/violet lines) ctx.shadowBlur = 0;
+      // Hydrogen discharge glows pink-magenta (Hα + blue/violet lines).
+      ctx.shadowBlur = 14 + flash * 10; ctx.shadowColor = colours['tube-glow']; line(35, 56, W - 35, 56, colours.tube, 8); ctx.shadowBlur = 0;
       spectrum(150, H - 300); return;
     }
     const compact = W < 520, top = compact ? 255 : 55, bottom = compact && model ? 525 : 315, lx = compact ? 24 : W * .43;
@@ -189,7 +191,7 @@ export function mount(el) {
   function resize() {
     W = cv.clientWidth; H = tab ? 440 : W < 520 && model ? 690 : 480;
     const dpr = devicePixelRatio || 1; cv.width = Math.round(W * dpr); cv.height = H * dpr; cv.style.height = `${H}px`; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    const css = getComputedStyle(document.documentElement); colours = Object.fromEntries(['fg', 'muted', 'faint', 'accent'].map(k => [k, css.getPropertyValue(`--${k}`).trim()])); draw();
+    const css = getComputedStyle(document.documentElement); colours = Object.fromEntries(['fg', 'muted', 'faint', 'accent', 'tube', 'tube-glow'].map(k => [k, css.getPropertyValue(`--${k}`).trim()])); draw();
   }
   function tick(now) {
     const dt = previous ? Math.min(.05, (now - previous) / 1000) : 0; previous = now; time += dt;
@@ -223,6 +225,7 @@ export function mount(el) {
     else if (b.matches('.reset')) update(true);
   });
   $('.measured input').addEventListener('change', draw);
+  window.addEventListener('sophon:themechange', resize);
   new ResizeObserver(resize).observe(cv);
   new IntersectionObserver(([entry]) => { visible = entry.isIntersecting && !document.hidden; cancelAnimationFrame(frame); previous = 0; if (visible) frame = requestAnimationFrame(tick); }).observe(cv);
   document.addEventListener('visibilitychange', () => { visible = !document.hidden && cv.getBoundingClientRect().bottom > 0 && cv.getBoundingClientRect().top < innerHeight; cancelAnimationFrame(frame); previous = 0; if (visible) frame = requestAnimationFrame(tick); });

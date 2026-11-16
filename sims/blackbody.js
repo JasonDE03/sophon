@@ -41,7 +41,7 @@ export function mount(el) {
   el.innerHTML = `<style>
     .blackbody .modes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border:1px solid var(--faint);border-radius:12px;overflow:hidden;margin-bottom:12px}
     .blackbody button{cursor:pointer;font:inherit;line-height:1.4;background:transparent;color:var(--muted)}
-    .blackbody .modes button{border:0;padding:10px 6px;font-size:13px}.blackbody button[aria-pressed=true]{color:var(--fg);background:var(--faint);box-shadow:inset 0 -2px var(--accent)}
+    .blackbody .modes button{border:0;padding:10px 6px;font-size:13px}.blackbody button[aria-pressed=true]{color:var(--fg);background:var(--control-bg);box-shadow:inset 0 -2px var(--accent)}
     .blackbody .controls{display:grid;gap:16px}.blackbody label{flex-wrap:wrap;min-width:0}.blackbody [hidden]{display:none!important}
     .blackbody .presets{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
     .blackbody .presets button{border:1px solid var(--faint);border-radius:12px;padding:8px;font-size:12px}
@@ -82,7 +82,7 @@ export function mount(el) {
     W = cv.clientWidth; const dpr = devicePixelRatio || 1;
     cv.width = Math.round(W * dpr); cv.height = H * dpr; cv.style.height = `${H}px`; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     const css = getComputedStyle(document.documentElement);
-    colours = Object.fromEntries(['fg', 'muted', 'faint', 'accent', 'blue', 'green'].map(k => [k, css.getPropertyValue(`--${k}`).trim()]));
+    colours = Object.fromEntries(['fg', 'muted', 'faint', 'accent', 'blue', 'green', 'glow-surround'].map(k => [k, css.getPropertyValue(`--${k}`).trim()]));
     draw();
   }
   function wrapped(text, x, y, width, colour, align = 'left') {
@@ -102,11 +102,13 @@ export function mount(el) {
     ctx.clearRect(0, 0, W, H); ctx.font = '12px Inter, system-ui'; ctx.textAlign = 'left';
     if (mode === 0) {
       const x = W * (compact ? .5 : .11), y = compact ? 36 : 177, radius = compact ? 18 : Math.min(30, W * .065), rgb = kelvinToRgb(T);
+      // A dark surround preserves the actual temperature colour on warm paper.
+      ctx.fillStyle = colours['glow-surround']; ctx.beginPath(); ctx.arc(x, y, radius * 2, 0, 2 * Math.PI); ctx.fill();
       const glow = ctx.createRadialGradient(x, y, radius * .5, x, y, radius * 1.8);
       glow.addColorStop(0, rgb); glow.addColorStop(1, `${rgb.slice(0, -1).replace('rgb(', 'rgba(')},0)`);
       ctx.fillStyle = glow; ctx.beginPath(); ctx.arc(x, y, radius * 1.8, 0, 2 * Math.PI); ctx.fill();
       ctx.fillStyle = rgb; ctx.beginPath(); ctx.arc(x, y, radius, 0, 2 * Math.PI); ctx.fill();
-      wrapped(t.colour, x, y + radius + 28, compact ? W - 8 : W * .22 - 16, muted, 'center');
+      wrapped(t.colour, x, y + radius * 2 + 20, compact ? W - 8 : W * .22 - 16, muted, 'center');
     }
     if (data) wrapped(t.title, left, 24, W - left - 4, fg);
     else {
@@ -168,6 +170,7 @@ export function mount(el) {
   $('input[type=checkbox]').addEventListener('input', draw);
   el.querySelectorAll('[data-mode]').forEach(b => b.addEventListener('click', () => { mode = +b.dataset.mode; update(); }));
   el.querySelectorAll('[data-temperature]').forEach(b => b.addEventListener('click', () => { temperatures[0] = +b.dataset.temperature; update(); }));
+  window.addEventListener('sophon:themechange', resize);
   new ResizeObserver(resize).observe(cv); addEventListener('resize', resize);
   new IntersectionObserver(([entry]) => { if (entry.isIntersecting) draw(); }).observe(el);
   resize(); update(); document.fonts?.ready.then(resize);

@@ -1,5 +1,8 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<html lang="en"><head><meta charset="utf-8">
+<meta name="color-scheme" content="dark light"><meta name="theme-color" content="#0b0b0d">
+<script>(()=>{let t;try{t=localStorage.getItem('sophon-theme')}catch{}t=t==='light'||t==='dark'?t:matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';document.documentElement.dataset.theme=t;document.querySelector('meta[name="theme-color"]').content=t==='light'?'#faf8f3':'#0b0b0d'})();</script>
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Sophon — The experiments that shaped physics</title>
 <meta name="description" content="The experiments that shaped physics, told in historical order, with simulations you can run yourself.">
 <meta property="og:type" content="website">
@@ -19,7 +22,7 @@
 <script defer src="../site.js"></script>
 </head>
 <body class="home-page">
-<header class="site-header"><nav aria-label="Main navigation"><a class="brand" href="/en/">sophon</a><span class="links"><span class="lang-switch" aria-label="Language"><a href="/vi/" data-lang="vi" lang="vi">VI</a> <span aria-hidden="true">|</span> <strong aria-current="true">EN</strong></span></span></nav></header>
+<header class="site-header"><nav aria-label="Main navigation"><a class="brand" href="/en/">sophon</a><span class="links"><span class="lang-switch" aria-label="Language"><a href="/vi/" data-lang="vi" lang="vi">VI</a> <span aria-hidden="true">|</span> <strong aria-current="true">EN</strong></span><button class="theme-toggle" type="button" aria-label="Switch to light theme"><svg class="theme-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg><svg class="theme-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 13.2A9 9 0 0 1 10.8 3.5a9 9 0 1 0 9.7 9.7Z"/></svg></button></span></nav></header>
 <main>
 <section class="hero">
 <h1>sophon</h1>

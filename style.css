@@ -1,10 +1,22 @@
-/* Sophon: dark, minimal, reading-first. Sims read --fg/--muted/--faint/--accent/--blue/--green. */
+/* Sophon: light and dark, minimal, reading-first. Sims read --fg/--muted/--faint/--accent/--blue/--green. */
 :root {
   --bg:#0b0b0d; --card:#121215; --line:#222227;
   --fg:#e9e7e2; --muted:#8e8d93; --faint:#4a4950;
   --accent:#f0b35a; --blue:#6aa8ff; --green:#5fd38d;
+  --popover-shadow:#0005; --control-bg:var(--faint);
+  --tube:#ff6fb5; --tube-glow:#ff4fa3;
+  --glass:var(--fg); --silver:var(--bg); --glow-surround:transparent;
   --serif:"Newsreader", Georgia, serif; --sans:"Inter", system-ui, sans-serif;
   color-scheme:dark;
+}
+:root[data-theme="light"] {
+  --bg:#faf8f3; --card:#ffffff; --line:#e6e1d6;
+  --fg:#1c1b19; --muted:#625e57; --faint:#b9b3a6;
+  --accent:#b45309; --blue:#1d4ed8; --green:#15803d;
+  --popover-shadow:#1c1b1926; --control-bg:var(--line);
+  --tube:#b51662; --tube-glow:#c52876;
+  --glass:#e9e7e2; --silver:#0b0b0d; --glow-surround:#242329;
+  color-scheme:light;
 }
 * { box-sizing:border-box; }
 html { background:var(--bg); }
@@ -92,7 +104,7 @@ dfn[data-def]::after { content:attr(data-def); display:none; position:absolute; 
   width:max-content; max-width:min(320px, 80vw, calc(100% - 40px)); margin-top:1.8em; z-index:10;
   padding:12px 14px; border:1px solid var(--line); border-radius:8px; background:var(--card);
   color:var(--fg); font:400 14px/1.6 var(--sans); text-align:left; overflow-wrap:anywhere;
-  box-shadow:0 8px 24px #0005; }
+  box-shadow:0 8px 24px var(--popover-shadow); }
 dfn[data-def].open::after, dfn[data-def]:focus-visible::after { display:block; }
 @media (hover: hover) and (pointer: fine) {
   dfn[data-def]:not(.dismissed):hover::after { display:block; }
@@ -116,7 +128,7 @@ ol.episodes li > a, ol.episodes li > span { display:grid; grid-template-columns:
 ol.episodes li > a:hover { background:var(--card); }
 ol.episodes li > a:hover .t { color:var(--accent); }
 ol.episodes .n, ol.episodes .y { font:500 13px var(--sans); color:var(--muted); font-variant-numeric:tabular-nums; }
-ol.episodes .soon { opacity:.42; }
+ol.episodes .soon { color:var(--muted); }
 .soon { color:var(--muted); }
 .sources { font:14px/1.6 var(--sans); color:var(--muted); }
 
@@ -130,7 +142,7 @@ ol.episodes .soon { opacity:.42; }
 .episode-nav > a:hover { border-color:var(--accent); }
 .episode-nav > a:focus-visible { outline:2px solid var(--blue); outline-offset:4px; }
 .episode-nav > .next { text-align:right; }
-.episode-nav > .soon { opacity:.5; }
+.episode-nav > .soon { color:var(--muted); }
 .episode-nav > * > span { display:block; margin-bottom:8px; color:var(--muted);
   font:500 12px/1.5 var(--sans); }
 @media (max-width:599px) {
@@ -187,7 +199,15 @@ ol.episodes .soon { opacity:.42; }
 /* Shared language-aware header and author footer. */
 .site-header { border-bottom:1px solid var(--line); margin-bottom:64px; }
 .site-header nav { max-width:680px; margin:0 auto; padding:22px 20px; border:0; }
-.site-header .links { align-items:center; gap:22px; }
+.site-header .links { align-items:center; gap:12px; }
+.theme-toggle { display:inline-flex; flex:none; align-items:center; justify-content:center;
+  width:32px; height:32px; padding:6px; border:1px solid var(--line); border-radius:50%;
+  background:transparent; color:var(--muted); cursor:pointer; transition:color .15s; }
+.theme-toggle:hover { color:var(--fg); }
+.theme-toggle:focus-visible { outline:2px solid var(--blue); outline-offset:4px; }
+.theme-toggle svg { width:18px; height:18px; }
+.theme-moon, :root[data-theme="light"] .theme-sun { display:none; }
+:root[data-theme="light"] .theme-moon { display:block; }
 .lang-switch { display:inline-flex; align-items:center; gap:8px; padding:6px 11px;
   border:1px solid var(--line); border-radius:999px; color:var(--faint); font:400 12px/1.4 var(--sans); }
 .lang-switch strong { color:var(--fg); font-weight:600; }
@@ -198,7 +218,7 @@ ol.episodes .soon { opacity:.42; }
 .social-links a { display:inline-flex; padding:6px; color:var(--muted); }
 .social-links a:hover { color:var(--fg); }
 .social-links svg { width:22px; height:22px; }
-.author-footer p { margin:16px 0 0; color:var(--faint); font:400 13px/1.6 var(--sans); }
+.author-footer p { margin:16px 0 0; color:var(--muted); font:400 13px/1.6 var(--sans); }
 .site-header a:focus-visible, .social-links a:focus-visible, .page-toc a:focus-visible {
   outline:2px solid var(--blue); outline-offset:4px; }
 

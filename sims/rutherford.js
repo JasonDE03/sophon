@@ -86,13 +86,13 @@ export function mount(el) {
   el.innerHTML = `<style>
     .rutherford .segments{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border:1px solid var(--faint);border-radius:12px;overflow:hidden;margin-bottom:12px}
     .rutherford button{cursor:pointer;font:inherit;line-height:1.4;background:transparent;color:var(--muted);border:1px solid var(--faint);border-radius:8px;padding:8px}
-    .rutherford .segments button{border:0;border-radius:0;padding:10px 6px;font-size:13px}.rutherford button[aria-pressed=true]{color:var(--fg);background:var(--faint);box-shadow:inset 0 -2px var(--accent)}
+    .rutherford .segments button{border:0;border-radius:0;padding:10px 6px;font-size:13px}.rutherford button[aria-pressed=true]{color:var(--fg);background:var(--control-bg);box-shadow:inset 0 -2px var(--accent)}
     .rutherford .controls{display:grid;gap:16px}.rutherford label{flex-wrap:wrap;min-width:0}.rutherford [hidden]{display:none!important}
     .rutherford .models{grid-template-columns:repeat(2,minmax(0,1fr));margin:8px 0 0}.rutherford .model-label{color:var(--fg)}
     .rutherford input[type=range]{appearance:none;width:100%;height:8px;border-radius:8px;background:var(--faint);margin:8px 0}
     .rutherford input[type=range]::-webkit-slider-thumb{appearance:none;width:18px;height:18px;border-radius:50%;background:var(--fg);border:3px solid var(--accent)}
     .rutherford input[type=range]::-moz-range-thumb{width:12px;height:12px;border-radius:50%;background:var(--fg);border:3px solid var(--accent)}
-    .rutherford :focus-visible{outline:2px solid var(--blue);outline-offset:4px}.rutherford select{font:inherit;color:var(--fg);background:var(--faint);max-width:100%;padding:6px;border-radius:6px}
+    .rutherford :focus-visible{outline:2px solid var(--blue);outline-offset:4px}.rutherford select{font:inherit;color:var(--fg);background:var(--control-bg);max-width:100%;padding:6px;border-radius:6px}
     .rutherford .explanation{font-size:14px;line-height:1.7;color:var(--fg);margin:0}.rutherford .records{width:100%;border-collapse:collapse;font-size:12px;margin:12px 0;line-height:1.6;font-variant-numeric:tabular-nums}
     .rutherford th,.rutherford td{text-align:right;padding:3px 8px;border-bottom:1px solid var(--line)}.rutherford th{color:var(--fg);font-weight:500}
     </style><div class="segments modes" role="group" aria-label="${t.modes.join(' / ')}">${t.modes.map((s, i) => `<button type="button" data-mode="${i}">${s}</button>`).join('')}</div>
@@ -196,6 +196,7 @@ export function mount(el) {
   el.querySelectorAll('[data-model]').forEach(e => e.addEventListener('click', () => { model = +e.dataset.model; $('.impact').max = model ? 200 : 140000; $('.impact').step = model ? 1 : 1000; $('.impact').value = model ? 20 : 20000; update(true); }));
   $('.count').addEventListener('click', () => { points.push({ a: angle, n: poisson(model ? meanR(angle) : 1e6 * Math.exp(-.5 * angle ** 2)) }); explain(); draw(); });
   $('.clear').addEventListener('click', () => { points = []; total = back = credit = 0; tracks = []; explain(); draw(); });
+  window.addEventListener('sophon:themechange', resize);
   new ResizeObserver(resize).observe(cv); addEventListener('resize', resize);
   new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; animate(); }).observe(cv);
   resize(); update(); document.fonts?.ready.then(resize);

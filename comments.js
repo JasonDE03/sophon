@@ -96,12 +96,17 @@ async function mount(section) {
     if (widget !== undefined) window.turnstile.reset(widget);
   };
   const renderWidget = () => {
-    widget = window.turnstile.render(widgetBox, { sitekey: siteKey, theme: 'dark', language: lang, size: 'flexible',
+    widget = window.turnstile.render(widgetBox, { sitekey: siteKey, theme: document.documentElement.dataset.theme, language: lang, size: 'flexible',
       callback: value => { token = value; submit.disabled = posting; },
       'expired-callback': () => { token = ''; submit.disabled = true; },
       'error-callback': () => { token = ''; submit.disabled = true; status.textContent = t.verification_failed; },
     });
   };
+  window.addEventListener('sophon:themechange', () => {
+    if (widget === undefined) return;
+    window.turnstile.remove(widget); widget = undefined; token = ''; submit.disabled = true;
+    renderWidget();
+  });
   const loadWidget = async () => {
     if (authorToken || widgetLoading) return;
     widgetLoading = true;

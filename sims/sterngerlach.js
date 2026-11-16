@@ -49,7 +49,7 @@ export function mount(el) {
     .sterngerlach{font:14px/1.6 Inter,system-ui}.sterngerlach [hidden]{display:none!important}
     .sterngerlach .segments{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;margin:0 0 14px}
     .sterngerlach button{font:inherit;font-size:13px;line-height:1.5;color:var(--fg);background:transparent;border:1px solid var(--faint);border-radius:8px;padding:9px;cursor:pointer}
-    .sterngerlach button[aria-pressed=true]{background:var(--faint);box-shadow:inset 0 -2px var(--accent)}.sterngerlach button:disabled{opacity:.5;cursor:default}
+    .sterngerlach button[aria-pressed=true]{background:var(--control-bg);box-shadow:inset 0 -2px var(--accent)}.sterngerlach button:disabled{opacity:.5;cursor:default}
     .sterngerlach :focus-visible{outline:2px solid var(--blue);outline-offset:3px}.sterngerlach .controls{gap:12px 20px;margin:12px 0}
     .sterngerlach .strength{display:flex;flex-wrap:wrap}.sterngerlach input[type=range]{width:150px}.sterngerlach .model-label{display:block;margin-bottom:6px}
     .sterngerlach .explanation{color:var(--fg);font-size:14px;margin:14px 0 0}.sterngerlach .thought{color:var(--muted);margin:8px 0 14px}
@@ -106,17 +106,18 @@ export function mount(el) {
   function drawPlate() {
     const c = canvases[1].getContext('2d'), h = 320, left = 36, right = W - 12, top = 36, bottom = 269, mid = (top + bottom) / 2, scale = 750000;
     c.clearRect(0, 0, W, h); c.font = '12px Inter'; text(c, t.front, 0, 19, colours.fg);
-    // Light glass and dark silver use the site's foreground/background pigments.
-    c.fillStyle = colours.fg; c.fillRect(left, top, right - left, bottom - top);
+    // Keep the photographic plate light with dark silver in either theme.
+    c.fillStyle = colours.glass; c.fillRect(left, top, right - left, bottom - top);
+    c.strokeStyle = colours.muted; c.strokeRect(left, top, right - left, bottom - top);
     c.save(); c.beginPath(); c.rect(left, top, right - left, bottom - top); c.clip();
-    c.fillStyle = colours.bg; c.globalAlpha = .08 + .92 * developed;
+    c.fillStyle = colours.silver; c.globalAlpha = .08 + .92 * developed;
     for (const p of dots) c.fillRect(left + (p.x + 1) / 2 * (right - left), mid - p.z * scale, 1.2, 1.2);
     c.restore();
     text(c, t.z, 0, 33); text(c, t.x, (left + right) / 2, 313, colours.muted, 'center');
     [-1, 0, 1].forEach(x => { const px = left + (x + 1) / 2 * (right - left); line(c, px, bottom, px, bottom + 5); text(c, String(x).replace('-', '−'), px, bottom + 20, colours.muted, x === 1 ? 'right' : x === -1 ? 'left' : 'center'); });
-    line(c, right - 18, top + 14, right - 18, top + 89, colours.bg, 2); line(c, right - 22, top + 14, right - 14, top + 14, colours.bg); line(c, right - 22, top + 89, right - 14, top + 89, colours.bg);
-    text(c, `${fmt(.1, 1)} mm`, right - 28, top + 30, colours.bg, 'right');
-    if (developed) text(c, t.sulfide, left + 8, bottom - 12, colours.bg);
+    line(c, right - 18, top + 14, right - 18, top + 89, colours.silver, 2); line(c, right - 22, top + 14, right - 14, top + 14, colours.silver); line(c, right - 22, top + 89, right - 14, top + 89, colours.silver);
+    text(c, `${fmt(.1, 1)} mm`, right - 28, top + 30, colours.silver, 'right');
+    if (developed) text(c, t.sulfide, left + 8, bottom - 12, colours.silver);
   }
   function boxLayout(i) { return W < 600 ? { x: 26, y: 75 + i * 164, w: 90 } : { x: 26 + i * (W / axes().length), y: 95, w: 90 }; }
   function bridge(i) {
@@ -160,7 +161,7 @@ export function mount(el) {
   }
   function resize() {
     W = el.clientWidth - 2 * parseFloat(getComputedStyle(el).paddingLeft);
-    const css = getComputedStyle(document.documentElement); colours = Object.fromEntries(['fg', 'bg', 'faint', 'muted', 'accent', 'blue'].map(k => [k, css.getPropertyValue(`--${k}`).trim()]));
+    const css = getComputedStyle(document.documentElement); colours = Object.fromEntries(['fg', 'bg', 'faint', 'muted', 'accent', 'blue', 'glass', 'silver'].map(k => [k, css.getPropertyValue(`--${k}`).trim()]));
     setup(canvases[0], W < 520 ? 270 : 220); setup(canvases[1], 320); setup(canvases[2], W < 600 ? axes().length * 164 + 48 : 250); draw();
   }
   function draw() { if (!colours || !W) return; if (tab) drawSeries(); else { drawSide(); drawPlate(); } }
@@ -205,6 +206,7 @@ export function mount(el) {
   });
   $('.magnet').addEventListener('change', e => { on = e.target.checked; resetPlate(); explain(); draw(); });
   $('input[type=range]').addEventListener('input', e => { gradient = +e.target.value; resetPlate(); explain(); draw(); });
+  window.addEventListener('sophon:themechange', resize);
   new ResizeObserver(resize).observe(el);
   function visibility() {
     cancelAnimationFrame(frame); previous = 0;
