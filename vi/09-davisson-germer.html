@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="vi"><head><meta charset="utf-8">
+<meta name="color-scheme" content="dark light"><meta name="theme-color" content="#0b0b0d">
+<script>(()=>{let t;try{t=localStorage.getItem('sophon-theme')}catch{}t=t==='light'||t==='dark'?t:matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';document.documentElement.dataset.theme=t;document.querySelector('meta[name="theme-color"]').content=t==='light'?'#faf8f3':'#0b0b0d'})();</script>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Bài 9: Davisson–Germer: electron giao thoa — Sophon</title>
+<meta name="description" content="Một bình khí lỏng phát nổ, một tấm niken hỏng, và bằng chứng đầu tiên rằng electron là sóng. Kèm mô phỏng thí nghiệm 1927 và từng electron qua hai khe.">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Sophon">
+<meta property="og:title" content="Bài 9: Davisson–Germer: electron giao thoa">
+<meta property="og:description" content="Một bình khí lỏng phát nổ, một tấm niken hỏng, và bằng chứng đầu tiên rằng electron là sóng. Kèm mô phỏng thí nghiệm 1927 và từng electron qua hai khe.">
+<meta property="og:url" content="https://sophon.jasonng-1407.workers.dev/vi/09-davisson-germer">
+<meta property="og:image" content="https://sophon.jasonng-1407.workers.dev/og/vi-09.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="vi_VN">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 16 16%27><circle cx=%278%27 cy=%278%27 r=%275%27 fill=%27%23f0b35a%27/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&display=swap">
+<link rel="stylesheet" href="../style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"
+  onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]})"></script>
+<script type="module" src="../learn.js"></script>
+<script type="module" src="../comments.js"></script>
+<!-- Cloudflare Web Analytics (cookieless) --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "1c73ba8208884aa18a21e8f30432ae9f"}'></script>
+<script defer src="../site.js"></script>
+</head><body class="episode-page">
+<header class="site-header"><nav aria-label="Điều hướng chính"><a class="brand" href="/vi/">sophon</a><span class="links"><a href="/vi/">Mục lục</a><span class="lang-switch" aria-label="Ngôn ngữ"><strong aria-current="true">VI</strong> <span aria-hidden="true">|</span> <a href="/en/09-davisson-germer.html" data-lang="en" lang="en">EN</a></span><button class="theme-toggle" type="button" aria-label="Chuyển sang giao diện sáng"><svg class="theme-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg><svg class="theme-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 13.2A9 9 0 0 1 10.8 3.5a9 9 0 1 0 9.7 9.7Z"/></svg></button></span></nav></header>
+<div class="episode-layout">
+<aside class="page-toc"></aside>
+<main>
+
+<p class="year">Bài 9 · 1925–1927</p>
+<h1>Davisson–Germer: electron giao thoa</h1>
+<p class="lede">Một bình khí hoá lỏng phát nổ trong phòng thí nghiệm ở New York làm hỏng một mẫu kim loại. Hai năm sau, chính mẫu kim loại hỏng ấy cho thấy electron giao thoa như sóng, đúng như de Broglie dự đoán.</p>
+<aside class="tldr"><p class="tldr-label">Tóm tắt</p><p>Ở Bell Labs, Clinton Davisson và Lester Germer bắn electron vào một khối niken để nghiên cứu cách electron bật khỏi kim loại, không hề nhằm kiểm chứng de Broglie. Sau một tai nạn năm 1925, khối niken kết tinh lại thành vài tinh thể lớn, và electron bật lại mạnh hẳn ở một vài góc riêng. Năm 1927, họ chỉ ra rằng các góc ấy khớp với bước sóng de Broglie của electron: electron bị tinh thể nhiễu xạ như tia X. Cùng năm, George Thomson ở Scotland thấy điều tương tự theo một cách khác, và sóng vật chất trở thành sự thật thực nghiệm.</p></aside>
+
+<h2>Một câu hỏi của ngành điện thoại</h2>
+<p>Clinton Davisson làm việc cho Western Electric, công ty sản xuất thiết bị cho hệ thống điện thoại Mỹ, từ năm 1917; phòng nghiên cứu của công ty trở thành Bell Telephone Laboratories năm 1925. Các bóng đèn điện tử khuếch đại tín hiệu điện thoại hoạt động nhờ chùm electron đập vào các tấm kim loại, nên câu hỏi electron bật khỏi kim loại thế nào có giá trị thực tế.</p>
+<p>Từ năm 1921, Davisson cùng Charles Kunsman bắn electron chậm vào các tấm kim loại và đếm số electron bật ra ở từng góc. Họ thấy những cực đại lạ, và giải thích rằng electron bật khác nhau tuỳ nó chạm tới lớp vỏ nào của nguyên tử. Năm 1925, ở Göttingen, sinh viên 21 tuổi Walter Elsasser đọc luận án của de Broglie và đề xuất rằng chính các cực đại ấy là dấu hiệu electron <dfn tabindex="0" data-def="Hiện tượng sóng bị lệch hướng và tạo vân khi gặp vật cản hay khe có kích thước cỡ bước sóng của nó.">nhiễu xạ</dfn> như sóng. Bài báo ngắn của Elsasser không gây được tiếng vang, và Davisson không để ý tới nó.</p>
+
+<h2>Tự làm lại thí nghiệm</h2>
+<p>Mô phỏng có hai phần. Phần đầu dựng lại thí nghiệm năm 1927: electron được tăng tốc qua một <dfn tabindex="0" data-def="Hiệu điện thế dùng để đẩy electron cho nhanh lên; electron qua 54 vôn có năng lượng 54 electronvôn.">điện thế</dfn> vài chục vôn, bắn thẳng vào một <dfn tabindex="0" data-def="Chất rắn mà các nguyên tử xếp thành hàng lối đều đặn, lặp lại theo một khuôn mẫu.">tinh thể</dfn> niken, và một máy đếm quét quanh để đo số electron bật lại ở mỗi góc. Phần sau là một thí nghiệm mãi về sau mới làm được: cho từng electron một đi qua hai khe hẹp.</p>
+<div class="ask predict" data-answer="1">
+<p class="ask-q">Bắn từng electron một qua hai khe hẹp, mỗi lần chỉ một electron. Sau hàng nghìn electron, các chấm trên màn sẽ tạo thành hình gì?</p>
+<div class="ask-options"><button type="button">Hai vệt, đối diện hai khe</button><button type="button">Nhiều vạch sáng tối xen kẽ</button><button type="button">Một vệt mờ trải đều</button></div>
+<p class="ask-why" hidden>Nhiều vạch sáng tối xen kẽ: vân giao thoa của một sóng đi qua cả hai khe, dù mỗi electron chỉ đến màn như một chấm duy nhất. Thử ở phần "Từng electron qua hai khe".</p>
+</div>
+<div class="sim" id="sim"></div>
+<script type="module">import { mount } from '../sims/davisson.js'; mount(document.getElementById('sim'));</script>
+<p>Hãy để ý:</p>
+<ul>
+<li>Ở "Thí nghiệm 1927", tăng điện thế từ 40 V: một "cái gờ" nhô lên trên đồ thị cực, mạnh nhất ở 54 V, ở góc khoảng 50°. Đó chính là hình Davisson và Germer công bố.</li>
+<li>Đường mảnh màu xanh là góc tính từ bước sóng de Broglie và khoảng cách 0,215 nm giữa các hàng nguyên tử niken. Đổi điện thế, góc dự đoán dịch theo, vì bước sóng thay đổi.</li>
+<li>Chuyển sang "Chỉ là hạt": đường cong trơn, không có gờ nào. Chỉ sóng mới cho cực đại ở một góc riêng.</li>
+<li>Ở "Từng electron qua hai khe", vài chục electron đầu trông hoàn toàn ngẫu nhiên. Chờ vài nghìn: vân hiện ra. Đóng một khe, hoặc đặt máy dò xem electron đi khe nào: vân biến mất.</li>
+</ul>
+
+<h2>Bình khí lỏng phát nổ</h2>
+<p>Tháng 4/1925, trong lúc tấm niken đang được nung nóng trong ống chân không, một bình khí hoá lỏng phát nổ. Ống thuỷ tinh vỡ, không khí tràn vào và làm tấm niken nóng bị oxy hoá nặng. Để cứu mẫu, Davisson và người trợ lý trẻ Lester Germer nung nó rất lâu ở nhiệt độ cao để khử lớp oxit. Khi đo lại, cách electron bật ra đã thay đổi hoàn toàn.</p>
+<p>Họ mất một thời gian mới tìm ra lý do: quá trình nung đã làm tấm niken, vốn gồm vô số tinh thể li ti, kết tinh lại thành vài tinh thể lớn. Electron giờ chỉ va vào những hàng nguyên tử xếp đều đặn. Davisson và Germer nghĩ electron bị dẫn đi giữa các mặt tinh thể, nhưng giả thuyết ấy không khớp: góc của các cực đại thay đổi theo vận tốc electron.</p>
+
+<h2>Oxford, mùa hè 1926</h2>
+<p>Tháng 8/1926, Davisson sang Anh dự hội nghị của Hiệp hội Anh vì sự tiến bộ của khoa học ở Oxford. Tại đó, ông được nghe Max Born nhắc tới chính các đường cong cũ của mình như bằng chứng cho sóng electron. Davisson mang các số liệu mới tới cho Born và những người khác xem. Lúc này cơ học sóng của Schrödinger ở bài 7 vừa ra đời, và sóng vật chất không còn có vẻ viển vông.</p>
+<p>Trở về New York, Davisson và Germer bắt đầu tìm có hệ thống. Đầu năm 1927, họ thấy một cực đại rõ rệt: ở điện thế 54 V, số electron bật lại mạnh nhất ở góc 50°. Bước sóng de Broglie của electron 54 V khớp với khoảng cách giữa các hàng nguyên tử niken mà tia X đã đo trước đó. Bài báo ngắn đăng trên <i>Nature</i> ngày 16/4/1927 viết thận trọng rằng kết quả "dĩ nhiên rất gợi ý" các ý tưởng của cơ học sóng.</p>
+<p>Cùng năm, ở Aberdeen, Scotland, George Paget Thomson cùng sinh viên Alexander Reid bắn electron nhanh xuyên qua những màng kim loại rất mỏng và thấy các vòng nhiễu xạ trên phim ảnh. Cha ông, J. J. Thomson, là người năm 1897 chỉ ra tia âm cực gồm những hạt mang điện, tức electron. Ba mươi năm sau, người con chứng minh chính những hạt ấy nhiễu xạ như sóng. Davisson và G. P. Thomson cùng nhận giải Nobel Vật lý năm 1937.</p>
+
+<details class="deep"><summary>Toán vừa đủ <span class="skip">(có thể bỏ qua)</span></summary>
+<p>Electron được tăng tốc qua điện thế $V$ có động năng $eV$, động lượng $p = \sqrt{2m_e eV}$ và bước sóng de Broglie</p>
+$$\lambda = \frac{h}{\sqrt{2m_e eV}} \approx \frac{1{,}226}{\sqrt{V}}\ \text{nm}.$$
+<p>Với $V = 54$ V, $\lambda \approx 0{,}167$ nm, cỡ khoảng cách giữa các nguyên tử. Electron bắn thẳng vào mặt tinh thể niken, các hàng nguyên tử trên bề mặt cách nhau $d = 0{,}215$ nm đóng vai trò như một cách tử. Sóng phản xạ từ các hàng kế nhau tăng cường nhau khi hiệu đường đi bằng một bước sóng:</p>
+$$d\sin\theta = \lambda \quad\Longrightarrow\quad \sin\theta = \frac{0{,}167}{0{,}215} \approx 0{,}776,\quad \theta \approx 50{,}9^\circ.$$
+<p>Davisson và Germer đo được 50°. Chênh lệch nhỏ đến từ chỗ electron đi vào trong tinh thể bị các nguyên tử hút nên nhanh lên một chút, bước sóng bên trong ngắn hơn; bài báo đầy đủ của họ tính cả hiệu ứng này.</p>
+<details><summary>Thêm: vì sao cực đại mạnh nhất ở 54 V</summary>
+<p>Tinh thể không chỉ có một lớp nguyên tử trên mặt mà nhiều lớp chồng lên nhau. Điều kiện $d\sin\theta = \lambda$ chỉ nói các hàng trong cùng một lớp tăng cường nhau. Muốn cực đại thật mạnh, sóng phản xạ từ các lớp sâu hơn cũng phải cùng pha, và điều đó chỉ xảy ra ở một số điện thế nhất định. Với mặt tinh thể và hướng mà Davisson và Germer dùng, hai điều kiện gặp nhau gần 54 V. Mô phỏng ở trên chỉ bắt chước hình dạng gờ tăng rồi giảm này, không tính đầy đủ cấu trúc ba chiều.</p>
+</details>
+<p>Muốn tự tính góc nhiễu xạ ở các điện thế khác nhau, mô phỏng từng electron qua hai khe và vẽ vòng nhiễu xạ của Thomson bằng Python? <a href="https://colab.research.google.com/github/JasonDE03/sophon/blob/main/lab/09_davisson_germer.ipynb">Mở notebook trong Google Colab</a>: chạy ngay trên trình duyệt, không cần cài gì.</p>
+</details>
+<h2>Những hiểu lầm phổ biến</h2>
+<p><b>"Davisson và Germer làm thí nghiệm để kiểm chứng de Broglie."</b> Họ nghiên cứu electron bật khỏi kim loại từ năm 1921 vì những câu hỏi của ngành điện thoại. Cực đại xuất hiện nhờ một tai nạn năm 1925, và họ chỉ hướng tới sóng electron sau khi nghe Born ở Oxford năm 1926.</p>
+<p><b>"Davisson và Germer đã làm thí nghiệm khe đôi với electron."</b> Thí nghiệm của họ là electron phản xạ trên tinh thể. Khe đôi thật với electron do Claus Jönsson ở Tübingen làm năm 1961. Cho từng electron một đi qua và nhìn vân hiện dần lên thì đến năm 1974 mới làm được, bởi Pier Giorgio Merli, Gian Franco Missiroli và Giulio Pozzi ở Bologna; năm 1989 nhóm của Akira Tonomura ở Hitachi làm lại với độ rõ nét nổi tiếng. Trong bộ <i>Bài giảng Vật lý</i> dựa trên các bài giảng năm 1961–1963, Richard Feynman còn viết rằng thí nghiệm này "chưa bao giờ được làm đúng theo cách này", có lẽ vì không biết tới kết quả của Jönsson.</p>
+
+<section class="quiz">
+<h2>Trắc nghiệm</h2>
+<div class="ask" data-answer="2">
+<p class="ask-q">Vì sao tai nạn năm 1925 lại quan trọng?</p>
+<div class="ask-options"><button type="button">Vì nó làm electron chạy nhanh hơn</button><button type="button">Vì nó làm sạch chân không trong ống</button><button type="button">Vì khi được nung để cứu, tấm niken kết tinh lại thành vài tinh thể lớn</button></div>
+<p class="ask-why" hidden>Với vài tinh thể lớn, electron gặp những hàng nguyên tử đều đặn như một cách tử, nên hiệu ứng nhiễu xạ hiện rõ thành các cực đại ở những góc riêng.</p>
+</div>
+<div class="ask" data-answer="0">
+<p class="ask-q">Tăng điện thế tăng tốc electron thì góc nhiễu xạ thay đổi thế nào?</p>
+<div class="ask-options"><button type="button">Nhỏ lại, vì electron nhanh hơn có bước sóng ngắn hơn</button><button type="button">Lớn lên, vì electron nhanh hơn bật mạnh hơn</button><button type="button">Không đổi</button></div>
+<p class="ask-why" hidden>Bước sóng $\lambda = h/p$ giảm khi electron nhanh hơn, và $\sin\theta = \lambda/d$ giảm theo. Chính việc góc dịch theo vận tốc đã thuyết phục Davisson và Germer rằng đây là nhiễu xạ.</p>
+</div>
+<div class="ask" data-answer="1">
+<p class="ask-q">Trong thí nghiệm khe đôi với từng electron, điều gì làm vân giao thoa biến mất?</p>
+<div class="ask-options"><button type="button">Bắn electron chậm lại, từng cái một</button><button type="button">Đặt máy dò để biết mỗi electron đi qua khe nào</button><button type="button">Dùng nhiều electron hơn</button></div>
+<p class="ask-why" hidden>Bắn từng electron một vẫn cho vân. Nhưng khi biết được electron đi khe nào, vân biến mất. Bài 10 kể Bohr và Einstein đã tranh luận về chính điều này.</p>
+</div>
+</section>
+
+<h2>Hệ quả</h2>
+<p>Từ năm 1927, sóng vật chất không còn là giả thuyết. Nhiễu xạ electron trở thành công cụ để nghiên cứu bề mặt vật liệu, và kính hiển vi điện tử ra đời từ những năm 1930 dựa trên chính bước sóng rất ngắn của electron. Về sau, người ta làm giao thoa với nơtron, nguyên tử, và cả phân tử lớn gồm hàng chục nguyên tử carbon.</p>
+<p>Nhưng vân giao thoa của từng electron để lại một câu hỏi khó chịu: một electron đi qua khe nào, và vì sao biết được điều đó lại xoá mất vân? Tháng 10/1927, các nhà vật lý hàng đầu thế giới gặp nhau ở Brussels, và Einstein mang câu hỏi ấy ra thách thức Bohr.</p>
+<p><a href="10-solvay.html">→ Bài 10: Hội nghị Solvay: Bohr và Einstein (1927)</a></p>
+
+<details class="deep"><summary>Nguồn</summary>
+<ul class="sources">
+<li>C. Davisson và L. H. Germer, "The scattering of electrons by a single crystal of nickel", <i>Nature</i> 119, 558 (1927); "Diffraction of electrons by a crystal of nickel", <i>Phys. Rev.</i> 30, 705 (1927).</li>
+<li>C. Davisson và C. H. Kunsman, "The scattering of low speed electrons by platinum and magnesium", <i>Phys. Rev.</i> 22, 242 (1923).</li>
+<li>W. Elsasser, "Bemerkungen zur Quantenmechanik freier Elektronen", <i>Naturwissenschaften</i> 13, 711 (1925).</li>
+<li>G. P. Thomson và A. Reid, "Diffraction of cathode rays by a thin film", <i>Nature</i> 119, 890 (1927).</li>
+<li>C. Jönsson, "Elektroneninterferenzen an mehreren künstlich hergestellten Feinspalten", <i>Z. Phys.</i> 161, 454 (1961).</li>
+<li>P. G. Merli, G. F. Missiroli và G. Pozzi, "On the statistical aspect of electron interference phenomena", <i>Am. J. Phys.</i> 44, 306 (1976). A. Tonomura và cộng sự, "Demonstration of single-electron buildup of an interference pattern", <i>Am. J. Phys.</i> 57, 117 (1989).</li>
+<li>R. K. Gehrenbeck, "Electron diffraction: fifty years ago", <i>Physics Today</i> 31(1), 34 (1978).</li>
+<li>H. A. Medicus, "Fifty years of matter waves", <i>Physics Today</i> 27(2), 38 (1974).</li>
+<li>R. P. Feynman, R. B. Leighton và M. Sands, <i>The Feynman Lectures on Physics</i>, tập III, chương 1 (1965).</li>
+</ul>
+</details>
+<section class="comments" data-episode="09"><h2>Bình luận</h2></section>
+<nav class="episode-nav" aria-label="Các bài">
+  <a class="prev" href="08-heisenberg.html"><span>← Bài trước</span>Nguyên lý bất định Heisenberg</a>
+  <a class="next" href="10-solvay.html"><span>Bài sau →</span>Hội nghị Solvay: Bohr và Einstein</a>
+</nav>
+</main>
+</div>
+<footer class="author-footer">
+  <div class="social-links">
+    <a href="https://www.facebook.com/nam.son.178624/" aria-label="Facebook" rel="me noopener" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 21v-8h3l.5-4H14V6.5c0-1 .4-1.5 1.5-1.5H18V2h-3c-3 0-5 1.8-5 5v2H7v4h3v8"/></svg></a>
+    <a href="https://www.instagram.com/fet.sofn/" aria-label="Instagram" rel="me noopener" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".8" fill="currentColor" stroke="none"/></svg></a>
+    <a href="https://github.com/JasonDE03/sophon" aria-label="GitHub" rel="me noopener" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 21v-3c-3 .8-3-1.5-4-2m10 5v-4c0-1-.3-1.6-.8-2 2.7-.3 5.3-1.3 5.3-6A4.7 4.7 0 0 0 18.2 6c.2-1 .1-2-.3-3-1.5 0-2.8.8-3.5 1.3a12 12 0 0 0-4.8 0C8.9 3.8 7.6 3 6.1 3c-.4 1-.5 2-.3 3A4.7 4.7 0 0 0 4.5 9c0 4.7 2.6 5.7 5.3 6-.5.4-.8 1-.8 2"/></svg></a>
+  </div>
+  <p>© 2026 Nguyen Phan Nam Son</p>
+</footer>
+</body></html>

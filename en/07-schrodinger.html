@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="color-scheme" content="dark light"><meta name="theme-color" content="#0b0b0d">
+<script>(()=>{let t;try{t=localStorage.getItem('sophon-theme')}catch{}t=t==='light'||t==='dark'?t:matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';document.documentElement.dataset.theme=t;document.querySelector('meta[name="theme-color"]').content=t==='light'?'#faf8f3':'#0b0b0d'})();</script>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Episode 7: The Schrödinger equation — Sophon</title>
+<meta name="description" content="Why a wave equation picks out the energy levels of atoms by itself, and how an electron gets through a wall it cannot climb. With a simulation that lets you solve the equation.">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Sophon">
+<meta property="og:title" content="Episode 7: The Schrödinger equation">
+<meta property="og:description" content="Why a wave equation picks out the energy levels of atoms by itself, and how an electron gets through a wall it cannot climb. With a simulation that lets you solve the equation.">
+<meta property="og:url" content="https://sophon.jasonng-1407.workers.dev/en/07-schrodinger">
+<meta property="og:image" content="https://sophon.jasonng-1407.workers.dev/og/en-07.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="en_GB">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 16 16%27><circle cx=%278%27 cy=%278%27 r=%275%27 fill=%27%23f0b35a%27/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&display=swap">
+<link rel="stylesheet" href="../style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"
+  onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]})"></script>
+<script type="module" src="../learn.js"></script>
+<script type="module" src="../comments.js"></script>
+<!-- Cloudflare Web Analytics (cookieless) --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "1c73ba8208884aa18a21e8f30432ae9f"}'></script>
+<script defer src="../site.js"></script>
+</head><body class="episode-page">
+<header class="site-header"><nav aria-label="Main navigation"><a class="brand" href="/en/">sophon</a><span class="links"><a href="/en/">Contents</a><span class="lang-switch" aria-label="Language"><a href="/vi/07-schrodinger.html" data-lang="vi" lang="vi">VI</a> <span aria-hidden="true">|</span> <strong aria-current="true">EN</strong></span><button class="theme-toggle" type="button" aria-label="Switch to light theme"><svg class="theme-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg><svg class="theme-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 13.2A9 9 0 0 1 10.8 3.5a9 9 0 1 0 9.7 9.7Z"/></svg></button></span></nav></header>
+<div class="episode-layout">
+<aside class="page-toc"></aside>
+<main>
+
+<p class="year">Episode 7 · 1925–1926</p>
+<h1>The Schrödinger equation: quantisation appears by itself</h1>
+<p class="lede">At the end of 1925, a 38-year-old professor in Zürich went to the mountains for Christmas, taking with him the question de Broglie had left unanswered: what law governs the propagation of the electron’s wave? He returned with an equation that remains a foundation of chemistry and solid-state physics.</p>
+<aside class="tldr"><p class="tldr-label">Summary</p><p>De Broglie said that an electron was accompanied by a wave, but did not say how that wave propagated. At the end of 1925, Erwin Schrödinger found its equation. Put an electron in a hydrogen atom, and the equation has physically acceptable solutions only at certain energies, which are exactly Bohr’s energy levels: quantisation emerges from the mathematics itself. Schrödinger himself misunderstood what the wave was; Max Born supplied the interpretation still accepted today: the wave gives the probability of finding the electron.</p></aside>
+
+<h2>A wave without an equation</h2>
+<p>In the summer of 1925, Werner Heisenberg, aged 23, put forward a new quantum mechanics, later called matrix mechanics. It calculated many things correctly, but was very abstract: no orbits, no picture of what happened inside an atom, just tables of numbers multiplied according to unfamiliar rules.</p>
+<p>Meanwhile, de Broglie’s idea of matter waves from episode 6 was spreading through Einstein’s paper. Erwin Schrödinger, professor of theoretical physics at the University of Zürich, sought out the thesis. On 3 November 1925, he wrote to Einstein: “A few days ago, I read with great interest the ingenious theses of Louis de Broglie, which I finally got hold of”.</p>
+<p>Felix Bloch, then a student in Zürich, recalled many years later that Schrödinger presented de Broglie’s work at a seminar, and Peter Debye remarked that talking about waves without a <dfn tabindex="0" data-def="An equation describing how a wave changes in space and time, such as the equation for waves on a string or sound waves.">wave equation</dfn> was “rather childish”. A few weeks later, Schrödinger opened the next seminar: “My colleague Debye suggested that one should have a wave equation; well, I have found one.” This is one person’s recollection, written fifty years later, so the details may be inaccurate; the sequence of events, however, agrees with Schrödinger’s correspondence.</p>
+
+<h2>Do the experiment yourself</h2>
+<p>This time, what you “repeat” is the solution of Schrödinger’s equation itself. The first part puts an electron in a <dfn tabindex="0" data-def="A region where an electron has lower potential energy than in its surroundings and is therefore confined, like a ball at the bottom of a hole.">potential well</dfn> 1 nm wide and 4 eV deep. You choose an energy; the computer solves the equation from left to right and plots the resulting <dfn tabindex="0" data-def="The wave associated with an electron in quantum mechanics, usually written ψ (psi). Its squared magnitude gives the probability of finding the electron at each position.">wave function</dfn> ψ. Outside the well, the electron does not have enough energy to remain, so the wave must decay on both sides. The second part fires an electron at a thin wall.</p>
+<div class="ask predict" data-answer="1">
+<p class="ask-q">An electron approaches a thin wall. Its energy is below what it needs to get over the wall. What happens?</p>
+<div class="ask-options"><button type="button">It always bounces back</button><button type="button">Most of it bounces back, but some gets through</button><button type="button">It always passes through</button></div>
+<p class="ask-why" hidden>Some gets through. The electron’s wave penetrates the wall and decays, but does not immediately fall to zero, so if the wall is thin enough, some wave remains on the far side. This is tunnelling, which has no counterpart in classical physics. Try the “Tunnelling” part of the simulation.</p>
+</div>
+<div class="sim" id="sim"></div>
+<script type="module">import { mount } from '../sims/schrodinger.js'; mount(document.getElementById('sim'));</script>
+<p>Notice:</p>
+<ul>
+<li>In “Hunt for the energy levels”, at most energies the wave’s right-hand tail shoots up or plunges down towards infinity. Such a wave cannot describe an electron.</li>
+<li>Move the slider slowly: there are places where the tail switches from shooting up to plunging down. Right at the change of direction, the wave decays on both sides. That is an energy level. This well has only four such levels.</li>
+<li>At the first level, the wave never crosses the axis inside the well; at the second, it crosses once; at the third, twice. No extra rule is needed: the requirement that “the wave must decay” selects the levels by itself.</li>
+<li>In “Tunnelling”, a 1 eV electron meets a 1.5 eV barrier. A classical particle always bounces back, but part of the wave gets through. Increase the barrier width: the transmitted fraction falls very rapidly, exponentially.</li>
+</ul>
+
+<h2>The holiday in Arosa</h2>
+<p>Schrödinger spent Christmas 1925 in Arosa, a Swiss mountain town. On 27 December, he wrote from there to Wilhelm Wien, editor of <i>Annalen der Physik</i>, saying that he was struggling with a new atomic theory.</p>
+<p>He first tried an equation that included relativity. Applied to hydrogen, it gave approximately the right energy levels but got the finer details of the spectrum wrong, in ways later found to involve the electron spin discussed in episode 5. He abandoned that version and turned to a simpler, non-relativistic equation.</p>
+<p>This time everything fitted. On 27 January 1926, <i>Annalen der Physik</i> received the first paper, entitled “Quantisation as an <dfn tabindex="0" data-def="In Schrödinger’s problem, the special energy values at which the equation has physically acceptable solutions.">eigenvalue</dfn> problem”. From the equation, he derived exactly the hydrogen energy levels that Bohr had had to introduce by hand, with no extra assumption about whole numbers. Three further instalments followed within five months. In March 1926, he also proved that his wave mechanics and Heisenberg’s matrix mechanics gave the same results.</p>
+<p>Physicists welcomed it warmly. Wave mechanics used mathematics every physicist knew, differential equations, and offered a much easier picture to grasp than Heisenberg’s tables of numbers. In a letter of 2 April 1926, Max Planck told Schrödinger that he read the paper “as an inquisitive child listens in suspense to the solution of a riddle that he has puzzled about for a long time”.</p>
+
+<h2>A wave of what?</h2>
+<p>The equation was right, but nobody yet knew what the wave ψ was. Schrödinger thought the electron really was a wave: ψ described its electric charge spread through space. This interpretation immediately ran into two problems. A free wave packet keeps spreading, while an electron in a cloud chamber always leaves a narrow track. And for two electrons, ψ lives not in ordinary three-dimensional space but in a six-dimensional space.</p>
+<p>In June 1926, Max Born in Göttingen used Schrödinger’s equation to calculate electron collisions with atoms, and proposed another interpretation: the wave was not the electron, but gave the probability of finding it. In his manuscript, he wrote that the probability was proportional to ψ; at proof stage, he added a note saying that, on closer consideration, it was proportional to the square of ψ. This interpretation is still accepted today, and earned Born the Nobel Prize in 1954. Schrödinger never really accepted it.</p>
+
+<details class="deep"><summary>Just enough maths <span class="skip">(optional)</span></summary>
+<p>For an electron moving in one dimension $x$ in a potential $V(x)$, at a definite energy $E$, Schrödinger’s equation is</p>
+$$-\frac{\hbar^2}{2m}\,\frac{d^2\psi}{dx^2} + V(x)\,\psi = E\,\psi.$$
+<p>Where $E > V$, it gives wave-like solutions with exactly the de Broglie wavelength $h/p$. Where $E < V$, the solutions do not oscillate but grow or decay exponentially, $e^{\pm\kappa x}$ with $\kappa = \sqrt{2m(V-E)}/\hbar$. Outside the well, only the decaying solution is acceptable. Requiring decay on both sides can be satisfied only at certain discrete energies: the eigenvalues.</p>
+<p>For a well of width $L$ and infinite depth, the levels are $E_n = n^2 h^2/(8mL^2)$. With $L = 1$ nm, $E_1 \approx 0.38$ eV. The well in the simulation is only 4 eV deep, so the wave leaks out a little and the levels are slightly lower: 0.26; 1.04; 2.27 and 3.75 eV.</p>
+<p>For a barrier of height $V_0$ and width $w$, when $E < V_0$ and the barrier is sufficiently thick, the transmission probability is approximately</p>
+$$T \approx \frac{16E(V_0-E)}{V_0^2}\,e^{-2\kappa w}.$$
+<p>A 1 eV electron and a 1.5 eV barrier 1 nm thick give $\kappa \approx 3.6$ nm⁻¹ and $T \approx 0.26\%$. With a 2 nm barrier, $T \approx 0.0002\%$. Doubling the thickness reduces the probability by more than a thousand times. This sensitivity is what allows tunnelling to explain why the lifetimes of radioactive nuclei differ by tens of orders of magnitude.</p>
+<details><summary>More: the full, time-dependent equation</summary>
+<p>The equation above is the case of a definite energy. The general form, which Schrödinger published in the fourth instalment in 1926, describes how ψ changes with time:</p>
+$$i\hbar\,\frac{\partial\psi}{\partial t} = -\frac{\hbar^2}{2m}\,\frac{\partial^2\psi}{\partial x^2} + V(x)\,\psi.$$
+<p>The imaginary number $i$ on the left makes ψ necessarily complex, one reason it cannot be an ordinary material wave. The “Tunnelling” part of the simulation solves this very equation step by step in time.</p>
+</details>
+<p>Want to solve the equation yourself in Python, including for the hydrogen atom, and try tunnelling through different barriers? <a href="https://colab.research.google.com/github/JasonDE03/sophon/blob/main/lab/07_schrodinger.ipynb">Open the notebook in Google Colab</a>: it runs in your browser, nothing to install.</p>
+</details>
+<h2>Common misconceptions</h2>
+<p><b>“Schrödinger derived his equation from first principles.”</b> The equation cannot be derived from classical physics. Schrödinger arrived at it through the analogy between mechanics and optics that Hamilton had identified in the nineteenth century, together with a good deal of guesswork. It was accepted because it gave the right results, rather than because it had been proved.</p>
+<p><b>“Schrödinger knew ψ was a probability wave.”</b> He thought ψ was the electron spread out as a real cloud of charge. The probability interpretation was Born’s, and Schrödinger opposed it throughout his life. His famous cat of 1935 was devised precisely to expose what he saw as an absurdity in that interpretation.</p>
+<p><b>“Wave mechanics and matrix mechanics are competing theories.”</b> They look quite different, but as early as 1926 Schrödinger proved that the two approaches gave the same results. Today they are regarded as two ways of writing the same quantum mechanics.</p>
+
+<section class="quiz">
+<h2>Quiz</h2>
+<div class="ask" data-answer="2">
+<p class="ask-q">In Schrödinger’s theory, why does an electron in an atom have only certain energy levels?</p>
+<div class="ask-options"><button type="button">Because Schrödinger kept Bohr’s whole-number rule</button><button type="button">Because the electron receives energy only in packets</button><button type="button">Because the equation has acceptable solutions that decay at large distances only at certain energies</button></div>
+<p class="ask-why" hidden>At most energies, the solution shoots off to infinity and cannot describe an electron. Only at a few special energies, the eigenvalues, does the solution decay at large distances. Quantisation emerges by itself, without an extra rule.</p>
+</div>
+<div class="ask" data-answer="0">
+<p class="ask-q">In Born’s interpretation, what does the squared magnitude of ψ at a position tell us?</p>
+<div class="ask-options"><button type="button">The probability of finding the electron there</button><button type="button">The amount of the electron’s charge located there</button><button type="button">The electron’s speed there</button></div>
+<p class="ask-why" hidden>Born proposed in 1926 that $|\psi|^2$ is a probability density. The “spread-out charge” interpretation was Schrödinger’s, and could not be sustained.</p>
+</div>
+<div class="ask" data-answer="1">
+<p class="ask-q">In tunnelling, how does doubling the wall’s thickness change the probability that an electron gets through?</p>
+<div class="ask-options"><button type="button">It halves</button><button type="button">It falls many times over, exponentially</button><button type="button">It stays the same</button></div>
+<p class="ask-why" hidden>The wave decays exponentially inside the wall, so the transmission probability falls exponentially with thickness. For a 1 eV electron and a 1.5 eV barrier, increasing the width from 1 nm to 2 nm reduces the probability by more than a thousand times.</p>
+</div>
+</section>
+
+<h2>What came next</h2>
+<p>In 1928, George Gamow, and independently Ronald Gurney and Edward Condon, used tunnelling to explain alpha decay: the alpha particle is trapped in the nucleus behind a wall it could never climb in classical physics, but its wave can get out. Today, tunnelling underlies the scanning tunnelling microscope, which lets us see individual atoms, and the flash memory in phones.</p>
+<p>Born’s interpretation left an uncomfortable question: if the wave gives only probabilities, does the electron have a definite position and velocity before we measure it? Early in 1927, Heisenberg showed that the two could not both be known to arbitrary precision.</p>
+<p><a href="08-heisenberg.html">→ Episode 8: Heisenberg's uncertainty principle (1927)</a></p>
+
+<details class="deep"><summary>Sources</summary>
+<ul class="sources">
+<li>E. Schrödinger, "Quantisierung als Eigenwertproblem", <i>Ann. Phys.</i> 79, 361 (1926); 79, 489 (1926); 80, 437 (1926); 81, 109 (1926).</li>
+<li>E. Schrödinger, "Über das Verhältnis der Heisenberg–Born–Jordanschen Quantenmechanik zu der meinen", <i>Ann. Phys.</i> 79, 734 (1926).</li>
+<li>W. Heisenberg, "Über quantentheoretische Umdeutung kinematischer und mechanischer Beziehungen", <i>Z. Phys.</i> 33, 879 (1925).</li>
+<li>M. Born, "Zur Quantenmechanik der Stoßvorgänge", <i>Z. Phys.</i> 37, 863 (1926).</li>
+<li>G. Gamow, "Zur Quantentheorie des Atomkernes", <i>Z. Phys.</i> 51, 204 (1928); R. W. Gurney and E. U. Condon, "Wave mechanics and radioactive disintegration", <i>Nature</i> 122, 439 (1928).</li>
+<li>F. Bloch, "Heisenberg and the early days of quantum mechanics", <i>Physics Today</i> 29(12), 23 (1976).</li>
+<li>K. Przibram (ed.), <i>Letters on Wave Mechanics: Schrödinger, Planck, Einstein, Lorentz</i>, Philosophical Library (1967).</li>
+<li>W. Moore, <i>Schrödinger: Life and Thought</i>, Cambridge University Press (1989).</li>
+</ul>
+</details>
+<section class="comments" data-episode="07"><h2>Comments</h2></section>
+<nav class="episode-nav" aria-label="Episodes">
+  <a class="prev" href="06-de-broglie.html"><span>← Previous</span>de Broglie and matter waves</a>
+  <a class="next" href="08-heisenberg.html"><span>Next →</span>Heisenberg's uncertainty principle</a>
+</nav>
+</main>
+</div>
+<footer class="author-footer">
+  <div class="social-links">
+    <a href="https://www.facebook.com/nam.son.178624/" aria-label="Facebook" rel="me noopener" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 21v-8h3l.5-4H14V6.5c0-1 .4-1.5 1.5-1.5H18V2h-3c-3 0-5 1.8-5 5v2H7v4h3v8"/></svg></a>
+    <a href="https://www.instagram.com/fet.sofn/" aria-label="Instagram" rel="me noopener" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".8" fill="currentColor" stroke="none"/></svg></a>
+    <a href="https://github.com/JasonDE03/sophon" aria-label="GitHub" rel="me noopener" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 21v-3c-3 .8-3-1.5-4-2m10 5v-4c0-1-.3-1.6-.8-2 2.7-.3 5.3-1.3 5.3-6A4.7 4.7 0 0 0 18.2 6c.2-1 .1-2-.3-3-1.5 0-2.8.8-3.5 1.3a12 12 0 0 0-4.8 0C8.9 3.8 7.6 3 6.1 3c-.4 1-.5 2-.3 3A4.7 4.7 0 0 0 4.5 9c0 4.7 2.6 5.7 5.3 6-.5.4-.8 1-.8 2"/></svg></a>
+  </div>
+  <p>© 2026 Nguyen Phan Nam Son</p>
+</footer>
+</body></html>

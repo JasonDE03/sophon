@@ -61,19 +61,21 @@ export function mount(el) {
     .debroglie .amplitude{font-size:12px;color:var(--muted)}.debroglie .amplitude-row{display:flex;align-items:center;gap:10px}
     .debroglie .bar{height:8px;flex:1;background:var(--faint);border-radius:4px;overflow:hidden}.debroglie .fill{height:100%;background:var(--accent)}
     .debroglie .object{grid-template-columns:repeat(4,minmax(0,1fr))}.debroglie .readout{font-size:20px;color:var(--accent);margin:14px 0;font-variant-numeric:tabular-nums}
-    @media(max-width:599px){.debroglie .views{grid-template-columns:minmax(0,1fr);gap:12px}.debroglie .slider{grid-template-columns:minmax(0,1fr)}.debroglie .object{grid-template-columns:repeat(2,minmax(0,1fr))}.debroglie .snaps span{flex-basis:100%}}
-    </style>${group('tab', t.tabs)}<section class="orbit-tab"><div class="views"><div><canvas class="orbit" role="img" aria-label="${t.aria[0]}"></canvas>
+    @media(max-width:599px){.debroglie .orbit-tab{display:flex;flex-direction:column}.debroglie .views{display:contents}.debroglie .orbit-view{order:0}.debroglie .orbit-controls{order:1}.debroglie .ladder{order:2;margin-top:16px}.debroglie .slider{grid-template-columns:minmax(0,1fr)}.debroglie .object{grid-template-columns:repeat(2,minmax(0,1fr))}.debroglie .snaps span{flex-basis:100%}}
+    </style>${group('tab', t.tabs)}<section class="orbit-tab"><div class="views"><div class="orbit-view"><canvas class="orbit" role="img" aria-label="${t.aria[0]}"></canvas>
     <div class="amplitude">${t.amplitude}<div class="amplitude-row"><div class="bar" role="meter" aria-label="${t.amplitude}" aria-valuemin="0" aria-valuemax="100"><div class="fill"></div></div><output class="amplitude-value"></output></div></div></div>
-    <canvas class="ladder" role="img" aria-label="${t.aria[1]}"></canvas></div><div class="controls"><label class="slider">${t.radius}<input class="radius" type="range" min="0.8" max="5.5" step="0.005" value="2.5"><output class="radius-value"></output></label>
-    <div class="snaps"><span>${t.snap}</span>${[1, 2, 3, 4, 5].map(n => `<button type="button" data-n="${n}" aria-pressed="false">n = ${n}</button>`).join('')}</div></div><p class="info"></p></section>
+    <canvas class="ladder" role="img" aria-label="${t.aria[1]}"></canvas></div><div class="orbit-controls"><div class="controls"><label class="slider">${t.radius}<input class="radius" type="range" min="0.8" max="5.5" step="0.005" value="2.5"><output class="radius-value"></output></label>
+    <div class="snaps"><span>${t.snap}</span>${[1, 2, 3, 4, 5].map(n => `<button type="button" data-n="${n}" aria-pressed="false">n = ${n}</button>`).join('')}</div></div><p class="info"></p><p class="explanation" aria-live="polite"></p></div></section>
     <section class="objects-tab" hidden>${group('object', OBJECTS.map(o => o[lang]))}<label class="slider">${t.speed}<input class="speed" type="range" min="0" max="1" step="0.001"><output class="speed-value"></output></label>
-    <canvas class="ruler" role="img" aria-label="${t.aria[2]}"></canvas><p class="readout"></p></section><p class="explanation" aria-live="polite"></p>`;
+    <canvas class="ruler" role="img" aria-label="${t.aria[2]}"></canvas><p class="readout"></p></section>`;
   const $ = s => el.querySelector(s), cvs = ['orbit', 'ladder', 'ruler'].map(k => $(`.${k}`));
   let tab = 0, object = 0, s = 2.5, v = OBJECTS[0].v, phase = 0, colours, visible = false, frame, previous = 0;
   const radius = () => s * s * A0, fitting = () => Math.abs(turns(radius()) - Math.round(turns(radius()))) < .03;
   function update() {
     const r = radius(), N = turns(r), n = Math.round(N), a = Math.round(100 * Math.min(1, residual(N))), o = OBJECTS[object], w = debroglie(o.m, v), ratio = o.size / w, k = sup(Math.round(Math.log10(ratio)));
     $('.orbit-tab').hidden = !!tab; $('.objects-tab').hidden = !tab;
+    const explanation = $('.explanation'), target = tab ? $('.objects-tab') : $('.orbit-controls');
+    if (explanation.parentElement !== target) target.append(explanation);
     el.querySelectorAll('[data-tab],[data-object],[data-n]').forEach(b => b.setAttribute('aria-pressed', b.dataset.tab !== undefined ? +b.dataset.tab === tab : b.dataset.object !== undefined ? +b.dataset.object === object : Math.abs(+b.dataset.n - s) < 1e-9));
     $('.radius').value = s; $('.radius-value').textContent = `${fmt(r / A0)} a₀ · ${fmt(r * 1e9, 3)} nm`;
     $('.amplitude-value').textContent = `${a}%`; $('.bar').setAttribute('aria-valuenow', a); $('.fill').style.width = `${100 * Math.min(1, residual(N))}%`;

@@ -103,4 +103,103 @@ assert.ok(residual(2.9) > 0 && residual(2.9) < 1);
 const davissonGermer = H / Math.sqrt(2 * ME * 1.602176634e-19 * 54);
 assert.ok(Math.abs(davissonGermer / 1.67e-10 - 1) < .005);
 assert.ok(Math.abs(debroglie(.145, 40) / 1.142e-34 - 1) < .01);
+// Davisson–Germer: surface-row diffraction and incoherent two-slit limits.
+{
+  const { electronWavelengthNm, peakAngleDeg, scatterModel, twoSlit, sampleTwoSlit } = await import('./sims/davisson.js');
+  assert.ok(Math.abs(electronWavelengthNm(54) / .1669 - 1) < .005);
+  assert.ok(Math.abs(peakAngleDeg(54) - 50.9) < .2);
+  assert.ok(Number.isNaN(peakAngleDeg(20)));
+  assert.equal(twoSlit(0, 'both'), 1);
+  assert.ok(twoSlit(.5, 'both') < 1e-12);
+  assert.ok(twoSlit(.5, 'detector') > .1);
+  const integrals = ['both', 'detector', 'one'].map(mode => {
+    let sum = 0;
+    for (let i = 0; i < 12000; i++) sum += twoSlit(-6 + (i + .5) * .001, mode) * .001;
+    return sum;
+  });
+  assert.ok(Math.abs(integrals[0] / integrals[1] - 1) < .02);
+  assert.ok(Math.abs(integrals[2] / integrals[1] - .5) < 1e-12);
+  assert.ok(scatterModel(peakAngleDeg(54), 54) > 2 * scatterModel(peakAngleDeg(54), 54, false));
+  let seed = 1927;
+  const rng = () => ((seed = (1664525 * seed + 1013904223) >>> 0) / 2 ** 32);
+  for (const mode of ['both', 'one', 'detector']) {
+    for (let i = 0; i < 1000; i++) { const u = sampleTwoSlit(mode, rng); assert.ok(u >= -6 && u <= 6); }
+  }
+}
+// Solvay: pure-state duality, screen limits and Gaussian recoil blur.
+{
+  const { visibility, screen, slitBlurFringes, recoilArgument } = await import('./sims/solvay.js');
+  assert.equal(visibility(0), 1);
+  assert.equal(visibility(1), 0);
+  assert.ok(Math.abs(visibility(.6) - .8) < 1e-12);
+  assert.equal(screen(0, 1), 1);
+  assert.ok(screen(.5, 1) < 1e-12);
+  const x = Math.PI * .5 * .25;
+  assert.ok(Math.abs(screen(.5, 0) - .5 * (Math.sin(x) / x) ** 2) < 1e-12);
+  assert.ok(screen(.5, 0) > .4);
+  for (const D of [.2, .5, .9]) assert.ok(Math.abs(slitBlurFringes(recoilArgument(D)) - visibility(D)) < 1e-9);
+  assert.equal(slitBlurFringes(recoilArgument(0)), 1);
+  assert.equal(slitBlurFringes(recoilArgument(1)), 0);
+}
+// Heisenberg: numerical Fourier widths and the microscope's SI product.
+{
+  const { H_SI, HBAR_SI, packet, spreadX, spreadK, microscope } = await import('./sims/heisenberg.js');
+  const widths = new Map();
+  for (const sigma of [.3, 1, 2, 3]) {
+    const x = Array.from({ length: 2401 }, (_, i) => (24 * i / 2400 - 12) / sigma);
+    const { re, im } = packet(x, 10, sigma);
+    const k = Array.from({ length: 201 }, (_, i) => 10 + sigma * (10 * i / 200 - 5));
+    const w = k.map(value => Math.exp(-((value - 10) ** 2) / (2 * sigma ** 2)));
+    const dx = spreadX(x, re, im), dk = spreadK(k, w);
+    widths.set(sigma, dx);
+    assert.ok(Math.abs(dx * dk / .5 - 1) < .01, `Gaussian uncertainty sigma=${sigma}`);
+    assert.ok(Math.abs(dx * 1e-9 * dk * HBAR_SI * 1e9 / (HBAR_SI / 2) - 1) < .01);
+  }
+  assert.ok(Math.abs(widths.get(1) / widths.get(2) / 2 - 1) < .01);
+  for (const lambda of [.001, .01, 1, 500, 1000]) {
+    for (const degrees of [5, 30, 60]) {
+      const a = microscope(lambda, degrees * Math.PI / 180);
+      const b = microscope(lambda / 2, degrees * Math.PI / 180);
+      assert.ok(Math.abs(a.product / H_SI - 1) < 1e-12);
+      assert.ok(Math.abs(a.dx * 1e-9 * a.dp / H_SI - 1) < 1e-12);
+      assert.ok(Math.abs(b.dx / a.dx - .5) < 1e-12);
+      assert.ok(Math.abs(b.dp / a.dp - 2) < 1e-12);
+    }
+  }
+}
+// Schrodinger: finite-well eigenvalues, barrier limits and unitary time evolution.
+{
+  const { C, HBAR, numerov, wellPotential, boundStates, transmission, evolve } = await import('./sims/schrodinger.js');
+  const levels = boundStates(4, 1);
+  assert.equal(levels.length, 4);
+  [0.2623, 1.0362, 2.2699, 3.7539].forEach((E, i) => assert.ok(Math.abs(levels[i] - E) < .002));
+  // A 400 eV well is still 3.793% below infinity; 1600 eV reaches 2%.
+  assert.ok(Math.abs(boundStates(1600, 1)[0] / (Math.PI ** 2 * C) - 1) < .02);
+  const free = numerov(1, () => 0, 0, 1, 1000), k = Math.sqrt(1 / C);
+  assert.ok(free.x instanceof Float64Array && free.psi instanceof Float64Array);
+  assert.equal(free.psi[0], 0); assert.equal(free.psi[1], 1e-6);
+  assert.ok(Math.abs(free.psi[1000] / (1e-6 * Math.sin(k) / Math.sin(k / 1000)) - 1) < 1e-9);
+  assert.equal(wellPotential(4, 1)(0), 0); assert.equal(wellPotential(4, 1)(.5), 4);
+  for (const E of [.2, 1, 3]) assert.ok(Math.abs(transmission(E, 0, .4) - 1) < 1e-12);
+  assert.ok(Math.abs(transmission(1, 1.5, .4) - .1800) < .001);
+  let previous = 1;
+  for (let j = 2; j <= 10; j++) {
+    const T = transmission(1, 1.5, j / 10); assert.ok(T < previous); previous = T;
+  }
+  assert.ok(Math.abs(transmission(1.5 - 1e-6, 1.5, .4) - transmission(1.5 + 1e-6, 1.5, .4)) < 1e-4);
+  assert.ok(Math.abs(transmission(1.5, 1.5, .4) - 1 / (1 + 1.5 * .4 ** 2 / (4 * C))) < 1e-12);
+  // Above-barrier interference has unit-transmission resonances.
+  assert.ok(Math.abs(transmission(1.5 + C * (Math.PI / .4) ** 2, 1.5, .4) - 1) < 1e-12);
+  const dx = .04, re = new Float64Array(2001), im = new Float64Array(2001), V = new Float64Array(2001);
+  for (let i = 1; i < re.length - 1; i++) {
+    const x = -40 + i * dx, a = Math.exp(-((x + 5) ** 2) / (4 * 2.5 ** 2)), phase = Math.sqrt(1 / C) * x;
+    re[i] = a * Math.cos(phase); im[i] = a * Math.sin(phase); V[i] = x >= 0 && x <= .4 ? 1.5 : 0;
+  }
+  const norm = () => re.reduce((sum, value, i) => sum + (value * value + im[i] ** 2) * dx, 0);
+  const normalization = Math.sqrt(norm());
+  for (let i = 0; i < re.length; i++) { re[i] /= normalization; im[i] /= normalization; }
+  evolve(re, im, V, dx, .04, 500);
+  assert.ok(Math.abs(norm() - 1) < 1e-6);
+  assert.equal(re[0], 0); assert.equal(im.at(-1), 0); assert.equal(HBAR, .6582119569);
+}
 console.log('ok');

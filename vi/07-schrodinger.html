@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="vi"><head><meta charset="utf-8">
+<meta name="color-scheme" content="dark light"><meta name="theme-color" content="#0b0b0d">
+<script>(()=>{let t;try{t=localStorage.getItem('sophon-theme')}catch{}t=t==='light'||t==='dark'?t:matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';document.documentElement.dataset.theme=t;document.querySelector('meta[name="theme-color"]').content=t==='light'?'#faf8f3':'#0b0b0d'})();</script>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Bài 7: Phương trình Schrödinger — Sophon</title>
+<meta name="description" content="Vì sao một phương trình sóng tự chọn ra các mức năng lượng của nguyên tử, và vì sao electron xuyên được qua bức tường mà nó không đủ sức vượt. Kèm mô phỏng để bạn tự giải phương trình.">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Sophon">
+<meta property="og:title" content="Bài 7: Phương trình Schrödinger">
+<meta property="og:description" content="Vì sao một phương trình sóng tự chọn ra các mức năng lượng của nguyên tử, và vì sao electron xuyên được qua bức tường mà nó không đủ sức vượt. Kèm mô phỏng để bạn tự giải phương trình.">
+<meta property="og:url" content="https://sophon.jasonng-1407.workers.dev/vi/07-schrodinger">
+<meta property="og:image" content="https://sophon.jasonng-1407.workers.dev/og/vi-07.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="vi_VN">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 16 16%27><circle cx=%278%27 cy=%278%27 r=%275%27 fill=%27%23f0b35a%27/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&display=swap">
+<link rel="stylesheet" href="../style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"
+  onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]})"></script>
+<script type="module" src="../learn.js"></script>
+<script type="module" src="../comments.js"></script>
+<!-- Cloudflare Web Analytics (cookieless) --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "1c73ba8208884aa18a21e8f30432ae9f"}'></script>
+<script defer src="../site.js"></script>
+</head><body class="episode-page">
+<header class="site-header"><nav aria-label="Điều hướng chính"><a class="brand" href="/vi/">sophon</a><span class="links"><a href="/vi/">Mục lục</a><span class="lang-switch" aria-label="Ngôn ngữ"><strong aria-current="true">VI</strong> <span aria-hidden="true">|</span> <a href="/en/07-schrodinger.html" data-lang="en" lang="en">EN</a></span><button class="theme-toggle" type="button" aria-label="Chuyển sang giao diện sáng"><svg class="theme-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg><svg class="theme-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 13.2A9 9 0 0 1 10.8 3.5a9 9 0 1 0 9.7 9.7Z"/></svg></button></span></nav></header>
+<div class="episode-layout">
+<aside class="page-toc"></aside>
+<main>
+
+<p class="year">Bài 7 · 1925–1926</p>
+<h1>Phương trình Schrödinger: lượng tử hoá tự hiện ra</h1>
+<p class="lede">Cuối năm 1925, một giáo sư 38 tuổi ở Zürich lên núi nghỉ Giáng sinh, mang theo câu hỏi de Broglie để lại: sóng của electron lan truyền theo quy luật nào? Ông trở về với một phương trình mà đến nay vẫn là nền móng của hoá học và vật lý chất rắn.</p>
+<aside class="tldr"><p class="tldr-label">Tóm tắt</p><p>De Broglie nói electron đi kèm một sóng, nhưng không cho biết sóng ấy lan truyền ra sao. Cuối năm 1925, Erwin Schrödinger tìm ra phương trình cho sóng đó. Đặt electron vào nguyên tử hydro, phương trình chỉ có lời giải hợp lý ở một số năng lượng nhất định, và đó đúng là các mức năng lượng của Bohr: lượng tử hoá tự hiện ra từ toán học. Chính Schrödinger lại hiểu sai sóng ấy là gì; Max Born mới đưa ra cách hiểu được chấp nhận đến nay: sóng cho biết xác suất tìm thấy electron.</p></aside>
+
+<h2>Một sóng chưa có phương trình</h2>
+<p>Mùa hè năm 1925, Werner Heisenberg, 23 tuổi, đưa ra một cơ học lượng tử mới, về sau gọi là cơ học ma trận. Nó tính đúng nhiều thứ, nhưng rất trừu tượng: không có quỹ đạo, không có hình ảnh nào về chuyện gì xảy ra bên trong nguyên tử, chỉ có những bảng số nhân với nhau theo quy tắc lạ.</p>
+<p>Cùng lúc đó, ý tưởng sóng vật chất của de Broglie ở bài 6 lan dần nhờ bài báo của Einstein. Erwin Schrödinger, giáo sư vật lý lý thuyết ở Đại học Zürich, tìm đọc luận án. Ngày 3/11/1925, ông viết cho Einstein rằng mấy hôm trước ông đã đọc "với sự hứng thú lớn" luận án tài tình của de Broglie, thứ mà cuối cùng ông mới kiếm được.</p>
+<p>Felix Bloch, khi ấy là sinh viên ở Zürich, kể lại nhiều năm sau: Schrödinger trình bày về de Broglie trong một buổi seminar, và Peter Debye nhận xét rằng nói về sóng mà không có <dfn tabindex="0" data-def="Phương trình cho biết một sóng thay đổi theo không gian và thời gian ra sao, như phương trình mô tả sóng trên dây đàn hay sóng âm.">phương trình sóng</dfn> thì hơi trẻ con. Vài tuần sau, Schrödinger mở đầu buổi seminar tiếp theo: "Đồng nghiệp Debye của tôi gợi ý rằng phải có một phương trình sóng. Vâng, tôi đã tìm ra một phương trình." Đây là hồi ức của một người, viết sau năm mươi năm, nên chi tiết có thể không chính xác; nhưng thứ tự các sự kiện thì khớp với thư từ của Schrödinger.</p>
+
+<h2>Tự làm lại thí nghiệm</h2>
+<p>Lần này thứ cần "làm lại" là giải chính phương trình của Schrödinger. Phần đầu đặt electron vào một <dfn tabindex="0" data-def="Một vùng mà ở đó electron có năng lượng thấp hơn xung quanh, nên bị giữ lại bên trong, như hòn bi nằm dưới đáy một cái hố.">giếng thế</dfn> rộng 1 nm, sâu 4 eV. Bạn chọn một năng lượng, máy tính giải phương trình từ bên trái sang phải và vẽ <dfn tabindex="0" data-def="Sóng gắn với electron trong cơ học lượng tử, thường ký hiệu là ψ (psi). Bình phương độ lớn của nó cho biết xác suất tìm thấy electron ở mỗi chỗ.">hàm sóng</dfn> ψ thu được. Bên ngoài giếng, electron không đủ năng lượng để ở lại, nên sóng phải tắt dần ở cả hai phía. Phần sau cho electron bắn vào một bức tường mỏng.</p>
+<div class="ask predict" data-answer="1">
+<p class="ask-q">Một electron bay tới một bức tường mỏng. Năng lượng của nó thấp hơn mức cần để vượt qua tường. Điều gì xảy ra?</p>
+<div class="ask-options"><button type="button">Luôn luôn bật lại</button><button type="button">Phần lớn bật lại, nhưng một phần lọt sang bên kia</button><button type="button">Luôn đi qua</button></div>
+<p class="ask-why" hidden>Một phần lọt qua. Sóng của electron thấm vào trong tường và tắt dần nhưng không về không ngay, nên nếu tường đủ mỏng, sóng còn lại ở phía bên kia. Đây là hiện tượng xuyên hầm, không có trong vật lý cổ điển. Thử ở phần "Xuyên hầm" của mô phỏng.</p>
+</div>
+<div class="sim" id="sim"></div>
+<script type="module">import { mount } from '../sims/schrodinger.js'; mount(document.getElementById('sim'));</script>
+<p>Hãy để ý:</p>
+<ul>
+<li>Ở "Tìm mức năng lượng", với hầu hết các năng lượng, đuôi sóng bên phải phóng lên hoặc cắm xuống vô cùng. Một sóng như thế không thể mô tả electron.</li>
+<li>Kéo thanh trượt chậm lại: có những chỗ đuôi sóng đổi từ phóng lên sang cắm xuống. Ngay tại chỗ đổi chiều, sóng tắt dần ở cả hai phía. Đó là một mức năng lượng. Giếng này chỉ có bốn mức như thế.</li>
+<li>Mức thứ nhất không có điểm nào sóng cắt trục bên trong giếng, mức thứ hai có một điểm, mức thứ ba có hai. Không cần thêm luật nào: điều kiện "sóng phải tắt dần" tự chọn ra các mức.</li>
+<li>Ở "Xuyên hầm", electron 1 eV gặp rào cao 1,5 eV. Hạt cổ điển luôn bật lại, còn sóng thì một phần lọt qua. Tăng bề rộng rào: phần lọt qua giảm rất nhanh, theo hàm mũ.</li>
+</ul>
+
+<h2>Kỳ nghỉ ở Arosa</h2>
+<p>Schrödinger nghỉ Giáng sinh năm 1925 ở Arosa, một thị trấn trên núi Thuỵ Sĩ. Ngày 27/12, ông viết từ đó cho Wilhelm Wien, chủ bút tạp chí <i>Annalen der Physik</i>, rằng mình đang vật lộn với một lý thuyết nguyên tử mới.</p>
+<p>Ông thử trước một phương trình có tính đến thuyết tương đối. Áp vào nguyên tử hydro, nó cho các mức năng lượng gần đúng nhưng sai ở những chi tiết nhỏ của phổ, chỗ mà về sau người ta mới biết là do spin của electron ở bài 5. Ông bỏ phiên bản ấy và chuyển sang phương trình đơn giản hơn, không tính tương đối.</p>
+<p>Lần này mọi thứ khớp. Ngày 27/1/1926, <i>Annalen der Physik</i> nhận bài báo đầu tiên, tựa đề "Lượng tử hoá như một bài toán <dfn tabindex="0" data-def="Trong bài toán của Schrödinger, đó là những giá trị năng lượng đặc biệt mà ở đó phương trình có lời giải hợp lý.">trị riêng</dfn>". Từ phương trình, ông suy ra đúng các mức năng lượng của hydro mà Bohr đã phải đặt ra bằng tay, không cần thêm giả thiết nào về số nguyên. Ba phần tiếp theo ra đời trong vòng năm tháng. Tháng 3/1926, ông còn chứng minh rằng cơ học sóng của mình và cơ học ma trận của Heisenberg cho cùng kết quả.</p>
+<p>Giới vật lý đón nhận nồng nhiệt. Cơ học sóng dùng thứ toán mà mọi nhà vật lý đều quen, phương trình vi phân, và cho một hình ảnh dễ hình dung hơn hẳn những bảng số của Heisenberg. Trong thư ngày 2/4/1926, Max Planck viết cho Schrödinger rằng ông đọc bài báo "như một đứa trẻ tò mò nghe lời giải của một câu đố đã làm nó băn khoăn từ lâu".</p>
+
+<h2>Sóng của cái gì?</h2>
+<p>Phương trình đúng, nhưng sóng ψ là gì thì chưa ai rõ. Schrödinger nghĩ electron thật sự là sóng: ψ mô tả điện tích của electron trải ra trong không gian. Cách hiểu này vướng ngay hai chỗ. Một gói sóng tự do sẽ nở ra mãi, trong khi electron trong buồng sương luôn để lại vết gọn. Và với hai electron, ψ không sống trong không gian ba chiều thông thường mà trong một không gian sáu chiều.</p>
+<p>Tháng 6/1926, Max Born ở Göttingen dùng phương trình của Schrödinger để tính electron va chạm với nguyên tử, và đưa ra một cách hiểu khác: sóng không phải là electron, mà cho biết xác suất tìm thấy electron. Trong bản thảo, ông viết xác suất tỉ lệ với ψ; đến lúc sửa bản in, ông thêm một chú thích: xét kỹ hơn thì xác suất tỉ lệ với bình phương của ψ. Cách hiểu ấy được chấp nhận đến nay, và Born nhận giải Nobel năm 1954 vì nó. Schrödinger thì không bao giờ thật sự chấp nhận.</p>
+
+<details class="deep"><summary>Toán vừa đủ <span class="skip">(có thể bỏ qua)</span></summary>
+<p>Với một electron chuyển động theo một chiều $x$ trong thế năng $V(x)$, ở một năng lượng xác định $E$, phương trình Schrödinger là</p>
+$$-\frac{\hbar^2}{2m}\,\frac{d^2\psi}{dx^2} + V(x)\,\psi = E\,\psi.$$
+<p>Ở chỗ $E > V$, nó cho nghiệm dạng sóng với bước sóng đúng bằng bước sóng de Broglie $h/p$. Ở chỗ $E < V$, nghiệm không dao động mà tăng hoặc giảm theo hàm mũ, $e^{\pm\kappa x}$ với $\kappa = \sqrt{2m(V-E)}/\hbar$. Bên ngoài giếng, chỉ nghiệm giảm dần là chấp nhận được. Đòi hỏi cả hai phía cùng giảm dần chỉ thoả được ở một số năng lượng rời rạc: đó là các trị riêng.</p>
+<p>Với giếng rộng $L$ và sâu vô hạn, các mức là $E_n = n^2 h^2/(8mL^2)$. Với $L = 1$ nm, $E_1 \approx 0{,}38$ eV. Giếng trong mô phỏng chỉ sâu 4 eV nên sóng thấm ra ngoài một chút, các mức thấp hơn một ít: 0,26; 1,04; 2,27 và 3,75 eV.</p>
+<p>Với một rào cao $V_0$, dày $w$, khi $E < V_0$ và rào đủ dày, xác suất xuyên qua xấp xỉ</p>
+$$T \approx \frac{16E(V_0-E)}{V_0^2}\,e^{-2\kappa w}.$$
+<p>Electron 1 eV, rào 1,5 eV dày 1 nm: $\kappa \approx 3{,}6$ nm⁻¹ và $T \approx 0{,}26\%$. Rào dày 2 nm: $T \approx 0{,}0002\%$. Dày gấp đôi, xác suất giảm hơn nghìn lần. Chính sự nhạy cảm ấy khiến xuyên hầm giải thích được vì sao thời gian sống của các hạt nhân phóng xạ chênh nhau hàng chục bậc độ lớn.</p>
+<details><summary>Thêm: phương trình đầy đủ, theo thời gian</summary>
+<p>Phương trình ở trên là trường hợp năng lượng xác định. Dạng tổng quát, Schrödinger công bố trong phần thứ tư năm 1926, cho biết ψ thay đổi theo thời gian:</p>
+$$i\hbar\,\frac{\partial\psi}{\partial t} = -\frac{\hbar^2}{2m}\,\frac{\partial^2\psi}{\partial x^2} + V(x)\,\psi.$$
+<p>Số ảo $i$ ở vế trái khiến ψ nhất thiết là số phức, một trong những lý do ψ không thể là một sóng vật chất thông thường. Phần "Xuyên hầm" của mô phỏng giải đúng phương trình này theo từng bước thời gian.</p>
+</details>
+<p>Muốn tự giải phương trình bằng Python, kể cả nguyên tử hydro, và thử xuyên hầm với nhiều rào khác nhau? <a href="https://colab.research.google.com/github/JasonDE03/sophon/blob/main/lab/07_schrodinger.ipynb">Mở notebook trong Google Colab</a>: chạy ngay trên trình duyệt, không cần cài gì.</p>
+</details>
+<h2>Những hiểu lầm phổ biến</h2>
+<p><b>"Schrödinger suy ra phương trình của mình từ những nguyên lý cơ bản."</b> Phương trình không thể suy ra từ vật lý cổ điển. Schrödinger đi đến nó bằng phép tương tự giữa cơ học và quang học mà Hamilton đã chỉ ra từ thế kỷ 19, cộng với nhiều phỏng đoán. Nó được chấp nhận vì cho kết quả đúng, chứ không phải vì được chứng minh.</p>
+<p><b>"Schrödinger biết ψ là sóng xác suất."</b> Ông nghĩ ψ là electron trải ra như một đám mây điện tích thật. Cách hiểu xác suất là của Born, và Schrödinger phản đối nó suốt đời. Con mèo nổi tiếng năm 1935 của ông sinh ra chính là để chỉ ra chỗ vô lý mà ông thấy ở cách hiểu ấy.</p>
+<p><b>"Cơ học sóng và cơ học ma trận là hai lý thuyết cạnh tranh."</b> Chúng trông khác hẳn nhau, nhưng ngay năm 1926 Schrödinger đã chứng minh hai cách cho cùng kết quả. Ngày nay chúng được coi là hai cách viết của cùng một cơ học lượng tử.</p>
+
+<section class="quiz">
+<h2>Trắc nghiệm</h2>
+<div class="ask" data-answer="2">
+<p class="ask-q">Trong lý thuyết của Schrödinger, vì sao electron trong nguyên tử chỉ có một số mức năng lượng?</p>
+<div class="ask-options"><button type="button">Vì Schrödinger giữ nguyên luật số nguyên của Bohr</button><button type="button">Vì electron chỉ nhận năng lượng từng gói</button><button type="button">Vì phương trình chỉ có lời giải hợp lý, tắt dần ở xa, tại một số năng lượng</button></div>
+<p class="ask-why" hidden>Ở hầu hết các năng lượng, lời giải phóng ra vô cùng và không thể mô tả electron. Chỉ ở vài năng lượng đặc biệt, các trị riêng, lời giải tắt dần ở xa. Lượng tử hoá tự hiện ra, không cần đặt thêm luật.</p>
+</div>
+<div class="ask" data-answer="0">
+<p class="ask-q">Theo cách hiểu của Born, bình phương độ lớn của ψ ở một chỗ cho biết điều gì?</p>
+<div class="ask-options"><button type="button">Xác suất tìm thấy electron ở chỗ đó</button><button type="button">Lượng điện tích của electron nằm ở chỗ đó</button><button type="button">Tốc độ của electron ở chỗ đó</button></div>
+<p class="ask-why" hidden>Born đề xuất năm 1926 rằng $|\psi|^2$ là mật độ xác suất. Cách hiểu "điện tích trải ra" là của Schrödinger, và không đứng vững được.</p>
+</div>
+<div class="ask" data-answer="1">
+<p class="ask-q">Với hiện tượng xuyên hầm, nếu bức tường dày gấp đôi thì xác suất electron lọt qua thay đổi thế nào?</p>
+<div class="ask-options"><button type="button">Giảm còn một nửa</button><button type="button">Giảm đi rất nhiều lần, theo hàm mũ</button><button type="button">Không đổi</button></div>
+<p class="ask-why" hidden>Sóng tắt dần theo hàm mũ trong tường, nên xác suất lọt qua giảm theo hàm mũ của bề dày. Với electron 1 eV và rào 1,5 eV, từ 1 nm lên 2 nm, xác suất giảm hơn nghìn lần.</p>
+</div>
+</section>
+
+<h2>Hệ quả</h2>
+<p>Năm 1928, George Gamow, và độc lập với ông là Ronald Gurney cùng Edward Condon, dùng xuyên hầm để giải thích phân rã alpha: hạt alpha bị giữ trong hạt nhân sau một bức tường mà theo vật lý cổ điển nó không bao giờ vượt nổi, nhưng sóng của nó lọt ra được. Ngày nay, xuyên hầm là nguyên lý của kính hiển vi quét xuyên hầm, thứ cho phép nhìn thấy từng nguyên tử, và của bộ nhớ flash trong điện thoại.</p>
+<p>Còn câu hỏi của Born để lại một hệ quả khó chịu: nếu sóng chỉ cho xác suất, thì electron có vị trí và vận tốc xác định trước khi ta đo hay không? Đầu năm 1927, Heisenberg chỉ ra rằng không thể biết đồng thời cả hai đến độ chính xác tuỳ ý.</p>
+<p><a href="08-heisenberg.html">→ Bài 8: Nguyên lý bất định Heisenberg (1927)</a></p>
+
+<details class="deep"><summary>Nguồn</summary>
+<ul class="sources">
+<li>E. Schrödinger, "Quantisierung als Eigenwertproblem", <i>Ann. Phys.</i> 79, 361 (1926); 79, 489 (1926); 80, 437 (1926); 81, 109 (1926).</li>
+<li>E. Schrödinger, "Über das Verhältnis der Heisenberg–Born–Jordanschen Quantenmechanik zu der meinen", <i>Ann. Phys.</i> 79, 734 (1926).</li>
+<li>W. Heisenberg, "Über quantentheoretische Umdeutung kinematischer und mechanischer Beziehungen", <i>Z. Phys.</i> 33, 879 (1925).</li>
+<li>M. Born, "Zur Quantenmechanik der Stoßvorgänge", <i>Z. Phys.</i> 37, 863 (1926).</li>
+<li>G. Gamow, "Zur Quantentheorie des Atomkernes", <i>Z. Phys.</i> 51, 204 (1928); R. W. Gurney và E. U. Condon, "Wave mechanics and radioactive disintegration", <i>Nature</i> 122, 439 (1928).</li>
+<li>F. Bloch, "Heisenberg and the early days of quantum mechanics", <i>Physics Today</i> 29(12), 23 (1976).</li>
+<li>K. Przibram (biên tập), <i>Letters on Wave Mechanics: Schrödinger, Planck, Einstein, Lorentz</i>, Philosophical Library (1967).</li>
+<li>W. Moore, <i>Schrödinger: Life and Thought</i>, Cambridge University Press (1989).</li>
+</ul>
+</details>
+<section class="comments" data-episode="07"><h2>Bình luận</h2></section>
+<nav class="episode-nav" aria-label="Các bài">
+  <a class="prev" href="06-de-broglie.html"><span>← Bài trước</span>de Broglie và sóng vật chất</a>
+  <a class="next" href="08-heisenberg.html"><span>Bài sau →</span>Nguyên lý bất định Heisenberg</a>
+</nav>
+</main>
+</div>
+<footer class="author-footer">
+  <div class="social-links">
+    <a href="https://www.facebook.com/nam.son.178624/" aria-label="Facebook" rel="me noopener" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 21v-8h3l.5-4H14V6.5c0-1 .4-1.5 1.5-1.5H18V2h-3c-3 0-5 1.8-5 5v2H7v4h3v8"/></svg></a>
+    <a href="https://www.instagram.com/fet.sofn/" aria-label="Instagram" rel="me noopener" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".8" fill="currentColor" stroke="none"/></svg></a>
+    <a href="https://github.com/JasonDE03/sophon" aria-label="GitHub" rel="me noopener" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 21v-3c-3 .8-3-1.5-4-2m10 5v-4c0-1-.3-1.6-.8-2 2.7-.3 5.3-1.3 5.3-6A4.7 4.7 0 0 0 18.2 6c.2-1 .1-2-.3-3-1.5 0-2.8.8-3.5 1.3a12 12 0 0 0-4.8 0C8.9 3.8 7.6 3 6.1 3c-.4 1-.5 2-.3 3A4.7 4.7 0 0 0 4.5 9c0 4.7 2.6 5.7 5.3 6-.5.4-.8 1-.8 2"/></svg></a>
+  </div>
+  <p>© 2026 Nguyen Phan Nam Son</p>
+</footer>
+</body></html>

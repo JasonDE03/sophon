@@ -24,8 +24,12 @@ Arc 1 — The quantum crisis (1900–1927)
 | 4 | [The Bohr model and hydrogen lines](https://sophon.jasonng-1407.workers.dev/en/04-bohr) | 1885–1913 | Electron jumps on an energy ladder; the hydrogen spectrum |
 | 5 | [The Stern–Gerlach experiment](https://sophon.jasonng-1407.workers.dev/en/05-stern-gerlach) | 1921–1927 | A silver beam splitting in two on Gerlach's plate; magnets in series |
 | 6 | [de Broglie and matter waves](https://sophon.jasonng-1407.workers.dev/en/06-de-broglie) | 1923–1924 | An electron wave wrapped around an orbit fits only on Bohr's radii; the wavelength of everything |
+| 7 | [The Schrödinger equation](https://sophon.jasonng-1407.workers.dev/en/07-schrodinger) | 1925–1926 | Hunt for the energy levels of a well by solving the equation; wave-packet tunnelling |
+| 8 | [Heisenberg's uncertainty principle](https://sophon.jasonng-1407.workers.dev/en/08-heisenberg) | 1927 | Build a wave packet from many waves; Heisenberg's gamma-ray microscope |
+| 9 | [Davisson–Germer: electrons interfere](https://sophon.jasonng-1407.workers.dev/en/09-davisson-germer) | 1925–1927 | The 54 V peak on a nickel crystal; electrons one at a time through two slits |
+| 10 | [Solvay 1927: Bohr vs Einstein](https://sophon.jasonng-1407.workers.dev/en/10-solvay) | 1927 | Einstein's recoiling slit and the which-path/fringe trade-off; his action-at-a-distance objection |
 
-More episodes follow: Schrödinger, Heisenberg, Davisson–Germer and the 1927 Solvay conference.
+Chapter 1 is complete. Later chapters will go back to Galileo, Newton, electromagnetism, thermodynamics and relativity.
 
 ## Features
 

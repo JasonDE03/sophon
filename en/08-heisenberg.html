@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="color-scheme" content="dark light"><meta name="theme-color" content="#0b0b0d">
+<script>(()=>{let t;try{t=localStorage.getItem('sophon-theme')}catch{}t=t==='light'||t==='dark'?t:matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';document.documentElement.dataset.theme=t;document.querySelector('meta[name="theme-color"]').content=t==='light'?'#faf8f3':'#0b0b0d'})();</script>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Episode 8: Heisenberg's uncertainty principle — Sophon</title>
+<meta name="description" content="Why the position and velocity of an electron cannot both be known to arbitrary precision, and the real story behind 1927. With simulations of a wave packet and the gamma-ray microscope.">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Sophon">
+<meta property="og:title" content="Episode 8: Heisenberg's uncertainty principle">
+<meta property="og:description" content="Why the position and velocity of an electron cannot both be known to arbitrary precision, and the real story behind 1927. With simulations of a wave packet and the gamma-ray microscope.">
+<meta property="og:url" content="https://sophon.jasonng-1407.workers.dev/en/08-heisenberg">
+<meta property="og:image" content="https://sophon.jasonng-1407.workers.dev/og/en-08.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="en_GB">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 16 16%27><circle cx=%278%27 cy=%278%27 r=%275%27 fill=%27%23f0b35a%27/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&display=swap">
+<link rel="stylesheet" href="../style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"
+  onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]})"></script>
+<script type="module" src="../learn.js"></script>
+<script type="module" src="../comments.js"></script>
+<!-- Cloudflare Web Analytics (cookieless) --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "1c73ba8208884aa18a21e8f30432ae9f"}'></script>
+<script defer src="../site.js"></script>
+</head><body class="episode-page">
+<header class="site-header"><nav aria-label="Main navigation"><a class="brand" href="/en/">sophon</a><span class="links"><a href="/en/">Contents</a><span class="lang-switch" aria-label="Language"><a href="/vi/08-heisenberg.html" data-lang="vi" lang="vi">VI</a> <span aria-hidden="true">|</span> <strong aria-current="true">EN</strong></span><button class="theme-toggle" type="button" aria-label="Switch to light theme"><svg class="theme-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg><svg class="theme-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 13.2A9 9 0 0 1 10.8 3.5a9 9 0 1 0 9.7 9.7Z"/></svg></button></span></nav></header>
+<div class="episode-layout">
+<aside class="page-toc"></aside>
+<main>
+
+<p class="year">Episode 8 · 1927</p>
+<h1>The uncertainty principle: you cannot know it all at once</h1>
+<p class="lede">An electron leaves a clear track in a cloud chamber, like a particle following a path. But quantum mechanics has no place for paths. Early in 1927, a 25-year-old physicist in Copenhagen resolved this contradiction with an inequality.</p>
+<aside class="tldr"><p class="tldr-label">Summary</p><p>In 1927, Werner Heisenberg showed that a particle’s position and momentum cannot both be known to arbitrary precision: the more precisely one is known, the less certain the other becomes. The underlying reason is that an electron is also a wave, and a wave confined to a small region must be made up of many different wavelengths. This limit comes from the nature of things themselves, rather than from poor measuring instruments. For objects the size of a dust grain or larger, it is too small ever to notice.</p></aside>
+
+<h2>The track in the cloud chamber</h2>
+<p>By the end of 1926, quantum mechanics had two mathematical forms, Heisenberg’s matrix mechanics and Schrödinger’s wave mechanics from episode 7, and Born had proposed that the wave gave probabilities. But the question “what does the electron actually do?” remained open. Matrix mechanics had no paths. Yet in a cloud chamber, where tiny water droplets condense along a charged particle’s flight, an electron left a clear track like the path of a bullet.</p>
+<p>Heisenberg was then a lecturer at Bohr’s institute in Copenhagen. The two argued about this all winter, so intensely that both became exhausted. In February 1927, Bohr went skiing in Norway for about a month, leaving Heisenberg on his own.</p>
+<p>According to Heisenberg’s memoirs, the idea came to him during a night-time walk in the park behind the institute: perhaps the cloud-chamber track was not a precise path. It was only a chain of water droplets, each far larger than the electron, giving only an approximate position. The right question was not “where is the electron?” but “how precisely can we know its position and velocity?”</p>
+
+<h2>Do the experiment yourself</h2>
+<p>The simulation has two parts. The first lets you build a <dfn tabindex="0" data-def="A wave with appreciable amplitude only in a small region, formed by adding many waves with slightly different wavelengths.">wave packet</dfn> from waves of different wavelengths, to see why position and <dfn tabindex="0" data-def="Mass multiplied by velocity, for an object moving much slower than light.">momentum</dfn> cannot both be sharply defined. The second recreates the thought experiment Heisenberg himself used in 1927: looking at an electron through a microscope.</p>
+<div class="ask predict" data-answer="1">
+<p class="ask-q">To see an electron’s position more clearly, we illuminate it with light of a shorter wavelength. What happens to the electron?</p>
+<div class="ask-options"><button type="button">Nothing: the light only helps us see</button><button type="button">The light particle gives it a harder kick</button><button type="button">It receives a gentler kick</button></div>
+<p class="ask-why" hidden>Shorter-wavelength light gives a sharper image, but each of its light particles carries more momentum $h/\lambda$, so it kicks the electron harder. The sharper the image, the harder it is to know the electron’s velocity afterwards. Try “The gamma-ray microscope”.</p>
+</div>
+<div class="sim" id="sim"></div>
+<script type="module">import { mount } from '../sims/heisenberg.js'; mount(document.getElementById('sim'));</script>
+<p>Notice:</p>
+<ul>
+<li>In “Build a wave packet”, mixing only waves with similar wavelengths gives a narrow momentum spectrum but a wide packet: the electron is “somewhere” across several nanometres.</li>
+<li>Increase the momentum spread: the wave packet contracts. The two always trade off, and the product $\Delta x\cdot\Delta p$ stays at $\hbar/2$. There is no way to make both small.</li>
+<li>In “The gamma-ray microscope”, move the wavelength from visible light down to gamma rays: the image spot shrinks, but the kick arrow grows longer. In the bars below, as Δx gets shorter, Δp gets correspondingly longer, while the product bar $\Delta x\cdot\Delta p$ stays at $h$.</li>
+<li>Widen the lens to collect more light: the image becomes sharper, but we do not know which way the light particle scattered, so the kick becomes more uncertain. The product remains of order $h$.</li>
+</ul>
+
+<h2>The fourteen-page letter</h2>
+<p>On 23 February 1927, Heisenberg wrote Wolfgang Pauli a fourteen-page letter setting out the idea. Pauli was the fiercest critic Heisenberg knew, and his response was very positive. Heisenberg wrote up a paper, received by <i>Zeitschrift für Physik</i> on 23 March 1927.</p>
+<p>To explain it, Heisenberg used a thought experiment: to find out where an electron is, look at it through a microscope. The microscope’s resolution is limited by the wavelength of light, so a precise position requires a very short wavelength, meaning gamma rays. But a short-wavelength light particle carries a large momentum and strikes the electron like a ball in the Compton effect, changing its velocity by an unpredictable amount. He concluded that the product of the two uncertainties was of order Planck’s constant, $\Delta x\cdot\Delta p \sim h$, and wrote a famous sentence: “The 'path' comes into existence only when we observe it.”</p>
+
+<h2>Bohr returns</h2>
+<p>Bohr returned in mid-March and read the manuscript. He agreed with the conclusion but identified an error in the microscope analysis: Heisenberg had neglected the lens aperture. According to Bohr, the uncertainty came not just from the collision, but from the fact that both light and electrons were waves as well as particles. The two argued fiercely for weeks. In a 1963 interview, Heisenberg recalled that at one point he burst into tears, unable to bear the pressure from Bohr.</p>
+<p>In the end, Heisenberg kept the paper as it was but added a “note added in proof” acknowledging Bohr’s comments. That same year, the American physicist Earle Kennard rigorously proved that, for every state, the spreads in position and momentum satisfy $\Delta x\cdot\Delta p \geq \hbar/2$, exactly the form found in textbooks today. In September 1927, Bohr presented his own interpretation, called the <dfn tabindex="0" data-def="Bohr’s idea that waves and particles are mutually exclusive but complementary aspects; an experiment can reveal only one aspect.">complementarity principle</dfn>, at a conference in Como, Italy.</p>
+
+<details class="deep"><summary>Just enough maths <span class="skip">(optional)</span></summary>
+<p>Let $\Delta x$ be the spread in position and $\Delta p$ the spread in momentum, measured as standard deviations. Kennard’s inequality is</p>
+$$\Delta x\,\Delta p \;\geq\; \frac{\hbar}{2},\qquad \hbar = \frac{h}{2\pi} \approx 1.055\times10^{-34}\ \text{J}\cdot\text{s}.$$
+<p>It follows from a general property of all waves: a packet of width $\Delta x$ must contain wave numbers $k = 2\pi/\lambda$ spread over a range $\Delta k \geq 1/(2\Delta x)$. According to de Broglie, $p = \hbar k$, so multiplying both sides by $\hbar$ gives the inequality above. A bell-shaped (Gaussian) packet achieves exact equality.</p>
+<p>For an electron in an atom, $\Delta x \approx 0.1$ nm, so $\Delta p \geq 5\times10^{-25}$ kg·m/s, giving a velocity uncertainty of about $6\times10^5$ m/s, comparable to the electron’s own velocity in the atom. An electron cannot have a path in the classical sense. For a dust grain of mass 1 microgram located to within 1 micrometre, the velocity uncertainty is only about $5\times10^{-20}$ m/s, too small ever to measure.</p>
+<details><summary>More: calculating Heisenberg’s microscope</summary>
+<p>A microscope with aperture half-angle $\varepsilon$ can distinguish two points separated by $\Delta x \approx \lambda/(2\sin\varepsilon)$. The light particle has momentum $h/\lambda$; after scattering from the electron, it enters the lens in any direction within the aperture, so the transverse momentum transferred to the electron is uncertain over a range $\Delta p \approx 2(h/\lambda)\sin\varepsilon$. Multiplying gives $\Delta x\,\Delta p \approx h$, independent of wavelength or aperture angle. This is the version corrected following Bohr’s comments; Heisenberg’s original neglected the aperture angle.</p>
+</details>
+<p>Want to build a wave packet, watch it spread with time and calculate Heisenberg’s microscope in Python? <a href="https://colab.research.google.com/github/JasonDE03/sophon/blob/main/lab/08_heisenberg.ipynb">Open the notebook in Google Colab</a>: it runs in your browser, nothing to install.</p>
+</details>
+<h2>Common misconceptions</h2>
+<p><b>“Uncertainty comes from measuring instruments that are not good enough.”</b> No instrument can beat this limit, because it is part of the electron’s own wave nature. An electron does not have both a sharp position and a sharp momentum waiting to be measured.</p>
+<p><b>“Uncertainty is just the disturbance caused by measurement.”</b> That was Heisenberg’s explanation using the microscope in 1927, and it is easy to picture. But Kennard’s inequality concerns the spread of the state itself, without referring to any measurement. As early as 1927, Bohr thought the explanation in terms of a kick had not reached the root of the matter.</p>
+<p><b>“Heisenberg proved $\Delta x\cdot\Delta p \geq \hbar/2$.”</b> Heisenberg’s 1927 paper gave only an order-of-magnitude estimate, $\Delta x\cdot\Delta p \sim h$. The exact inequality was Kennard’s, from the same year, and the general form for any pair of quantities was Howard Robertson’s, from 1929.</p>
+
+<section class="quiz">
+<h2>Quiz</h2>
+<div class="ask" data-answer="2">
+<p class="ask-q">What must we do to confine a wave packet more tightly in space?</p>
+<div class="ask-options"><button type="button">Use a wave with a single wavelength</button><button type="button">Reduce the wave’s amplitude</button><button type="button">Mix waves from a wider range of wavelengths</button></div>
+<p class="ask-why" hidden>A wave with a single wavelength extends throughout space. To confine it, we must mix many wavelengths, and therefore many different momenta. The tighter the position, the wider the momentum spread.</p>
+</div>
+<div class="ask" data-answer="0">
+<p class="ask-q">Why do we not notice the uncertainty principle with a ball or a dust grain?</p>
+<div class="ask-options"><button type="button">Their large mass makes the velocity uncertainty too small to measure</button><button type="button">The principle applies only to charged particles</button><button type="button">Large objects have no momentum</button></div>
+<p class="ask-why" hidden>The limit concerns momentum, which is mass multiplied by velocity. For a heavy object, the velocity uncertainty is unimaginably small.</p>
+</div>
+<div class="ask" data-answer="1">
+<p class="ask-q">Who identified the error in Heisenberg’s original microscope analysis?</p>
+<div class="ask-options"><button type="button">Einstein</button><button type="button">Bohr</button><button type="button">Schrödinger</button></div>
+<p class="ask-why" hidden>Bohr pointed out that Heisenberg had neglected the lens aperture, and that uncertainty was rooted in wave–particle duality, rather than just the collision. Heisenberg added a note to his paper.</p>
+</div>
+</section>
+
+<h2>What came next</h2>
+<p>The uncertainty principle became a pillar of the interpretation of quantum mechanics developed by Bohr and Heisenberg in Copenhagen. It explains why atoms do not collapse: if an electron fell into the nucleus, its position would become too sharply defined, and its momentum, and therefore its energy, would shoot up.</p>
+<p>But the role of waves in the theory still rested on arguments. Did electrons really interfere like light? That same year, 1927, an experiment in New York that began with a laboratory accident answered the question.</p>
+<p><a href="09-davisson-germer.html">→ Episode 9: Davisson–Germer: electrons interfere (1925–1927)</a></p>
+
+<details class="deep"><summary>Sources</summary>
+<ul class="sources">
+<li>W. Heisenberg, "Über den anschaulichen Inhalt der quantentheoretischen Kinematik und Mechanik", <i>Z. Phys.</i> 43, 172 (1927). English translation in J. A. Wheeler and W. H. Zurek (ed.), <i>Quantum Theory and Measurement</i>, Princeton (1983).</li>
+<li>E. H. Kennard, "Zur Quantenmechanik einfacher Bewegungstypen", <i>Z. Phys.</i> 44, 326 (1927). H. P. Robertson, "The uncertainty principle", <i>Phys. Rev.</i> 34, 163 (1929).</li>
+<li>N. Bohr, "The quantum postulate and the recent development of atomic theory", <i>Nature</i> 121, 580 (1928) (Como lecture, 1927).</li>
+<li>W. Heisenberg, <i>Der Teil und das Ganze</i>, Piper (1969).</li>
+<li>W. Heisenberg, interviewed by T. S. Kuhn, Archive for the History of Quantum Physics (1963).</li>
+<li>D. C. Cassidy, <i>Uncertainty: The Life and Science of Werner Heisenberg</i>, W. H. Freeman (1992).</li>
+<li>A. Pais, <i>Niels Bohr's Times</i>, Oxford University Press (1991).</li>
+</ul>
+</details>
+<section class="comments" data-episode="08"><h2>Comments</h2></section>
+<nav class="episode-nav" aria-label="Episodes">
+  <a class="prev" href="07-schrodinger.html"><span>← Previous</span>The Schrödinger equation</a>
+  <a class="next" href="09-davisson-germer.html"><span>Next →</span>Davisson–Germer: electrons interfere</a>
+</nav>
+</main>
+</div>
+<footer class="author-footer">
+  <div class="social-links">
+    <a href="https://www.facebook.com/nam.son.178624/" aria-label="Facebook" rel="me noopener" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 21v-8h3l.5-4H14V6.5c0-1 .4-1.5 1.5-1.5H18V2h-3c-3 0-5 1.8-5 5v2H7v4h3v8"/></svg></a>
+    <a href="https://www.instagram.com/fet.sofn/" aria-label="Instagram" rel="me noopener" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".8" fill="currentColor" stroke="none"/></svg></a>
+    <a href="https://github.com/JasonDE03/sophon" aria-label="GitHub" rel="me noopener" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 21v-3c-3 .8-3-1.5-4-2m10 5v-4c0-1-.3-1.6-.8-2 2.7-.3 5.3-1.3 5.3-6A4.7 4.7 0 0 0 18.2 6c.2-1 .1-2-.3-3-1.5 0-2.8.8-3.5 1.3a12 12 0 0 0-4.8 0C8.9 3.8 7.6 3 6.1 3c-.4 1-.5 2-.3 3A4.7 4.7 0 0 0 4.5 9c0 4.7 2.6 5.7 5.3 6-.5.4-.8 1-.8 2"/></svg></a>
+  </div>
+  <p>© 2026 Nguyen Phan Nam Son</p>
+</footer>
+</body></html>
