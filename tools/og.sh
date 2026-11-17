@@ -17,12 +17,12 @@ profile=$(mktemp -d)
 trap 'rm -rf -- "$profile"' EXIT
 "${CHROME_BIN:-google-chrome}" --headless --disable-gpu --no-sandbox --hide-scrollbars \
   --user-data-dir="$profile" --no-first-run --no-default-browser-check \
-  --force-device-scale-factor=1 --window-size=1200,630 \
+  --force-device-scale-factor=2 --window-size=1200,630 \
   --virtual-time-budget=5000 --timeout=20000 --screenshot="$output" "$url"
 python3 - "$output" <<'PY'
 import pathlib, struct, sys
 p = pathlib.Path(sys.argv[1])
-assert struct.unpack('>II', p.read_bytes()[16:24]) == (1200, 630), 'Expected 1200×630 PNG'
-assert p.stat().st_size < 300_000, 'PNG must be smaller than 300 KB'
-print(f'{p.name}: 1200×630, {p.stat().st_size} bytes')
+assert struct.unpack('>II', p.read_bytes()[16:24]) == (2400, 1260), 'Expected 2400×1260 PNG'
+assert p.stat().st_size < 1_000_000, 'PNG must be smaller than 1 MB'
+print(f'{p.name}: 2400×1260, {p.stat().st_size} bytes')
 PY
