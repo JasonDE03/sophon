@@ -18,6 +18,7 @@ const TXT = {
     off: 'Không có từ trường: các nguyên tử bay thẳng, vết bạc là một vạch mảnh.',
     classical: 'Nếu các nguyên tử là những kim nam châm hướng ngẫu nhiên, mỗi nguyên tử bị kéo lệch một lượng khác nhau và vết bạc nở thành một dải liên tục.',
     observed: 'Thực tế, mỗi nguyên tử chỉ bị kéo lên hoặc xuống một lượng như nhau: vết bạc tách thành hai vệt, giữa hai vệt trống trơn. Đây là hình Gerlach chụp và gửi cho Bohr tháng 2/1922.',
+    plateHint: ['Bạc đang đọng lên kính nhưng lớp quá mỏng, chưa nhìn thấy.', 'Bấm “Thổi khói xì gà” để làm vết hiện lên.'],
     undeveloped: ' Lớp bạc còn quá mỏng để nhìn thấy: hãy thổi khói xì gà.', thought: 'Thí nghiệm tưởng tượng, nghĩ ra sau năm 1922',
     presets: ['Đứng rồi đứng', 'Đứng rồi ngang', 'Đứng, ngang, rồi đứng'], axes: ['Đứng', 'Ngang'], ports: [['lên', 'xuống'], ['trái', 'phải']],
     prepared: 'Chùm đã chọn ↑z', blocked: 'chặn', local: '% của chùm vào từng nam châm',
@@ -32,6 +33,7 @@ const TXT = {
     off: 'Without a magnetic field, atoms fly straight ahead and the silver forms a thin line.',
     classical: 'If atoms were tiny magnets pointing in random directions, each would be deflected by a different amount, spreading the silver into a continuous band.',
     observed: 'In reality, each atom is deflected up or down by the same amount: the silver splits into two traces with an empty gap between them. This is the pattern Gerlach photographed and sent to Bohr in February 1922.',
+    plateHint: ['Silver is landing on the plate, but the layer is too thin to see.', 'Click “Breathe cigar smoke” to reveal it.'],
     undeveloped: ' The silver layer is still too thin to see: breathe cigar smoke to reveal it.', thought: 'A thought experiment devised after 1922',
     presets: ['Vertical then vertical', 'Vertical then horizontal', 'Vertical, horizontal, vertical'], axes: ['Vertical', 'Horizontal'], ports: [['up', 'down'], ['left', 'right']],
     prepared: 'Prepared ↑z beam', blocked: 'blocked', local: '% of the beam entering each magnet',
@@ -117,6 +119,13 @@ export function mount(el) {
     [-1, 0, 1].forEach(x => { const px = left + (x + 1) / 2 * (right - left); line(c, px, bottom, px, bottom + 5); text(c, String(x).replace('-', '−'), px, bottom + 20, colours.muted, x === 1 ? 'right' : x === -1 ? 'left' : 'center'); });
     line(c, right - 18, top + 14, right - 18, top + 89, colours.silver, 2); line(c, right - 22, top + 14, right - 14, top + 14, colours.silver); line(c, right - 22, top + 89, right - 14, top + 89, colours.silver);
     text(c, `${fmt(.1, 1)} mm`, right - 28, top + 30, colours.silver, 'right');
+    if (!developing && !developed) {
+      c.save();
+      const width = right - left - 16, longest = Math.max(...t.plateHint.map(s => c.measureText(s).width));
+      c.font = `${Math.min(12, 12 * width / longest)}px Inter`;
+      t.plateHint.forEach((s, i) => text(c, s, (left + right) / 2, mid - 9 + i * 22, colours.muted, 'center'));
+      c.restore();
+    }
     if (developed) text(c, t.sulfide, left + 8, bottom - 12, colours.silver);
   }
   function boxLayout(i) { return W < 600 ? { x: 26, y: 75 + i * 164, w: 90 } : { x: 26 + i * (W / axes().length), y: 95, w: 90 }; }

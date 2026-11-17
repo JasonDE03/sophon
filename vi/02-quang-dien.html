@@ -44,10 +44,10 @@
 
 <h2>Tự làm lại thí nghiệm</h2>
 <p>Một tấm kim loại đặt trong chân không được chiếu sáng. Chọn kim loại, kéo màu và độ sáng của ánh sáng. Thanh năng lượng bên dưới so sánh năng lượng của một hạt ánh sáng với năng lượng cần để bứt một electron ra khỏi kim loại.</p>
-<div class="ask predict" data-answer="2">
-<p class="ask-q">Chiếu ánh sáng đỏ thật mạnh vào một tấm kẽm. Điều gì xảy ra?</p>
-<div class="ask-options"><button type="button">Electron bay ra rất nhanh</button><button type="button">Electron bay ra, nhưng chậm</button><button type="button">Không có electron nào bay ra</button></div>
-<p class="ask-why" hidden>Mỗi hạt ánh sáng đỏ chỉ mang khoảng 1,8 eV, trong khi cần khoảng 4,3 eV mới bứt được một electron khỏi kẽm. Chiếu mạnh hơn chỉ là nhiều hạt hơn, và không hạt nào đủ năng lượng. Thử trong mô phỏng: chọn kẽm, kéo màu sang đỏ, đưa độ sáng lên 100%.</p>
+<div class="ask predict" data-answer="1">
+<p class="ask-q">Ánh sáng tím chiếu vào natri làm electron bay ra. Giữ nguyên màu tím, tăng độ sáng lên gấp đôi. Điều gì thay đổi?</p>
+<div class="ask-options"><button type="button">Electron bay ra nhanh hơn</button><button type="button">Có nhiều electron hơn, nhưng không nhanh hơn</button><button type="button">Không có gì thay đổi</button></div>
+<p class="ask-why" hidden>Độ sáng gấp đôi nghĩa là gấp đôi số hạt ánh sáng, nên số electron bay ra cũng gấp đôi. Nhưng mỗi hạt vẫn mang đúng chừng ấy năng lượng, nên electron nhanh nhất vẫn nhanh như cũ. Nếu ánh sáng chỉ là sóng, lẽ ra electron phải bay ra nhanh hơn. Thử trong mô phỏng: giữ nguyên màu, kéo thanh độ sáng.</p>
 </div>
 <div class="sim" id="sim"></div>
 <script type="module">import { mount } from '../sims/photoelectric.js'; mount(document.getElementById('sim'));</script>

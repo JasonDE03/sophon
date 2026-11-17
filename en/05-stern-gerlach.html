@@ -45,10 +45,10 @@
 
 <h2>Try the experiment yourself</h2>
 <p>The simulation has two parts. The first recreates the 1922 experiment: a silver oven, narrow slits, a magnet and a collecting glass plate. The second is a thought experiment devised later: sending an atomic beam through two or three magnets in series.</p>
-<div class="ask predict" data-answer="2">
-<p class="ask-q">Send a beam of silver atoms through a magnet whose field grows stronger towards one side. What will the silver deposited on the glass plate look like?</p>
-<div class="ask-options"><button type="button">A thin line, unchanged</button><button type="button">A continuously broadened band</button><button type="button">Two separate traces</button></div>
-<p class="ask-why" hidden>Classical physics predicts a continuous band because the atoms point in random directions. In reality, Gerlach saw exactly two traces with an empty gap between them. Try both models in the simulation below.</p>
+<div class="ask predict" data-answer="1">
+<p class="ask-q">A vertical magnet keeps only the silver atoms that go "up". They then pass a horizontal magnet, which keeps only those going left. Finally they pass another vertical magnet. What do the atoms do at the last magnet?</p>
+<div class="ask-options"><button type="button">All still go up, since they were selected at the start</button><button type="button">Half go up, half go down</button><button type="button">All go down</button></div>
+<p class="ask-why" hidden>Half go down again, even though all were selected as "up" at the start. The horizontal measurement has erased the result of the vertical one, something impossible in classical physics. Try it in the simulation: the "Magnets in series" tab, preset "Vertical, horizontal, vertical".</p>
 </div>
 <div class="sim" id="sim"></div>
 <script type="module">import { mount } from '../sims/sterngerlach.js'; mount(document.getElementById('sim'));</script>
@@ -114,8 +114,8 @@ $$P = \cos^2\frac{\alpha}{2}.$$
 
 <h2>What came next</h2>
 <p>The Stern–Gerlach experiment opened up the molecular-beam method, a foundation for atomic clocks, nuclear magnetic resonance and many later precision measurement techniques. Stern received the 1943 Nobel Prize in Physics for this method and for measuring the magnetic moment of the proton.</p>
-<p>By 1922, quantum physics had accumulated a collection of results that nobody could fully explain: light behaved sometimes as a wave, sometimes as a particle; electrons occupied only certain energy levels; atoms took only a few orientations. In 1924, a French postgraduate student reversed the question: if light was both a wave and a particle, could electrons be both particles and waves? His name was Louis de Broglie.</p>
-<p><a href="./">→ Episode 6: de Broglie and matter waves (1924), coming soon</a></p>
+<p>By 1922, quantum physics had accumulated a collection of results that nobody could fully explain: light behaved sometimes as a wave, sometimes as a particle; electrons occupied only certain energy levels; atoms took only a few orientations. In 1923, a French postgraduate student reversed the question: if light was both a wave and a particle, could electrons be both particles and waves? His name was Louis de Broglie.</p>
+<p><a href="06-de-broglie.html">→ Episode 6: de Broglie and matter waves (1923–1924)</a></p>
 
 <details class="deep"><summary>Sources</summary>
 <ul class="sources">
@@ -130,7 +130,7 @@ $$P = \cos^2\frac{\alpha}{2}.$$
 <section class="comments" data-episode="05"><h2>Comments</h2></section>
 <nav class="episode-nav" aria-label="Episodes">
   <a class="prev" href="04-bohr.html"><span>← Previous</span>The Bohr model and hydrogen lines</a>
-  <span class="next soon"><span>Next →</span>de Broglie and matter waves · coming soon</span>
+  <a class="next" href="06-de-broglie.html"><span>Next →</span>de Broglie and matter waves</a>
 </nav>
 </main>
 </div>

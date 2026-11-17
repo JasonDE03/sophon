@@ -23,8 +23,9 @@ Arc 1 — The quantum crisis (1900–1927)
 | 3 | [Rutherford scattering](https://sophon.jasonng-1407.workers.dev/en/03-rutherford) | 1909–1913 | Alpha particles on a gold foil; Thomson vs. Rutherford atom |
 | 4 | [The Bohr model and hydrogen lines](https://sophon.jasonng-1407.workers.dev/en/04-bohr) | 1885–1913 | Electron jumps on an energy ladder; the hydrogen spectrum |
 | 5 | [The Stern–Gerlach experiment](https://sophon.jasonng-1407.workers.dev/en/05-stern-gerlach) | 1921–1927 | A silver beam splitting in two on Gerlach's plate; magnets in series |
+| 6 | [de Broglie and matter waves](https://sophon.jasonng-1407.workers.dev/en/06-de-broglie) | 1923–1924 | An electron wave wrapped around an orbit fits only on Bohr's radii; the wavelength of everything |
 
-More episodes follow: de Broglie, Schrödinger, Heisenberg, Davisson–Germer and the 1927 Solvay conference.
+More episodes follow: Schrödinger, Heisenberg, Davisson–Germer and the 1927 Solvay conference.
 
 ## Features
 

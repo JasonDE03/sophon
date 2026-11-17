@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="color-scheme" content="dark light"><meta name="theme-color" content="#0b0b0d">
+<script>(()=>{let t;try{t=localStorage.getItem('sophon-theme')}catch{}t=t==='light'||t==='dark'?t:matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';document.documentElement.dataset.theme=t;document.querySelector('meta[name="theme-color"]').content=t==='light'?'#faf8f3':'#0b0b0d'})();</script>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Episode 6: de Broglie and matter waves — Sophon</title>
+<meta name="description" content="Why an electron in an atom can only sit on a few orbits once it is also a wave. With a simulation of an electron wave wrapped around a Bohr orbit.">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Sophon">
+<meta property="og:title" content="Episode 6: de Broglie and matter waves">
+<meta property="og:description" content="Why an electron in an atom can only sit on a few orbits once it is also a wave. With a simulation of an electron wave wrapped around a Bohr orbit.">
+<meta property="og:url" content="https://sophon.jasonng-1407.workers.dev/en/06-de-broglie">
+<meta property="og:image" content="https://sophon.jasonng-1407.workers.dev/og/en-06.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="en_GB">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 16 16%27><circle cx=%278%27 cy=%278%27 r=%275%27 fill=%27%23f0b35a%27/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&display=swap">
+<link rel="stylesheet" href="../style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"
+  onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]})"></script>
+<script type="module" src="../learn.js"></script>
+<script type="module" src="../comments.js"></script>
+<!-- Cloudflare Web Analytics (cookieless) --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "1c73ba8208884aa18a21e8f30432ae9f"}'></script>
+<script defer src="../site.js"></script>
+</head><body class="episode-page">
+<header class="site-header"><nav aria-label="Main navigation"><a class="brand" href="/en/">sophon</a><span class="links"><a href="/en/">Contents</a><span class="lang-switch" aria-label="Language"><a href="/vi/06-de-broglie.html" data-lang="vi" lang="vi">VI</a> <span aria-hidden="true">|</span> <strong aria-current="true">EN</strong></span><button class="theme-toggle" type="button" aria-label="Switch to light theme"><svg class="theme-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg><svg class="theme-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 13.2A9 9 0 0 1 10.8 3.5a9 9 0 1 0 9.7 9.7Z"/></svg></button></span></nav></header>
+<div class="episode-layout">
+<aside class="page-toc"></aside>
+<main>
+
+<p class="year">Episode 6 · 1923–1924</p>
+<h1>de Broglie and matter waves</h1>
+<p class="lede">In 1905, Einstein proposed that light, already known to be a wave, also came in particles. Eighteen years later, a French physicist reversed the question: what if the electron, already known to be a particle, was also a wave? With that one idea, he explained what Bohr had had to introduce as a rule.</p>
+<aside class="tldr"><p class="tldr-label">Summary</p><p>In 1923, Louis de Broglie proposed that every particle of matter, including the electron, was accompanied by a wave. If an electron in an atom is a wave travelling around the nucleus, it can persist only when the wave joins up with itself after each lap. The orbits that satisfy this condition are exactly those Bohr had introduced in 1913 without explaining why. No experiment had yet detected electron waves, and the idea came to physicists’ attention largely through Einstein.</p></aside>
+
+<h2>Light has two faces. What about the electron?</h2>
+<p>By 1923, light had two faces. Interference and <dfn tabindex="0" data-def="The spreading of a wave and the formation of bright and dark fringes as it passes through a slit or opening comparable in size to its wavelength.">diffraction</dfn> showed that it was a wave. The photoelectric effect in episode 2 showed that it arrived in particles. That same year, Arthur Compton reported that X-rays bounced off electrons just like two colliding balls, each X-ray particle carrying a definite <dfn tabindex="0" data-def="A quantity describing how difficult it is to stop a moving object; at low speeds, it equals mass multiplied by velocity.">momentum</dfn>. After that, few people doubted that light also had a particle nature.</p>
+<p>The electron was the opposite: everyone regarded it as a particle. It had mass and charge, and left tracks in a cloud chamber. But Bohr’s model in episode 4 had an awkward feature. Electrons could occupy only certain orbits, numbered 1, 2, 3…, and Bohr could not explain why. He simply introduced it as a rule.</p>
+<p>For de Broglie, those whole numbers were the clue. In his Nobel lecture in 1929, he recalled:</p>
+<blockquote>On the other hand the determination of the stable motions of the electrons in the atom involves whole numbers, and so far the only phenomena in which whole numbers were involved in physics were those of interference and of eigenvibrations. That suggested the idea to me that electrons themselves could not be represented as simple corpuscles either, but that a periodicity had also to be assigned to them too.</blockquote>
+<p>A violin string vibrates only at certain frequencies: its length must fit a whole number of half <dfn tabindex="0" data-def="The distance between two neighbouring wave crests.">wavelengths</dfn>. If the electron was also a wave, Bohr’s allowed orbits might simply be the places where that wave fitted.</p>
+
+<h2>Do the experiment yourself</h2>
+<p>This episode has no experiment in the usual sense: de Broglie was a theorist, and nobody had yet detected electron waves. The simulation recreates his reasoning. The first part wraps the electron’s wave around an orbit in a hydrogen atom; the second calculates the wavelengths of different objects, from an electron to a baseball.</p>
+<p>The central idea in the first part is a <dfn tabindex="0" data-def="A wave confined to a region, superposed on itself and remaining in place, like a vibrating string.">standing wave</dfn>. A wave travelling around the nucleus overlaps with itself after each lap. If the crests on the next lap line up with those on the previous lap, the wave reinforces itself. If they are out of step, the laps cancel one another out.</p>
+<div class="ask predict" data-answer="2">
+<p class="ask-q">According to de Broglie, a flying baseball also has a wavelength. How large is it?</p>
+<div class="ask-options"><button type="button">About the size of the ball: a few centimetres</button><button type="button">About the size of an atom</button><button type="button">Far smaller than an atomic nucleus</button></div>
+<p class="ask-why" hidden>About $10^{-34}$ m, roughly ten billion billion times smaller than an atomic nucleus. Wavelength is inversely proportional to mass, and the ball is about $10^{29}$ times more massive than an electron. Try the “Everything has a wave” part of the simulation.</p>
+</div>
+<div class="sim" id="sim"></div>
+<script type="module">import { mount } from '../sims/debroglie.js'; mount(document.getElementById('sim'));</script>
+<p>Notice:</p>
+<ul>
+<li>In “Waves on an orbit”, the orbit initially has a circumference of 2.5 wavelengths. After each lap, the wave is out of step with itself and the laps cancel one another out. Move the slider until the laps line up exactly: the circumference is then exactly 1, 2, 3… wavelengths.</li>
+<li>Whenever the wave fits, the marker on the energy ladder falls exactly on one of Bohr’s levels from episode 4, at a radius of 1, 4, 9… times the Bohr radius. De Broglie needs no further assumption: Bohr’s rule emerges on its own.</li>
+<li>The larger the orbit, the slower the electron and the longer its wavelength. But the circumference grows faster than the wavelength, so a larger orbit fits more wavelengths.</li>
+<li>In “Everything has a wave”, the wavelength of the electron in the atom is larger than the atom itself. It cannot be treated as a tiny ball running along an orbit. Select the baseball and change its speed: its wavelength is always far smaller than an atomic nucleus, so no device can detect it.</li>
+</ul>
+
+<h2>A prince who studied history</h2>
+<p>Louis de Broglie was born on 15 August 1892 in Dieppe, into an old French aristocratic family; by his family’s title, he was a prince. He went to the Sorbonne to study history, intending to become a diplomat, and graduated in history in 1910. But he became increasingly interested in physics, switched to science and graduated in 1913.</p>
+<p>When the First World War broke out, he was called up and served in a radio unit based at the Eiffel Tower. He spent six years in the army altogether. After leaving the army, he studied theory while working in the private laboratory of his elder brother Maurice de Broglie, a well-known X-ray physicist. The brothers often discussed why X-rays sometimes behaved like waves and sometimes like particles.</p>
+
+<h2>Three notes in autumn 1923</h2>
+<p>On 10 September 1923, Jean Perrin presented de Broglie’s first note to the French Academy of Sciences. Entitled “Waves and quanta”, it appeared in <i>Comptes Rendus</i>. In this very first note, he applied the wave idea to electrons in atoms and required the wave to be in phase with itself after each lap. Two more notes followed on 24 September and 8 October.</p>
+<p>The note of 24 September contained a striking prediction: “A beam of electrons passing through a very small opening could present diffraction phenomena. This is perhaps the direction in which one may search for an experimental confirmation of our ideas.”</p>
+<p>Few people read the notes. De Broglie was also disputing several issues with Bohr’s and Sommerfeld’s groups, so atomic physicists had little confidence in him.</p>
+
+<h2>The thesis of November 1924</h2>
+<p>De Broglie brought his ideas together in his doctoral thesis, “Researches on the quantum theory”, which he defended at the Sorbonne on 25 November 1924. The examining committee consisted of Jean Perrin (chair), Paul Langevin (his supervisor), the mathematician Élie Cartan and the crystallographer Charles Mauguin.</p>
+<p>According to de Broglie’s recollections, Perrin asked how these waves could be observed. By then he had a more practical idea than in 1923: fire electrons at a crystal and look for diffraction. He also suggested that Alexandre Dauvillier, who worked in Maurice’s laboratory, should try it. According to de Broglie, Dauvillier was busy with other work and did not take it up; Dauvillier later recalled that he had tried, but without success.</p>
+<p>The committee thought highly of the thesis, but was unsure whether the waves were real. Nearly thirty years later, Mauguin wrote that he found it hard to understand how he had accepted an explanation of Bohr’s quantum laws that year without believing in the actual existence of the very thing that provided the explanation.</p>
+<p>Langevin was enthusiastic enough to send a copy of the thesis to his old friend Einstein. Einstein replied that de Broglie had “lifted a corner of the great veil”. As early as December 1924, he used de Broglie’s idea in a paper on gases, calling it “a very noteworthy paper”. Einstein’s paper brought de Broglie’s idea to far more people than the notes of 1923 had reached.</p>
+
+<details class="deep"><summary>Just enough maths <span class="skip">(optional)</span></summary>
+<p>For a particle of mass $m$ moving at velocity $v$ (much slower than light), the de Broglie wavelength is</p>
+$$\lambda = \frac{h}{p} = \frac{h}{mv},$$
+<p>where $p = mv$ is momentum and $h \approx 6.626\times10^{-34}$ J·s is Planck’s constant. An electron in hydrogen’s lowest orbit moves at $v \approx 2.19\times10^6$ m/s, so $\lambda \approx 0.332$ nm, larger than the hydrogen atom itself. A 145 g baseball travelling at 40 m/s has $\lambda \approx 1.1\times10^{-34}$ m.</p>
+<p>For a wave to join up around a circular orbit of radius $r$, the circumference must equal a whole number of wavelengths:</p>
+$$2\pi r = n\lambda = n\frac{h}{mv} \quad\Longrightarrow\quad mvr = n\frac{h}{2\pi} = n\hbar.$$
+<p>The left-hand side is the electron’s angular momentum. This is exactly the condition Bohr introduced in 1913. Combining it with the Coulomb attraction between electron and nucleus, $mv^2/r = e^2/(4\pi\varepsilon_0 r^2)$, gives $r = n^2 a_0$, where $a_0 \approx 0.0529$ nm: precisely Bohr’s radii. A neat consequence is that the number of wavelengths around an orbit of radius $r$ is $\sqrt{r/a_0}$, so only the radii $a_0, 4a_0, 9a_0,\dots$ give whole numbers.</p>
+<details><summary>More: where de Broglie actually began</summary>
+<p>De Broglie did not start from $\lambda = h/mv$, but from frequency and special relativity. He assigned each particle an “internal clock” with a frequency $\nu_0 = mc^2/h$, obtained from $E = mc^2$ and $E = h\nu$. When the particle moves, this clock slows down according to relativity, while its energy increases. To reconcile the two, he introduced a “phase wave” accompanying the particle, with a <dfn tabindex="0" data-def="The speed at which a wave crest moves; distinct from the speed of the energy or particle carried by the wave.">phase velocity</dfn></p>
+$$V = \frac{c^2}{v} > c.$$
+<p>The phase wave travels faster than light but carries no energy; the energy and the particle travel at the group velocity, which equals $v$. The wavelength of the phase wave is $\lambda = V/\nu = h/(\gamma m v) = h/p$, where $\gamma = 1/\sqrt{1-v^2/c^2}$. The familiar formula is merely a consequence.</p>
+</details>
+<p>Want to check these numbers, plot the number of wavelengths against orbital radius and try the phase-velocity argument in Python? <a href="https://colab.research.google.com/github/JasonDE03/sophon/blob/main/lab/06_de_broglie.ipynb">Open the notebook in Google Colab</a>: it runs in your browser, nothing to install.</p>
+</details>
+<h2>Common misconceptions</h2>
+<p><b>“De Broglie was an unknown young student.”</b> By the time he defended his thesis, he was 32, had spent six years in the army and had published about two dozen papers on electrons, atoms and X-rays. He was a postgraduate student, but he was not new to the field.</p>
+<p><b>“Matter waves were proposed in 1924.”</b> That was the year of the thesis defence. The central idea had already been published in three notes in autumn 1923, and de Broglie himself later said that 1923 was the more appropriate date.</p>
+<p><b>“De Broglie started from the formula $\lambda = h/mv$.”</b> He started from frequency and relativity, as described in the maths above. For him, frequency mattered more than wavelength. In a thesis of over a hundred pages, the formula $\lambda = h/mv$ appears explicitly just once.</p>
+
+<section class="quiz">
+<h2>Quiz</h2>
+<div class="ask" data-answer="1">
+<p class="ask-q">According to de Broglie, why can electrons in atoms occupy only certain orbits?</p>
+<div class="ask-options"><button type="button">Because the nucleus attracts electrons only at certain distances</button><button type="button">Because the electron’s wave joins up with itself only when the orbit’s circumference is a whole number of wavelengths</button><button type="button">Because electrons lose energy on other orbits</button></div>
+<p class="ask-why" hidden>On other orbits, the wave is out of step with itself after each lap and cancels itself out. Only orbits with a circumference of 1, 2, 3… wavelengths give stable standing waves, and these are exactly Bohr’s orbits.</p>
+</div>
+<div class="ask" data-answer="2">
+<p class="ask-q">Why do we never see the wave behaviour of a ball?</p>
+<div class="ask-options"><button type="button">Because only charged particles have waves</button><button type="button">Because the ball moves too slowly</button><button type="button">Because its wavelength is far smaller than an atomic nucleus</button></div>
+<p class="ask-why" hidden>Everything has a wavelength $h/mv$. The ball’s mass is so large that its wavelength is only about $10^{-34}$ m. Wave effects become clear only when the wavelength is comparable to the size of what it encounters, such as the spacing between atoms.</p>
+</div>
+<div class="ask" data-answer="1">
+<p class="ask-q">When de Broglie defended his thesis in 1924, what experimental evidence was there for electron waves?</p>
+<div class="ask-options"><button type="button">Electron diffraction by crystals</button><button type="button">None: it was still a prediction</button><button type="button">The electron double-slit experiment</button></div>
+<p class="ask-why" hidden>There was none. De Broglie suggested looking for electron diffraction by crystals; Dauvillier tried without success. Only in 1927 did Davisson and Germer in the United States and George Thomson in Britain observe it.</p>
+</div>
+</section>
+
+<h2>What came next</h2>
+<p>Einstein’s paper on gases caught the attention of Erwin Schrödinger in Zürich. In April 1926, Schrödinger wrote to Einstein that the whole of wave mechanics would not have been created “if your second paper on the gas degeneracy had not pushed my nose onto the importance of de Broglie's ideas”. De Broglie had only said that an electron was accompanied by a wave; he had no equation describing how that wave propagated in an atom, in a potential well or through a barrier. At the end of 1925, Schrödinger set out to find that equation.</p>
+<p>The question “Are electron waves real?” had to wait until 1927, when two experimental groups in the United States and Britain observed electron diffraction by crystals and thin metal films, just as de Broglie had suggested. He received the 1929 Nobel Prize in Physics “for his discovery of the wave nature of electrons”.</p>
+<p><a href="./">→ Episode 7: The Schrödinger equation (1926), coming soon</a></p>
+
+<details class="deep"><summary>Sources</summary>
+<ul class="sources">
+<li>L. de Broglie, "Ondes et quanta", <i>C. R. Acad. Sci.</i> 177, 507 (1923); "Quanta de lumière, diffraction et interférences", 177, 548 (1923); "Les quanta, la théorie cinétique des gaz et le principe de Fermat", 177, 630 (1923).</li>
+<li>L. de Broglie, <i>Recherches sur la théorie des quanta</i>, thesis, Paris (1924); reprinted in <i>Ann. Phys.</i> (Paris) 10e série, 3, 22 (1925).</li>
+<li>L. de Broglie, "The wave nature of the electron", Nobel lecture, 12 December 1929, in <i>Nobel Lectures, Physics 1922–1941</i> (Elsevier, 1965).</li>
+<li>A. H. Compton, "A quantum theory of the scattering of X-rays by light elements", <i>Phys. Rev.</i> 21, 483 (1923).</li>
+<li>A. Einstein, "Quantentheorie des einatomigen idealen Gases. Zweite Abhandlung", <i>Sitzungsber. Preuss. Akad. Wiss.</i>, 3 (1925).</li>
+<li>H. A. Medicus, "Fifty years of matter waves", <i>Physics Today</i> 27(2), 38 (1974).</li>
+<li>A. Pais, <i>Subtle is the Lord: The Science and the Life of Albert Einstein</i>, Oxford University Press (1982).</li>
+</ul>
+</details>
+<section class="comments" data-episode="06"><h2>Comments</h2></section>
+<nav class="episode-nav" aria-label="Episodes">
+  <a class="prev" href="05-stern-gerlach.html"><span>← Previous</span>The Stern–Gerlach experiment</a>
+  <span class="next soon"><span>Next →</span>The Schrödinger equation · coming soon</span>
+</nav>
+</main>
+</div>
+<footer class="author-footer">
+  <div class="social-links">
+    <a href="https://www.facebook.com/nam.son.178624/" aria-label="Facebook" rel="me noopener" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 21v-8h3l.5-4H14V6.5c0-1 .4-1.5 1.5-1.5H18V2h-3c-3 0-5 1.8-5 5v2H7v4h3v8"/></svg></a>
+    <a href="https://www.instagram.com/fet.sofn/" aria-label="Instagram" rel="me noopener" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".8" fill="currentColor" stroke="none"/></svg></a>
+    <a href="https://github.com/JasonDE03/sophon" aria-label="GitHub" rel="me noopener" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 21v-3c-3 .8-3-1.5-4-2m10 5v-4c0-1-.3-1.6-.8-2 2.7-.3 5.3-1.3 5.3-6A4.7 4.7 0 0 0 18.2 6c.2-1 .1-2-.3-3-1.5 0-2.8.8-3.5 1.3a12 12 0 0 0-4.8 0C8.9 3.8 7.6 3 6.1 3c-.4 1-.5 2-.3 3A4.7 4.7 0 0 0 4.5 9c0 4.7 2.6 5.7 5.3 6-.5.4-.8 1-.8 2"/></svg></a>
+  </div>
+  <p>© 2026 Nguyen Phan Nam Son</p>
+</footer>
+</body></html>

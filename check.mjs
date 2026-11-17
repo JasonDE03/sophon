@@ -86,4 +86,21 @@ assert.ok(Math.abs(probUp(Math.PI / 2) * (1 - probUp(Math.PI / 2)) - .25) < 1e-1
 assert.equal(gradientProfile(0), 1);
 assert.equal(gradientProfile(-1), 0);
 assert.equal(gradientProfile(1), 0);
+// De Broglie: Coulomb orbits, phase closure and measured matter-wave scales.
+const { H, ME, A0, ALPHA_C, debroglie, orbitSpeed, turns, orbitEnergy, residual } = await import('./sims/debroglie.js');
+const { RY_EV } = await import('./sims/bohr.js');
+assert.ok(Math.abs(debroglie(ME, ALPHA_C) / (2 * Math.PI * A0) - 1) < 1e-6);
+for (let n = 1; n <= 5; n++) {
+  const r = n ** 2 * A0;
+  assert.ok(Math.abs(turns(r) - n) < 1e-9);
+  assert.ok(Math.abs(ME * orbitSpeed(r) * r / (n * H / (2 * Math.PI)) - 1) < 1e-9);
+}
+for (const multiple of [.64, 2.3, 6.25, 17.7, 30.25]) assert.ok(Math.abs(turns(multiple * A0) - Math.sqrt(multiple)) < 1e-9);
+assert.ok(Math.abs(orbitEnergy(4 * A0) + RY_EV / 4) < 1e-12);
+assert.equal(residual(3), 1);
+assert.ok(residual(2.5) < 1e-9);
+assert.ok(residual(2.9) > 0 && residual(2.9) < 1);
+const davissonGermer = H / Math.sqrt(2 * ME * 1.602176634e-19 * 54);
+assert.ok(Math.abs(davissonGermer / 1.67e-10 - 1) < .005);
+assert.ok(Math.abs(debroglie(.145, 40) / 1.142e-34 - 1) < .01);
 console.log('ok');
